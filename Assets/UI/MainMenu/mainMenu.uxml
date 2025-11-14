@@ -4,7 +4,7 @@
     <ui:VisualElement style="flex-grow: 1; align-self: center; flex-direction: row; justify-content: center; align-items: center; background-color: rgb(192, 192, 192); width: 100%; height: 100%;">
         <ui:VisualElement name="Dwarf" class="panel factionButton">
             <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;dwarf_flag&apos;); height: 400px;" />
-            <ui:Label text="Königreich Amboss" enable-rich-text="true" style="align-self: center; -unity-font-style: bold; font-size: 32px; color: rgb(119, 107, 65);" />
+            <ui:Label text="Königreich Freidorien" enable-rich-text="true" style="align-self: center; -unity-font-style: bold; font-size: 32px; color: rgb(119, 107, 65);" />
         </ui:VisualElement>
         <ui:VisualElement name="Orc" class="panel factionButton">
             <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;orc_flag&apos;); background-size: 100% 100%; height: 400px;" />
