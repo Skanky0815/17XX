@@ -1,0 +1,57 @@
+# Unity generierte Ordner
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+
+# IDE-spezifisch
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.pidb
+*.user
+*.unityproj
+*.booproj
+
+# Rider
+*.sln.iml
+*.dotCover
+*.idea/
+*.run/
+*.ReSharper
+*.resharper
+*.DotSettings
+
+# VS Code
+.vscode/
+
+# Unity Cache
+*.unitypackage
+*.apk
+*.aab
+*.ipa
+
+# Sonstige temporäre Dateien
+*.swp
+*.tmp
+*.bak
+*.orig
+*.log
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Git
+.gitignore
+.gitattributes
+
+# Behalte Unity-Metadaten!
+!*.meta
