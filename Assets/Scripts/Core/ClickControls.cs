@@ -125,6 +125,17 @@ public partial class @ClickControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""68276522-742d-4012-9f90-97264f0d7917"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c0cdca08-4178-45f4-8241-f28e93160ad8"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -11,6 +12,7 @@ namespace Map.Controller
         private ClickControls.PointerActions _pointerActions;
         private int _interactableLayer;
 
+        private List<ISelectable> _selectedObjects = new();
 
         private void Awake()
         {
@@ -36,8 +38,8 @@ namespace Map.Controller
             var ray = Camera.main.ScreenPointToRay(mousePosition);
             if (!Physics.Raycast(ray, out var hit, Mathf.Infinity, _interactableLayer)) return;
 
-            var interactable = hit.collider.GetComponent<IInteractable>();
-            interactable?.Interact(mousePosition);
+            HandleInteractable(hit, mousePosition);
+            HandleSelectable(hit, mousePosition);
         }
 
         private bool IsUiElement(Vector2 mousePosition)
@@ -47,6 +49,28 @@ namespace Map.Controller
             var hit = UIDocument.rootVisualElement.panel.Pick(panelPostition);
 
             return hit != null;
+        }
+
+        private void HandleInteractable(RaycastHit hit, Vector2 mousePosition)
+        {
+            var interactable = hit.collider.GetComponent<IInteractable>();
+            interactable?.Interact(mousePosition);
+        }
+
+        private void HandleSelectable(RaycastHit hit, Vector2 mousePosition)
+        {
+            if (hit.collider.TryGetComponent<ISelectable>(out var selectable))
+            {
+                foreach (var selected in _selectedObjects)
+                {
+                    if (selected == selectable) continue;
+
+                    selected.Deselect();
+                }
+
+                selectable.Select(mousePosition);
+                _selectedObjects.Add(selectable);
+            }
         }
     }
 }

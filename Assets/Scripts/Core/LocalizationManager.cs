@@ -44,7 +44,7 @@ namespace Core
             if (_localizedTexts != null && _localizedTexts.TryGetValue(key, out var value))
                 return value;
 
-            return $"#{key}"; // Fallback
+            return $"#{key}";
         }
     }
 }

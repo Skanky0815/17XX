@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Map.Controller
 {
-    public class RegionController : MonoBehaviour, IInteractable
+    public class RegionController : MonoBehaviour, ISelectable
     {
         public Texture2D RegionIdMap;
         public Renderer MapRenderer;
@@ -15,10 +15,6 @@ namespace Map.Controller
         public GameTimeController gameTimeController;
 
         private Dictionary<Color32, Region.Id> _regionIDs;
-
-        private bool _isSelected;
-
-        private Vector2 _mousePosition;
 
         private void Start()
         {
@@ -32,17 +28,9 @@ namespace Map.Controller
             gameTimeController.CurrentTime.OnNewDay -= RegionManager.OnNewDay;
         }
 
-        public void Interact(Vector2 position)
+        public void Select(Vector2 position)
         {
-            _isSelected = true;
-            _mousePosition = position;
-        }
-
-        private void Update()
-        {
-            if (!_isSelected) return;
-
-            var ray = Camera.main.ScreenPointToRay(_mousePosition);
+            var ray = Camera.main.ScreenPointToRay(position);
 
             if (Physics.Raycast(ray, out var hit))
             {
@@ -60,17 +48,16 @@ namespace Map.Controller
 
                         RegionMenu.Show(regionId);
                     }
-                    else
-                    {
-                        MapRenderer.material.SetColor("_HoverColor", new Color32(0, 0, 0, 0));
-                        MapRenderer.material.SetColor("_GlowColor", new Color(0, 0, 0));
-
-                        RegionMenu.Hide();
-                    }
                 }
             }
-            _isSelected = false;
         }
 
+        public void Deselect()
+        {
+            MapRenderer.material.SetColor("_HoverColor", new Color32(0, 0, 0, 0));
+            MapRenderer.material.SetColor("_GlowColor", new Color(0, 0, 0));
+
+            RegionMenu.Hide();
+        }
     }
 }

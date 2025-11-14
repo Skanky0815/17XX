@@ -1,3 +1,4 @@
+using Map.Player;
 using UnityEngine;
 
 public class WayPoint : MonoBehaviour, IInteractable

@@ -9,7 +9,7 @@ namespace Map
 {
     public static class FactionManager
     {
-        private static Player player;
+        private static Player.Player player;
 
         public static Faction PlayerFaction { get; private set; }
 
@@ -20,7 +20,7 @@ namespace Map
             return factions[factionId];
         }
 
-        public static void Initialize(Player playerRef, MapWorldState worldState)
+        public static void Initialize(Player.Player playerRef, MapWorldState worldState)
         {
             player = playerRef;
 

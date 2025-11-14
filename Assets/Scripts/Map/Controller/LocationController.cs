@@ -16,8 +16,8 @@ namespace Map.Controller
 
         private void OnTriggerEnter(Collider other)
         {
-            var player = other.gameObject.GetComponentInParent<Player>();
-            if (!other.gameObject.GetComponentInParent<Player>()) return;
+            var player = other.gameObject.GetComponentInParent<Player.Player>();
+            if (!other.gameObject.GetComponentInParent<Player.Player>()) return;
 
             Debug.Log($"Objekt {player.name} ist in {_region.RegionInfo.Name} eingetreten.");
 

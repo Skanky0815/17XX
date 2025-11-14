@@ -1,10 +1,10 @@
 using Assets.Scripts.Core.States;
-using Core;
 using Map;
 using Map.Controller;
+using Map.Player;
 using UnityEngine;
 
-namespace Assets.Scripts.Core
+namespace Core
 {
     public static class SceneController
     {

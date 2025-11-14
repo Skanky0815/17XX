@@ -2,14 +2,19 @@ using UnityEngine;
 
 namespace Map.Controller
 {
-    class PlayerController : MonoBehaviour, IInteractable
+    class PlayerController : MonoBehaviour, ISelectable
     {
-        public Player player;
+        public Player.Player Player;
 
-        public void Interact(Vector2 position)
+        public void Select(Vector2 position)
         {
             Debug.Log("Controller hier vom PLayer");
-            player.IsSelected = true;
+            Player.IsSelected = true;
+        }
+        
+        public void Deselect()
+        {
+            Player.IsSelected = false;
         }
     }
 }

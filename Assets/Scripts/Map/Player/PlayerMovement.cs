@@ -214,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         }
         catch
         {
-            _targetKnotT = (_targetKnot.KnotIndex >= 0.5f ? 1f : 0f);
+            _targetKnotT = _targetKnot.KnotIndex >= 0.5f ? 1f : 0f;
         }
 
         _moveDirection = (_t <= _targetKnotT) ? MoveDirection.FORWARD : MoveDirection.BACKWARD;

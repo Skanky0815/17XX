@@ -28832,6 +28832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   PathManager: {fileID: 575704686}
   MoveSpeed: 1
+  ArrivalThreshold: 0.05
 --- !u!114 &1113627959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28858,7 +28859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4885b0de2a9005f4a8e3cab5d00e31d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  player: {fileID: 1113627959}
+  Player: {fileID: 1113627959}
 --- !u!65 &1113627961
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43434,6 +43435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d0763a61e0e4c4e9e49d7713d33fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimeManager
+  IsPause: 0
 --- !u!4 &1767331307 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8807925768702028201, guid: 873f2259d88f64b448fd0837e7e865a5, type: 3}
