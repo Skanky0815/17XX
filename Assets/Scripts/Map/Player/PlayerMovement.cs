@@ -19,19 +19,20 @@ public class PlayerMovement : MonoBehaviour
 
     public float MoveSpeed = 1f;
     public float ArrivalThreshold = 0.05f;
+    private float _arrivalThresholdSq;
 
     private float _t = 0f;
     private float _targetKnotT = 0f;
     private MoveDirection _moveDirection;
     private Animator _animator;
 
-    // Debug / stuck detection
     private float _debugInterval = 0.5f;
     private float _debugTimer = 0f;
     private Vector3 _lastPosition;
     private float _stuckTimer = 0f;
-    private float _stuckThreshold = 1.0f;
+    private const float StuckThreshold = 1.0f;
     private int _stuckRecoverAttempts = 0;
+    private const float MovedThresholdSq = 0.000001f;
 
     private IEnumerable _cachedNodeIds = null;
     private bool _nodeIdsCacheAttempted = false;
@@ -40,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _animator = gameObject.GetComponentInChildren<Animator>();
         _lastPosition = transform.position;
+        _arrivalThresholdSq = ArrivalThreshold * ArrivalThreshold;
     }
 
     private void Start()
@@ -82,29 +84,7 @@ public class PlayerMovement : MonoBehaviour
         {
         }
 
-        if (goalKnot == null)
-        {
-            float bestDist = float.MaxValue;
-            foreach (var k in targetKnots)
-            {
-                Vector3 knotWorld;
-                try
-                {
-                    knotWorld = PathManager.GetKnotWoldPosition(k.SplineIndex, k.KnotIndex);
-                }
-                catch
-                {
-                    continue;
-                }
-
-                float d = (knotWorld - transform.position).sqrMagnitude;
-                if (d < bestDist)
-                {
-                    bestDist = d;
-                    goalKnot = k;
-                }
-            }
-        }
+        goalKnot ??= FindClosestKnot(targetKnots);
 
         if (goalKnot == null)
         {
@@ -127,6 +107,33 @@ public class PlayerMovement : MonoBehaviour
         StartFollowingPath(path);
     }
 
+    private KnotCollection.Knot FindClosestKnot(KnotCollection targetKnots)
+    {
+        float bestDist = float.MaxValue;
+        KnotCollection.Knot bestKnot = null;
+        Vector3 currentPos = transform.position;
+
+        foreach (var k in targetKnots)
+        {
+            try
+            {
+                Vector3 knotWorld = PathManager.GetKnotWoldPosition(k.SplineIndex, k.KnotIndex);
+                float d = (knotWorld - currentPos).sqrMagnitude;
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    bestKnot = k;
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        return bestKnot;
+    }
+
     private void StartFollowingPath(List<KnotCollection.Knot> path)
     {
         if (path == null || path.Count == 0) return;
@@ -141,12 +148,13 @@ public class PlayerMovement : MonoBehaviour
             if (_currentKnot == null)
             {
                 _currentKnot = path.First();
-                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(_currentKnot.SplineIndex); } catch { _currentKnotCollection = new KnotCollection { _currentKnot }; }
+                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(_currentKnot.SplineIndex); }
+                catch { _currentKnotCollection = new KnotCollection { _currentKnot }; }
                 _t = GetClosestTOnSpline(_currentKnot.SplineIndex, transform.position);
             }
         }
 
-        while (_pathQueue != null && _pathQueue.Count > 0 && _currentKnot != null && _pathQueue.Peek().Id == _currentKnot.Id)
+        while (_pathQueue.Count > 0 && _currentKnot != null && _pathQueue.Peek().Id == _currentKnot.Id)
         {
             _pathQueue.Dequeue();
         }
@@ -227,40 +235,23 @@ public class PlayerMovement : MonoBehaviour
 #endif
     }
 
-    private MoveDirection DetermineMoveDirection(KnotCollection.Knot from, KnotCollection.Knot to, KnotCollection fromCollection)
-    {
-        if (from == null || fromCollection == null || to == null) return MoveDirection.FORWARD;
-
-        if (to.IsSameSpline(from))
-        {
-            return from.KnotIndex <= to.KnotIndex ? MoveDirection.FORWARD : MoveDirection.BACKWARD;
-        }
-
-        try
-        {
-            var entry = fromCollection.GetBySplineIndex(to.SplineIndex);
-            return entry.KnotIndex <= to.KnotIndex ? MoveDirection.FORWARD : MoveDirection.BACKWARD;
-        }
-        catch
-        {
-            var tClosest = GetClosestTOnSpline(to.SplineIndex, transform.position);
-            return tClosest <= 0.5f ? MoveDirection.FORWARD : MoveDirection.BACKWARD;
-        }
-    }
-
     private void Update()
     {
-        if (_targetKnot == null && _pathQueue != null && _pathQueue.Count > 0)
+        if (_targetKnot == null)
         {
-            MoveToNextInPath();
+            if (_pathQueue != null && _pathQueue.Count > 0)
+                MoveToNextInPath();
+            else
+                return;
         }
 
-        if (_targetKnot == null || PathManager == null) return;
+        if (PathManager == null) return;
 
         float splineLength = Mathf.Max(0.0001f, PathManager.GetSpineLenght(_targetKnot.SplineIndex));
         var step = Time.deltaTime * MoveSpeed / splineLength;
 
         var tangent = PathManager.EvaluateSplineTangent(_targetKnot.SplineIndex, _t);
+
         if (_moveDirection == MoveDirection.FORWARD)
         {
             _t += step;
@@ -276,25 +267,27 @@ public class PlayerMovement : MonoBehaviour
         var pos = PathManager.EvaluateSplinePosition(_targetKnot.SplineIndex, _t);
         transform.position = pos;
 
-        if (tangent.sqrMagnitude > 0.0001f)
-            transform.rotation = Quaternion.LookRotation(tangent.normalized);
+        float tangentMagnitudeSq = tangent.sqrMagnitude;
+        if (tangentMagnitudeSq > 0.0001f)
+            transform.rotation = Quaternion.LookRotation(tangent * (1f / Mathf.Sqrt(tangentMagnitudeSq)));
 
-        if (_animator != null) _animator.SetBool("isMoving", true);
+        if (_animator != null)
+            _animator.SetBool("isMoving", true);
 
         var targetPos = PathManager.GetKnotWoldPosition(_targetKnot.SplineIndex, _targetKnot.KnotIndex);
-        float distToTarget = Vector3.Distance(transform.position, targetPos);
+        float distToTargetSq = (transform.position - targetPos).sqrMagnitude;
 
         _debugTimer += Time.deltaTime;
         if (_debugTimer >= _debugInterval)
         {
             _debugTimer = 0f;
 #if UNITY_EDITOR
-            Debug.Log($"Player.Update curr={_currentKnot?.Id ?? "null"} target={_targetKnot?.Id ?? "null"} t={_t:F2} dir={_moveDirection} distToTarget={distToTarget:F3} queue={_pathQueue?.Count ?? 0}");
+            Debug.Log($"Player.Update curr={_currentKnot?.Id ?? "null"} target={_targetKnot?.Id ?? "null"} t={_t:F2} dir={_moveDirection} distToTarget={Mathf.Sqrt(distToTargetSq):F3} queue={_pathQueue?.Count ?? 0}");
 #endif
         }
 
-        float moved = (transform.position - _lastPosition).sqrMagnitude;
-        if (moved < 0.000001f)
+        float movedSq = (transform.position - _lastPosition).sqrMagnitude;
+        if (movedSq < MovedThresholdSq)
         {
             _stuckTimer += Time.deltaTime;
         }
@@ -304,7 +297,7 @@ public class PlayerMovement : MonoBehaviour
         }
         _lastPosition = transform.position;
 
-        if (_stuckTimer > _stuckThreshold && _targetKnot != null)
+        if (_stuckTimer > StuckThreshold && _targetKnot != null)
         {
             _stuckRecoverAttempts++;
             Debug.LogWarning($"Player seems stuck for {_stuckTimer:F2}s on target {_targetKnot.Id}. Attempting recovery #{_stuckRecoverAttempts}");
@@ -318,7 +311,7 @@ public class PlayerMovement : MonoBehaviour
             _stuckTimer = 0f;
         }
 
-        if (distToTarget < ArrivalThreshold)
+        if (distToTargetSq < _arrivalThresholdSq)
         {
             transform.position = targetPos;
 #if UNITY_EDITOR
@@ -330,14 +323,16 @@ public class PlayerMovement : MonoBehaviour
                 _currentKnotCollection = _targetKnotCollection;
             else
             {
-                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(_currentKnot.SplineIndex); } catch { /* leave as is */ }
+                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(_currentKnot.SplineIndex); }
+                catch { /* leave as is */ }
             }
 
             _targetKnot = null;
             _targetKnotCollection = null;
             _targetKnotT = 0f;
 
-            if (_animator != null) _animator.SetBool("isMoving", false);
+            if (_animator != null)
+                _animator.SetBool("isMoving", false);
 
             MoveToNextInPath();
         }
@@ -366,26 +361,28 @@ public class PlayerMovement : MonoBehaviour
         }
         catch { }
 
-        int coarse = 24;
+        const int Coarse = 24;
         float bestT = 0f;
         float bestDist = float.MaxValue;
-        for (int i = 0; i <= coarse; i++)
+
+        for (int i = 0; i <= Coarse; i++)
         {
-            float t = i / (float)coarse;
+            float t = i / (float)Coarse;
             var p = PathManager.EvaluateSplinePosition(splineIndex, t);
-            var d = (p - worldPos).sqrMagnitude;
+            float d = (p - worldPos).sqrMagnitude;
             if (d < bestDist) { bestDist = d; bestT = t; }
         }
 
-        int refineSteps = 8;
-        float span = 1f / coarse;
+        const int RefineSteps = 8;
+        float span = 1f / Coarse;
         float start = Mathf.Max(0f, bestT - span);
         float end = Mathf.Min(1f, bestT + span);
-        for (int i = 0; i <= refineSteps; i++)
+
+        for (int i = 0; i <= RefineSteps; i++)
         {
-            float t = Mathf.Lerp(start, end, i / (float)refineSteps);
+            float t = Mathf.Lerp(start, end, i / (float)RefineSteps);
             var p = PathManager.EvaluateSplinePosition(splineIndex, t);
-            var d = (p - worldPos).sqrMagnitude;
+            float d = (p - worldPos).sqrMagnitude;
             if (d < bestDist) { bestDist = d; bestT = t; }
         }
 
@@ -416,40 +413,68 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (_cachedNodeIds != null)
+        if (_cachedNodeIds != null && TryFindClosestFromCache(out var knot))
         {
-            float bestDist = float.MaxValue;
-            string bestId = null;
-            foreach (var obj in _cachedNodeIds)
-            {
-                if (obj == null) continue;
-                string id = obj.ToString();
-                try
-                {
-                    var parts = id.Split(':');
-                    int si = int.Parse(parts[0]);
-                    int ki = int.Parse(parts[1]);
-                    var pos = PathManager.GetKnotWoldPosition(si, ki);
-                    var d = (pos - transform.position).sqrMagnitude;
-                    if (d < bestDist) { bestDist = d; bestId = id; }
-                }
-                catch { continue; }
-            }
-            if (bestId != null)
-            {
-                var knot = ParseIdToKnot(bestId);
-                _currentKnot = knot;
-                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(knot.SplineIndex); } catch { _currentKnotCollection = new KnotCollection { knot }; }
-                _t = GetClosestTOnSpline(knot.SplineIndex, transform.position);
+            _currentKnot = knot;
+            try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(knot.SplineIndex); }
+            catch { _currentKnotCollection = new KnotCollection { knot }; }
+            _t = GetClosestTOnSpline(knot.SplineIndex, transform.position);
 #if UNITY_EDITOR
-                Debug.Log($"EnsureCurrentKnotInitialized: chose {knot.Id} t={_t:F2}");
+            Debug.Log($"EnsureCurrentKnotInitialized: chose {knot.Id} t={_t:F2}");
 #endif
-                return;
-            }
+            return;
         }
 
-        float bestDist2 = float.MaxValue;
-        KnotCollection.Knot bestK = null;
+        TryBruteForceFindClosest(out var bestK);
+        if (bestK != null)
+        {
+            _currentKnot = bestK;
+            try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(bestK.SplineIndex); }
+            catch { _currentKnotCollection = new KnotCollection { bestK }; }
+            _t = GetClosestTOnSpline(bestK.SplineIndex, transform.position);
+#if UNITY_EDITOR
+            Debug.Log($"EnsureCurrentKnotInitialized fallback: chose {bestK.Id} t={_t:F2}");
+#endif
+        }
+    }
+
+    private bool TryFindClosestFromCache(out KnotCollection.Knot result)
+    {
+        result = null;
+        if (_cachedNodeIds == null) return false;
+
+        float bestDist = float.MaxValue;
+        Vector3 currentPos = transform.position;
+
+        foreach (var obj in _cachedNodeIds)
+        {
+            if (obj == null) continue;
+            string id = obj.ToString();
+            try
+            {
+                var parts = id.Split(':');
+                int si = int.Parse(parts[0]);
+                int ki = int.Parse(parts[1]);
+                var pos = PathManager.GetKnotWoldPosition(si, ki);
+                float d = (pos - currentPos).sqrMagnitude;
+                if (d < bestDist)
+                {
+                    bestDist = d;
+                    result = new KnotCollection.Knot(si, ki);
+                }
+            }
+            catch { continue; }
+        }
+
+        return result != null;
+    }
+
+    private bool TryBruteForceFindClosest(out KnotCollection.Knot result)
+    {
+        result = null;
+        float bestDist = float.MaxValue;
+        Vector3 currentPos = transform.position;
+
         for (int si = 0; si < 32; si++)
         {
             for (int ki = 0; ki < 32; ki++)
@@ -457,22 +482,18 @@ public class PlayerMovement : MonoBehaviour
                 try
                 {
                     var p = PathManager.GetKnotWoldPosition(si, ki);
-                    var d = (p - transform.position).sqrMagnitude;
-                    if (d < bestDist2) { bestDist2 = d; bestK = new KnotCollection.Knot(si, ki); }
+                    float d = (p - currentPos).sqrMagnitude;
+                    if (d < bestDist)
+                    {
+                        bestDist = d;
+                        result = new KnotCollection.Knot(si, ki);
+                    }
                 }
                 catch { break; }
             }
         }
 
-        if (bestK != null)
-        {
-            _currentKnot = bestK;
-            try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(bestK.SplineIndex); } catch { _currentKnotCollection = new KnotCollection { bestK }; }
-            _t = GetClosestTOnSpline(bestK.SplineIndex, transform.position);
-#if UNITY_EDITOR
-            Debug.Log($"EnsureCurrentKnotInitialized fallback: chose {bestK.Id} t={_t:F2}");
-#endif
-        }
+        return result != null;
     }
 
     #endregion
