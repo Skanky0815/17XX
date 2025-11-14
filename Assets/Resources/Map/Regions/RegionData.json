@@ -1,0 +1,142 @@
+{
+    "REGION_01": {
+        "idMapColor": "#4fff89",
+        "name": "Thargrimm-Kamm",
+        "description": "Hoch oben, wo die Wolken sich an die Zinnen der Berge klammern, liegt der Thargrimm-Kamm – ein uraltes Gebirge, das selbst die Ältesten der Insel nur aus Legenden kennen. Die Pfade sind steil und gefährlich, oft verschüttet durch Lawinen oder von Nebel verschluckt.\nIn den tiefen Höhlen unter dem Granit sollen einst die Runenschmiede der Zwerge gewirkt haben, deren Feuer nie ganz erloschen sind. Wanderer berichten von seltsamen Lichtreflexen in der Dunkelheit und einem Summen, das durch das Gestein wandert – als würde der Berg selbst atmen.\nNur wenige wagen sich hierher, und jene, die zurückkehren, sprechen von einem Ort, der mehr verbirgt, als er preisgibt.",
+        "ambientImage": "REGION_1",
+        "material": 3,
+        "food": 0,
+        "gold": 1,
+        "population": 0
+    },
+    "REGION_02": {
+        "idMapColor": "#c8d955",
+        "name": "Myrrwald-Tiefe",
+        "description": "Dort, wo die Schatten der Berge auf das dichte Grün fallen, beginnt die Myrrwald-Tiefe – ein uralter Forst, dessen Bäume so hoch und dicht stehen, dass kaum ein Sonnenstrahl den Boden erreicht. Die Luft ist feucht und voller Sporen, das Zwitschern der Vögel klingt fremd, fast wie Flüstern.\nInmitten des Waldes liegen die Überreste eines vergessenen Tempels, dessen Steine von Moos überwuchert und von Zeit gezeichnet sind. Manche sagen, hier sei einst ein Zirkel von Waldmagiern ansässig gewesen, deren Zauber noch immer in den Wurzeln der Bäume leben.\nReisende berichten von Irrlichtern, die zwischen den Stämmen tanzen, und Stimmen, die sie in die Tiefe locken. Doch wer den Wald mit Respekt betritt, dem offenbart er manchmal seine Wunder – Heilpflanzen, uralte Runensteine oder gar ein Blick in die Vergangenheit",
+        "ambientImage": "REGION_2",
+        "material": 3,
+        "food": 0,
+        "gold": 1,
+        "population": 0
+    },
+    "REGION_03": {
+        "idMapColor": "#6132c0",
+        "name": "Steinfurt-Klamm",
+        "description": "Zwischen dem moosbewachsenen Myrrwald und den donnernden Strömen des Praygar-Flusses erhebt sich der Nebelschlund-Grat wie der Buckel eines schlafenden Drachen. Dichte Nebelschwaden verweilen über den silbergrauen Felsgipfeln, Zeugen der unguten Aura, die diese Berge durchlüftet.\nReisende raunen einander Schauergeschichten über einen finsteren, verlassenen Waldtempel am höchsten Gipfel des Passes zu, gespickt mit widerwärtigen Details, die das Blut in den Adern zum Gefrieren bringen. Wenngleich mit dem Nebel die Gefahr einen lebt, haben es einige wenige Seher und Druiden in diese Berge wagen können, wohingegen einige eitle bürgerliche Möchtegern-Mystiker in ihren Spuk ihr Leben verloren.\nScharlatane aus allen Herren Länder bieten renommtrunkene Dabeigewesene tagtäglich elixierte Tinktura an, hergestellt aus Eis, das angeblich aus der heiligen Glaskugel eines der totgeglaubten Seher gewonnen wurde…",
+        "ambientImage": "REGION_3",
+        "material": 3,
+        "food": 1,
+        "gold": 1,
+        "population": 0
+    },
+    "REGION_04": {
+        "idMapColor": "#00ffff",
+        "name": "Tidewatch-Hochland",
+        "description": "Im äußersten Nordosten der Insel erhebt sich das Tidewatch-Hochland – ein windumtostes Plateau, das sich wie ein steinerner Schild gegen die tobende See stemmt. Die Wellen brechen donnernd an den Klippen, während Möwen kreischend über die Gräser jagen.\nAuf dem höchsten Punkt thront ein alter Leuchtturm, dessen Licht seit Jahrhunderten den Weg weist – nicht nur für Schiffe, sondern auch für jene, die sich in den Nebeln der Zeit verirrt haben.\nÜber das Hochland verstreut liegen uralte Steinkreise, deren Ursprung niemand kennt. Einige glauben, sie seien Sternentore, andere sagen, sie markieren die Gräber gefallener Wächter. Die Einheimischen – wettergegerbt und schweigsam – erzählen von Geistern, die bei Sturm zwischen den Steinen tanzen und von Stimmen, die aus dem Meer rufen.",
+        "ambientImage": "REGION_4",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_05": {
+        "idMapColor": "#0000ff",
+        "name": "Sternenruh-Hügel",
+        "description": "Auf dem sanften Rücken der Sternenruh-Hügel steht ein halbverfallenes Observatorium, dessen Kuppel einst die Sterne der Welt kartografierte. Heute ist das Gebäude von Efeu umrankt, seine Instrumente verrostet, doch der Blick von hier auf das nächtliche Firmament ist noch immer unvergleichlich.\nDie Hügel selbst sind von wilden Kräutern und flatternden Gräsern bedeckt, durchzogen von alten Pfaden, die einst von Gelehrten und Sternendeutern begangen wurden.\nManche sagen, dass bei Neumond ein schwaches Leuchten aus der Kuppel dringt – als würde jemand dort oben noch immer die Himmelszeichen lesen. Andere berichten von Träumen, die sie nach einem Besuch hier heimsuchten – Träume von anderen Welten, anderen Zeiten.",
+        "ambientImage": "REGION_5",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_06": {
+        "idMapColor": "#4f122f",
+        "name": "Branweiden-Tal",
+        "description": "Eingebettet zwischen sanften Hügeln und alten Wäldern liegt das Branweiden-Tal – eine Region, die vom Rhythmus der Jahreszeiten lebt. Die Felder sind goldgelb im Sommer, nebelverhangen im Herbst und von Frost überzogen im Winter.\nDas Dorf Branweiden selbst besteht aus Fachwerkhäusern mit schiefen Dächern, einem kleinen Marktplatz und einer uralten Linde, unter der die Ältesten Geschichten erzählen. Windmühlen drehen sich träge im Wind, und der Duft von frischem Brot und Kräutern liegt oft in der Luft.\nDie Bewohner sind stolz auf ihre Traditionen – jedes Jahr feiern sie das Erntelicht-Fest, bei dem Laternen aus Kürbissen und Rüben die Hügel erleuchten und alte Lieder gesungen werden, die von der Zeit erzählen, als die Götter noch unter den Menschen wandelten.",
+        "ambientImage": "REGION_6",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_07": {
+        "idMapColor": "#c894ce",
+        "name": "Elarenhain",
+        "description": "Im Herzen der Insel, wo die Berge ihre Schatten auf das Land werfen, liegt der Elarenhain – ein uralter Wald, dessen Bäume so hoch und dicht sind, dass selbst der Wind sich darin verirrt. Moose bedecken den Boden wie Teppiche, und zwischen den Stämmen flüstert die Vergangenheit.\nVersteckt zwischen Farnen und Felsen liegt ein halb versunkener Steinkreis, dessen Runen im Mondlicht schwach glimmen. Manche sagen, hier sei einst ein heiliger Ort der Waldelfen gewesen, andere glauben, dass die Geister der Natur selbst hier wohnen.\nIn einer versteckten Senke liegt der Spiegelsee – so klar, dass er die Sterne selbst zu reflektieren scheint. Wer dort in der Dämmerung verweilt, hört manchmal Stimmen, die aus dem Wasser kommen – sanft, fremd und voller Sehnsucht.",
+        "ambientImage": "REGION_7",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_08": {
+        "idMapColor": "#60d974",
+        "name": "Karkspitz",
+        "description": "Kargspitz mag klein sein, doch seine Bedeutung ist groß. Die sanften Hügel und offenen Wiesen dieser Region bilden das letzte grüne Band vor den Mauern der Stadt Vallbrück, einem Zentrum für Handel, Handwerk und Geschichten.\nEin alter Grenzstein aus dunklem Granit steht am Wegesrand – einst Symbol der Trennung, heute ein Treffpunkt für Händler, Pilger und Geschichtenerzähler. Die Wege sind gut gepflegt, gesäumt von Wildblumen und kleinen Büschen, und führen direkt zu den Toren der Stadt, deren Türme und Dächer schon von weitem sichtbar sind.\nIn Kargspitz spürt man den Puls der Zivilisation: das Klappern der Wagenräder, das Rufen der Marktschreier in der Ferne und den Duft von frischem Brot, der mit dem Wind über die Wiesen zieht. Es ist ein Ort, an dem Vergangenheit und Gegenwart sich die Hand reichen – schlicht, aber voller Leben.",
+        "ambientImage": "REGION_8",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_09": {
+        "idMapColor": "#607a19",
+        "name": "Dämmerforst",
+        "description": "",
+        "ambientImage": "REGION_9",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_10": {
+        "idMapColor": "#60dbdb",
+        "name": "Graustrom-Tal",
+        "description": "",
+        "ambientImage": "REGION_10",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_11": {
+        "idMapColor": "#bb7c41",
+        "name": "Königsbruch",
+        "description": "",
+        "ambientImage": "REGION_11",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_12": {
+        "idMapColor": "#ffffff",
+        "name": "Nebelgrat",
+        "description": "",
+        "ambientImage": "REGION_12",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_13": {
+        "idMapColor": "#bb00a0",
+        "name": "Silbermark",
+        "description": "",
+        "ambientImage": "REGION_13",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    },
+    "REGION_14": {
+        "idMapColor": "#4b00a0",
+        "name": "Aschenmeer",
+        "description": "",
+        "ambientImage": "REGION_14",
+        "material": 2,
+        "food": 2,
+        "gold": 1,
+        "population": 1
+    }
+}

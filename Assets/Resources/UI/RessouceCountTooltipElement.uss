@@ -1,0 +1,21 @@
+.tooltip {
+    position: absolute;
+    height: auto;
+    width: 320px;
+}
+
+.description {
+    font-size: 16px;
+    white-space: normal;
+    -unity-font-style: italic;
+}
+
+.infoline {
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.summery {
+    border-top-width: 2px;
+    border-top-color: rgb(123, 107, 59);
+}

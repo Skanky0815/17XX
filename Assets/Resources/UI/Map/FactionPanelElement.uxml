@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Map/temp.uss?fileID=7433441132597879392&amp;guid=f9ae0370d07c0014fa1bd85a13e2ae45&amp;type=3#temp" />
+    <Style src="project://database/Assets/Resources/UI/Map/FactionPanelElement.uss?fileID=7433441132597879392&amp;guid=abff17c037450ad43923e59ffebcea8d&amp;type=3#FactionPanelElement" />
+    <ui:VisualElement name="FactionPanel" class="panel factionPanel">
+        <ui:Image name="FactionImage" class="factionImage" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Map/temp.uss?fileID=7433441132597879392&amp;guid=f9ae0370d07c0014fa1bd85a13e2ae45&amp;type=3#temp" />
+    <Style src="project://database/Assets/UI/MainMenu/main.uss?fileID=7433441132597879392&amp;guid=24c94962a3cfe5d45a9f88f10264bc55&amp;type=3#main" />
+    <ui:VisualElement style="flex-grow: 1; align-self: center; flex-direction: row; justify-content: center; align-items: center; background-color: rgb(192, 192, 192); width: 100%; height: 100%;">
+        <ui:VisualElement name="Dwarf" class="panel factionButton">
+            <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;dwarf_flag&apos;); height: 400px;" />
+            <ui:Label text="Königreich Amboss" enable-rich-text="true" style="align-self: center; -unity-font-style: bold; font-size: 32px; color: rgb(119, 107, 65);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Orc" class="panel factionButton">
+            <ui:VisualElement style="flex-grow: 0; background-image: resource(&apos;orc_flag&apos;); background-size: 100% 100%; height: 400px;" />
+            <ui:Label text="Republik Lamecru" style="font-size: 32px; -unity-font-style: bold; align-self: center; color: rgb(119, 107, 65);" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

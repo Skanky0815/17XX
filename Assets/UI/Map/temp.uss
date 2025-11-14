@@ -1,0 +1,194 @@
+:root {
+    --color-gold: rgb(119, 107, 65);
+    --color-blue: rgb(59, 115, 143);
+}
+
+* {
+    picking-mode: position;
+}
+
+.panel {
+    width: 400px;
+    height: 600px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    background-color: rgb(237, 229, 207);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left-color: var(--color-gold);
+    border-right-color: var(--color-gold);
+    border-top-color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+}
+
+.uiBorder {
+    border-left-color: var(--color-gold);
+    border-right-color: var(--color-gold);
+    border-top-color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    background-color: rgb(237, 229, 207);
+    color: var(--color-gold);
+}
+
+.clockLayer {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    opacity: 1;
+    flex-shrink: 1;
+    flex-grow: 1;
+}
+
+.panelTitle {
+    flex-shrink: 0;
+    flex-direction: row;
+    align-items: flex-end;
+    top: -25px;
+    border-left-color: var(--color-gold);
+    border-right-color: var(--color-gold);
+    border-top-color: var(--color-gold);
+    border-bottom-color: var(--color-gold);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    flex-grow: 0;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.panelTitle > * {
+    width: 25px;
+    height: 36px;
+    background-color: rgb(59, 115, 143);
+}
+
+.panelTitle > Label {
+    border-left-color: var(--color-gold);
+    width: auto;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(237, 229, 207);
+    color: var(--color-gold);
+    -unity-font-style: normal;
+    -unity-text-align: lower-center;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    font-size: 26px;
+    padding-left: 8px;
+    padding-top: 2px;
+    padding-right: 8px;
+    padding-bottom: 2px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.panelTitle > Button {
+    border-left-color: var(--color-gold);
+    width: 25px;
+    height: 36px;
+    margin: 0;
+    padding: 0;
+    color: rgb(237, 229, 207);
+    -unity-font-style: bold;
+    background-color: rgb(59, 115, 143);
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+}
+
+.panelIcon {
+    font-size: 16px;
+    -unity-text-align: middle-center;
+    background-color: rgb(237, 229, 207);
+    border-left-color: rgb(119, 107, 65);
+    border-right-color: rgb(119, 107, 65);
+    border-top-color: rgb(119, 107, 65);
+    border-bottom-color: rgb(119, 107, 65);
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    width: 40px;
+    height: 40px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    background-image: url("project://database/Assets/Textures/Regions/resourccen_icons.png?fileID=696045857&guid=4a8ad95974163fa4c9d27a403ed5f76b&type=3#material_icon");
+    background-size: 60% 60%;
+    -unity-font-style: bold;
+}
+
+.resourcenCount {
+    flex-grow: 1;
+    background-image: url("project://database/Assets/Textures/Regions/resourccen_icons.png?fileID=-566404052&guid=4a8ad95974163fa4c9d27a403ed5f76b&type=3#gold_icon");
+    background-position-y: center;
+    background-repeat: no-repeat no-repeat;
+    background-size: 25px 25px;
+    background-position-x: left 0;
+    padding-left: 25px;
+    width: 80px;
+    height: 64px;
+    justify-content: center;
+    border-left-color: rgb(119, 107, 65);
+    border-right-color: rgb(119, 107, 65);
+    border-top-color: rgb(119, 107, 65);
+    border-bottom-color: rgb(119, 107, 65);
+    border-right-width: 1px;
+    margin-left: 2px;
+    padding-right: 4px;
+}
+
+.resourcenCountText {
+    flex-direction: row;
+    flex-grow: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-text-align: upper-right;
+}

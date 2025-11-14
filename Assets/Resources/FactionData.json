@@ -1,0 +1,17 @@
+{
+    "NEUTRAL": {
+        "name": "Neutral",
+        "icon": "",
+        "color": ""
+    },
+    "DWARF": {
+        "name": "Königreich Amboss",
+        "icon": "dwarf_icon",
+        "color": ""
+    },
+    "ORC": {
+        "name": "Königreich Lamecru",
+        "icon": "orc_icon",
+        "color": ""
+    }
+}
