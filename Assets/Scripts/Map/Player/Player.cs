@@ -14,6 +14,5 @@ public class Player : MonoBehaviour
         if (!IsSelected) return;
 
         PlayerMovement.RequestPath(knot);
-                //        PlayerMovement.SetTargetKnot(knot);
     }
 }
