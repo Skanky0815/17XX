@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Assets.Scripts.Map.Objects
 {
     public class Region
@@ -7,6 +9,8 @@ namespace Assets.Scripts.Map.Objects
         public readonly RegionInfo RegionInfo;
 
         public Faction Owner { get; private set; }
+
+        public readonly List<KnotCollection.Knot> Knots = new();
 
         public Region(Id regionId, RegionInfo regionInfo, Faction owner)
         {

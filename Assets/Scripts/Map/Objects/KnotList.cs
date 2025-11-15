@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using UnityEngine;
 
 public class KnotCollection : Collection<KnotCollection.Knot>
 {
@@ -28,8 +29,16 @@ public class KnotCollection : Collection<KnotCollection.Knot>
     {
         public readonly int SplineIndex;
         public readonly int KnotIndex;
-
         public string Id => $"{SplineIndex}:{KnotIndex}";
+        public readonly Vector3 WorldPosition;
+        public KnotCollection ConnectedKnots = new();
+        
+        public Knot(int splineIndex, int knotIndex, Vector3 worldPosition)
+        {
+            SplineIndex = splineIndex;
+            KnotIndex = knotIndex;
+            WorldPosition = worldPosition;
+        }
 
         public Knot(int splineIndex, int knotIndex)
         {
@@ -41,5 +50,5 @@ public class KnotCollection : Collection<KnotCollection.Knot>
         {
             return SplineIndex == otherKnot.SplineIndex;
         }
-    } 
+    }
 }

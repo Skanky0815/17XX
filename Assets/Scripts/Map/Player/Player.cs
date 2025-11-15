@@ -11,11 +11,11 @@ namespace Map.Player
 
         public Faction Faction { get; internal set; }
 
-        public void MoveTo(KnotCollection knot)
+        public void MoveTo(string knotId)
         {
             if (!IsSelected) return;
 
-            PlayerMovement.RequestPath(knot);
+            PlayerMovement.RequestPath(knotId);
         }
     }
 }

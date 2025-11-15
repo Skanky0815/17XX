@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Resources/UI/PanelHeader.uss?fileID=7433441132597879392&amp;guid=189c499ba60c8d24881880180afb4646&amp;type=3#PanelHeader" />
+    <ui:VisualElement name="PanelHeader" class="panelHeader" style="flex-grow: 0; align-items: center;">
+        <ui:VisualElement name="LeftField" style="flex-grow: 0;" />
+        <ui:Label text="Label" name="Text" />
+        <ui:VisualElement name="RigthField" style="flex-grow: 0;" />
+    </ui:VisualElement>
+</ui:UXML>

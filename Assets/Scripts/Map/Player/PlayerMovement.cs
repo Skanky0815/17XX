@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +6,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public PathManager PathManager;
+    private string _currentKnotId;
 
-    private KnotCollection.Knot _currentKnot;
-    private KnotCollection _currentKnotCollection;
+    private string _targetKnotId;
 
-    private KnotCollection.Knot _targetKnot;
-    private KnotCollection _targetKnotCollection;
-
-    private Queue<KnotCollection.Knot> _pathQueue;
+    private Queue<string> _pathQueue;
 
     public float MoveSpeed = 1f;
     public float ArrivalThreshold = 0.05f;
@@ -46,115 +41,57 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        _currentKnot = new KnotCollection.Knot(0, 0);
-        _currentKnotCollection = new KnotCollection { _currentKnot };
+        _currentKnotId = "0:0";
+        _t = GetClosestTOnSpline(_currentKnotId, transform.position);
 
-        if (PathManager != null)
-        {
-            _t = GetClosestTOnSpline(_currentKnot.SplineIndex, transform.position);
-        }
 #if UNITY_EDITOR
-        Debug.Log($"PlayerMovement.Start current={_currentKnot?.Id ?? "null"} t={_t:F2}");
+        Debug.Log($"PlayerMovement.Start current={_currentKnotId ?? "null"} t={_t:F2}");
 #endif
     }
 
-    public void RequestPath(KnotCollection targetKnots)
+    public void RequestPath(string targetKnotId)
     {
-        if (targetKnots == null)
+        if (targetKnotId == null)
         {
             Debug.LogWarning("RequestPath: targetKnots ist null.");
             return;
         }
 
-        if (PathManager == null || PathManager.KnotGrapth == null)
-        {
-            Debug.LogWarning("RequestPath: PathManager oder KnotGrapth ist null.");
-            return;
-        }
-
         EnsureCurrentKnotInitialized();
 
-        KnotCollection.Knot goalKnot = null;
-
-        try
-        {
-            goalKnot = targetKnots.GetMatchingWithSplineIndex(_currentKnotCollection);
-        }
-        catch (Exception)
-        {
-        }
-
-        goalKnot ??= FindClosestKnot(targetKnots);
-
-        if (goalKnot == null)
-        {
-            Debug.LogWarning("RequestPath: kein gültiger Zielknoten gefunden.");
-            return;
-        }
-
 #if UNITY_EDITOR
-        Debug.Log($"RequestPath: selected goal {goalKnot.Id} from current {_currentKnot?.Id ?? "null"}");
+        Debug.Log($"RequestPath: selected goal {targetKnotId} from current {_currentKnotId ?? "null"}");
 #endif
 
-        var pathIds = SplinePathfinder.FindPath(_currentKnot.Id, goalKnot.Id, PathManager.KnotGrapth);
+        var pathIds = SplinePathfinder.FindPath(_currentKnotId, targetKnotId, PathManager.KnotGrapth);
         if (pathIds == null || pathIds.Count == 0)
         {
-            Debug.LogWarning($"RequestPath: kein Pfad gefunden von {_currentKnot.Id} nach {goalKnot.Id}");
+            Debug.LogWarning($"RequestPath: kein Pfad gefunden von {_currentKnotId} nach {targetKnotId}");
             return;
         }
 
-        var path = pathIds.Select(ParseIdToKnot).ToList();
-        StartFollowingPath(path);
+        StartFollowingPath(pathIds);
     }
 
-    private KnotCollection.Knot FindClosestKnot(KnotCollection targetKnots)
-    {
-        float bestDist = float.MaxValue;
-        KnotCollection.Knot bestKnot = null;
-        Vector3 currentPos = transform.position;
-
-        foreach (var k in targetKnots)
-        {
-            try
-            {
-                Vector3 knotWorld = PathManager.GetKnotWoldPosition(k.SplineIndex, k.KnotIndex);
-                float d = (knotWorld - currentPos).sqrMagnitude;
-                if (d < bestDist)
-                {
-                    bestDist = d;
-                    bestKnot = k;
-                }
-            }
-            catch
-            {
-
-            }
-        }
-
-        return bestKnot;
-    }
-
-    private void StartFollowingPath(List<KnotCollection.Knot> path)
+    private void StartFollowingPath(List<string> path)
     {
         if (path == null || path.Count == 0) return;
 
-        _pathQueue = new Queue<KnotCollection.Knot>(path);
+        _pathQueue = new Queue<string>(path);
 #if UNITY_EDITOR
-        Debug.Log($"StartFollowingPath: enqueued {_pathQueue.Count} knots. first={_pathQueue.Peek().Id}");
+        Debug.Log($"StartFollowingPath: enqueued {_pathQueue.Count} knots. first={_pathQueue.Peek()}");
 #endif
-        if (_currentKnot == null)
+        if (_currentKnotId == null)
         {
             EnsureCurrentKnotInitialized();
-            if (_currentKnot == null)
+            if (_currentKnotId == null)
             {
-                _currentKnot = path.First();
-                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(_currentKnot.SplineIndex); }
-                catch { _currentKnotCollection = new KnotCollection { _currentKnot }; }
-                _t = GetClosestTOnSpline(_currentKnot.SplineIndex, transform.position);
+                _currentKnotId = path.First();
+                _t = GetClosestTOnSpline(_currentKnotId, transform.position);
             }
         }
 
-        while (_pathQueue.Count > 0 && _currentKnot != null && _pathQueue.Peek().Id == _currentKnot.Id)
+        while (_pathQueue.Count > 0 && _currentKnotId != null && _pathQueue.Peek() == _currentKnotId)
         {
             _pathQueue.Dequeue();
         }
@@ -166,8 +103,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_pathQueue == null || _pathQueue.Count == 0)
         {
-            _targetKnot = null;
-            _targetKnotCollection = null;
+            _targetKnotId = null;
             _targetKnotT = 0f;
 #if UNITY_EDITOR
             Debug.Log("MoveToNextInPath: queue empty");
@@ -175,19 +111,18 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        KnotCollection.Knot next = null;
+        string nextId = null;
         while (_pathQueue.Count > 0)
         {
-            next = _pathQueue.Dequeue();
-            if (_currentKnot == null || next.Id != _currentKnot.Id)
+            nextId = _pathQueue.Dequeue();
+            if (_currentKnotId == null || nextId != _currentKnotId)
                 break;
-            next = null;
+            nextId = null;
         }
 
-        if (next == null)
+        if (nextId == null)
         {
-            _targetKnot = null;
-            _targetKnotCollection = null;
+            _targetKnotId = null;
             _targetKnotT = 0f;
 #if UNITY_EDITOR
             Debug.Log("MoveToNextInPath: no non-duplicate knot found");
@@ -195,31 +130,17 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        _targetKnot = next;
-        try
-        {
-            _targetKnotCollection = PathManager.GetCollectionBySplineIndex(next.SplineIndex);
-        }
-        catch
-        {
-            _targetKnotCollection = null;
-        }
+        _targetKnotId = nextId;
 
-        _t = GetClosestTOnSpline(_targetKnot.SplineIndex, transform.position);
+        _t = GetClosestTOnSpline(_targetKnotId, transform.position);
 
-        try
-        {
-            var knotWorld = PathManager.GetKnotWoldPosition(_targetKnot.SplineIndex, _targetKnot.KnotIndex);
-            _targetKnotT = GetClosestTOnSpline(_targetKnot.SplineIndex, knotWorld);
-        }
-        catch
-        {
-            _targetKnotT = _targetKnot.KnotIndex >= 0.5f ? 1f : 0f;
-        }
+
+        var knotWorld = PathManager.GetKnotWoldPosition(_targetKnotId);
+        _targetKnotT = GetClosestTOnSpline(_targetKnotId, knotWorld);
 
         _moveDirection = (_t <= _targetKnotT) ? MoveDirection.FORWARD : MoveDirection.BACKWARD;
 #if UNITY_EDITOR
-        Debug.Log($"MoveToNextInPath: next={_targetKnot.Id} t={_t:F2} knotT={_targetKnotT:F2} dir={_moveDirection} remainingQueue={_pathQueue?.Count ?? 0}");
+        Debug.Log($"MoveToNextInPath: next={_targetKnotId} t={_t:F2} knotT={_targetKnotT:F2} dir={_moveDirection} remainingQueue={_pathQueue?.Count ?? 0}");
 #endif
         _stuckTimer = 0f;
         _stuckRecoverAttempts = 0;
@@ -228,8 +149,7 @@ public class PlayerMovement : MonoBehaviour
     public void CancelPath()
     {
         _pathQueue = null;
-        _targetKnot = null;
-        _targetKnotCollection = null;
+        _targetKnotId = null;
 #if UNITY_EDITOR
         Debug.Log("CancelPath called");
 #endif
@@ -237,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (_targetKnot == null)
+        if (_targetKnotId == null)
         {
             if (_pathQueue != null && _pathQueue.Count > 0)
                 MoveToNextInPath();
@@ -245,12 +165,10 @@ public class PlayerMovement : MonoBehaviour
                 return;
         }
 
-        if (PathManager == null) return;
-
-        float splineLength = Mathf.Max(0.0001f, PathManager.GetSpineLenght(_targetKnot.SplineIndex));
+        float splineLength = Mathf.Max(0.0001f, PathManager.GetSpineLenght(_targetKnotId));
         var step = Time.deltaTime * MoveSpeed / splineLength;
 
-        var tangent = PathManager.EvaluateSplineTangent(_targetKnot.SplineIndex, _t);
+        var tangent = PathManager.EvaluateSplineTangent(_targetKnotId, _t);
 
         if (_moveDirection == MoveDirection.FORWARD)
         {
@@ -264,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
         _t = Mathf.Clamp01(_t);
 
-        var pos = PathManager.EvaluateSplinePosition(_targetKnot.SplineIndex, _t);
+        var pos = PathManager.EvaluateSplinePosition(_targetKnotId, _t);
         transform.position = pos;
 
         float tangentMagnitudeSq = tangent.sqrMagnitude;
@@ -274,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
         if (_animator != null)
             _animator.SetBool("isMoving", true);
 
-        var targetPos = PathManager.GetKnotWoldPosition(_targetKnot.SplineIndex, _targetKnot.KnotIndex);
+        var targetPos = PathManager.GetKnotWoldPosition(_targetKnotId);
         float distToTargetSq = (transform.position - targetPos).sqrMagnitude;
 
         _debugTimer += Time.deltaTime;
@@ -282,7 +200,7 @@ public class PlayerMovement : MonoBehaviour
         {
             _debugTimer = 0f;
 #if UNITY_EDITOR
-            Debug.Log($"Player.Update curr={_currentKnot?.Id ?? "null"} target={_targetKnot?.Id ?? "null"} t={_t:F2} dir={_moveDirection} distToTarget={Mathf.Sqrt(distToTargetSq):F3} queue={_pathQueue?.Count ?? 0}");
+            Debug.Log($"Player.Update curr={_currentKnotId ?? "null"} target={_targetKnotId ?? "null"} t={_t:F2} dir={_moveDirection} distToTarget={Mathf.Sqrt(distToTargetSq):F3} queue={_pathQueue?.Count ?? 0}");
 #endif
         }
 
@@ -297,10 +215,10 @@ public class PlayerMovement : MonoBehaviour
         }
         _lastPosition = transform.position;
 
-        if (_stuckTimer > StuckThreshold && _targetKnot != null)
+        if (_stuckTimer > StuckThreshold && _targetKnotId != null)
         {
             _stuckRecoverAttempts++;
-            Debug.LogWarning($"Player seems stuck for {_stuckTimer:F2}s on target {_targetKnot.Id}. Attempting recovery #{_stuckRecoverAttempts}");
+            Debug.LogWarning($"Player seems stuck for {_stuckTimer:F2}s on target {_targetKnotId}. Attempting recovery #{_stuckRecoverAttempts}");
             _moveDirection = (_t <= _targetKnotT) ? MoveDirection.FORWARD : MoveDirection.BACKWARD;
 
             if (_stuckRecoverAttempts >= 3)
@@ -315,20 +233,11 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.position = targetPos;
 #if UNITY_EDITOR
-            Debug.Log($"Arrived at {_targetKnot.Id}");
+            Debug.Log($"Arrived at {_targetKnotId}");
 #endif
-            _currentKnot = _targetKnot;
+            _currentKnotId = _targetKnotId;
 
-            if (_targetKnotCollection != null)
-                _currentKnotCollection = _targetKnotCollection;
-            else
-            {
-                try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(_currentKnot.SplineIndex); }
-                catch { /* leave as is */ }
-            }
-
-            _targetKnot = null;
-            _targetKnotCollection = null;
+            _targetKnotId = null;
             _targetKnotT = 0f;
 
             if (_animator != null)
@@ -338,29 +247,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    #region Hilfsfunktionen
-
-    private static KnotCollection.Knot ParseIdToKnot(string id)
+    private float GetClosestTOnSpline(string knotId, Vector3 worldPos)
     {
-        var parts = id.Split(':');
-        return new KnotCollection.Knot(int.Parse(parts[0]), int.Parse(parts[1]));
-    }
-
-    private float GetClosestTOnSpline(int splineIndex, Vector3 worldPos)
-    {
-        if (PathManager == null) return 0f;
-
-        try
-        {
-            var method = PathManager.GetType().GetMethod("GetClosestTOnSpline");
-            if (method != null)
-            {
-                var res = method.Invoke(PathManager, new object[] { splineIndex, worldPos });
-                if (res is float f) return Mathf.Clamp01(f);
-            }
-        }
-        catch { }
-
         const int Coarse = 24;
         float bestT = 0f;
         float bestDist = float.MaxValue;
@@ -368,7 +256,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i <= Coarse; i++)
         {
             float t = i / (float)Coarse;
-            var p = PathManager.EvaluateSplinePosition(splineIndex, t);
+            var p = PathManager.EvaluateSplinePosition(knotId, t);
             float d = (p - worldPos).sqrMagnitude;
             if (d < bestDist) { bestDist = d; bestT = t; }
         }
@@ -381,7 +269,7 @@ public class PlayerMovement : MonoBehaviour
         for (int i = 0; i <= RefineSteps; i++)
         {
             float t = Mathf.Lerp(start, end, i / (float)RefineSteps);
-            var p = PathManager.EvaluateSplinePosition(splineIndex, t);
+            var p = PathManager.EvaluateSplinePosition(knotId, t);
             float d = (p - worldPos).sqrMagnitude;
             if (d < bestDist) { bestDist = d; bestT = t; }
         }
@@ -391,8 +279,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void EnsureCurrentKnotInitialized()
     {
-        if (PathManager == null || PathManager.KnotGrapth == null) return;
-        if (_currentKnot != null && _currentKnotCollection != null) return;
+        if (_currentKnotId != null) return;
 
         if (!_nodeIdsCacheAttempted)
         {
@@ -413,32 +300,29 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (_cachedNodeIds != null && TryFindClosestFromCache(out var knot))
+        if (_cachedNodeIds != null && TryFindClosestFromCache(out var knotId))
         {
-            _currentKnot = knot;
-            try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(knot.SplineIndex); }
-            catch { _currentKnotCollection = new KnotCollection { knot }; }
-            _t = GetClosestTOnSpline(knot.SplineIndex, transform.position);
+            _currentKnotId = knotId;
+            _t = GetClosestTOnSpline(knotId, transform.position);
 #if UNITY_EDITOR
-            Debug.Log($"EnsureCurrentKnotInitialized: chose {knot.Id} t={_t:F2}");
+            Debug.Log($"EnsureCurrentKnotInitialized: chose {knotId} t={_t:F2}");
 #endif
             return;
         }
 
-        TryBruteForceFindClosest(out var bestK);
-        if (bestK != null)
+        TryBruteForceFindClosest(out var bestKnotId);
+        if (bestKnotId != null)
         {
-            _currentKnot = bestK;
-            try { _currentKnotCollection = PathManager.GetCollectionBySplineIndex(bestK.SplineIndex); }
-            catch { _currentKnotCollection = new KnotCollection { bestK }; }
-            _t = GetClosestTOnSpline(bestK.SplineIndex, transform.position);
+            _currentKnotId = bestKnotId;
+
+            _t = GetClosestTOnSpline(bestKnotId, transform.position);
 #if UNITY_EDITOR
-            Debug.Log($"EnsureCurrentKnotInitialized fallback: chose {bestK.Id} t={_t:F2}");
+            Debug.Log($"EnsureCurrentKnotInitialized fallback: chose {bestKnotId} t={_t:F2}");
 #endif
         }
     }
 
-    private bool TryFindClosestFromCache(out KnotCollection.Knot result)
+    private bool TryFindClosestFromCache(out string result)
     {
         result = null;
         if (_cachedNodeIds == null) return false;
@@ -449,18 +333,15 @@ public class PlayerMovement : MonoBehaviour
         foreach (var obj in _cachedNodeIds)
         {
             if (obj == null) continue;
-            string id = obj.ToString();
+            string knotId = obj.ToString();
             try
             {
-                var parts = id.Split(':');
-                int si = int.Parse(parts[0]);
-                int ki = int.Parse(parts[1]);
-                var pos = PathManager.GetKnotWoldPosition(si, ki);
+                var pos = PathManager.GetKnotWoldPosition(knotId);
                 float d = (pos - currentPos).sqrMagnitude;
                 if (d < bestDist)
                 {
                     bestDist = d;
-                    result = new KnotCollection.Knot(si, ki);
+                    result = knotId;
                 }
             }
             catch { continue; }
@@ -469,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
         return result != null;
     }
 
-    private bool TryBruteForceFindClosest(out KnotCollection.Knot result)
+    private bool TryBruteForceFindClosest(out string result)
     {
         result = null;
         float bestDist = float.MaxValue;
@@ -479,14 +360,15 @@ public class PlayerMovement : MonoBehaviour
         {
             for (int ki = 0; ki < 32; ki++)
             {
+                var knotId = $"{si}:{ki}";
                 try
                 {
-                    var p = PathManager.GetKnotWoldPosition(si, ki);
+                    var p = PathManager.GetKnotWoldPosition(knotId);
                     float d = (p - currentPos).sqrMagnitude;
                     if (d < bestDist)
                     {
                         bestDist = d;
-                        result = new KnotCollection.Knot(si, ki);
+                        result = knotId;
                     }
                 }
                 catch { break; }
@@ -495,8 +377,6 @@ public class PlayerMovement : MonoBehaviour
 
         return result != null;
     }
-
-    #endregion
 
     private enum MoveDirection
     {

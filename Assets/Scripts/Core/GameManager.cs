@@ -56,9 +56,9 @@ namespace Core
 
         public void LoadGame()
         {
-            GameTimeManager.Load(mapWorldState);
-            FactionManager.Load(mapWorldState);
-            RegionManager.Load(mapWorldState);
+            // GameTimeManager.Load(mapWorldState);
+            // FactionManager.Load(mapWorldState);
+            // RegionManager.Load(mapWorldState);
         }
     }
 }

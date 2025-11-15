@@ -11,20 +11,20 @@ namespace Map
     {
         private static Player.Player player;
 
-        public static Faction PlayerFaction { get; private set; }
+        public static Faction PlayerFaction;
 
-        private static readonly Dictionary<Faction.Id, Faction> factions = new();
+        public static Dictionary<Faction.Id, Faction> Factions = new();
 
         public static Faction GetFaction(Faction.Id factionId)
         {
-            return factions[factionId];
+            return Factions[factionId];
         }
 
         public static void Initialize(Player.Player playerRef, MapWorldState worldState)
         {
             player = playerRef;
-
-            if (factions.Count == 0)
+            return;
+            if (Factions.Count == 0)
             {
                 var (factionInfos, factionIcons) = LoadAssets();
                 foreach ((var factionId, var factionInfo) in factionInfos)
@@ -38,18 +38,18 @@ namespace Map
 
                     var faction = new Faction(factionId, factionInfo, texture);
 
-                    factions[factionId] = faction;
+                    Factions[factionId] = faction;
                 }
             }
 
-            player.Faction = factions[worldState.playerFactionId];
-            PlayerFaction = factions[worldState.playerFactionId];
+            player.Faction = Factions[worldState.playerFactionId];
+            PlayerFaction = Factions[worldState.playerFactionId];
         }
 
         public static void Save(MapWorldState worldState)
         {
             worldState.factions.Clear();
-            foreach (var faction in factions.Values)
+            foreach (var faction in Factions.Values)
             {
                 worldState.factions.Add(faction.Save());
             }
@@ -57,9 +57,10 @@ namespace Map
 
         public static void Load(MapWorldState worldState)
         {
+            return;
             if (worldState.HasNoFactions()) return;
 
-            factions.Clear();
+            Factions.Clear();
 
             var (factionInfos, factionIcons) = LoadAssets();
             foreach (var factionState in worldState.factions)
@@ -75,10 +76,10 @@ namespace Map
                 var faction = new Faction(factionState.FactionId, factionInfo, texture);
                 faction.AddResources(factionState.Gold, factionState.Food, factionState.Material, factionState.Population);
 
-                factions[faction.FactionId] = faction;
+                Factions[faction.FactionId] = faction;
             }
 
-            if (factions.TryGetValue(worldState.playerFactionId, out var playerFaction))
+            if (Factions.TryGetValue(worldState.playerFactionId, out var playerFaction))
             {
                 PlayerFaction = playerFaction;
                 player.Faction = playerFaction;

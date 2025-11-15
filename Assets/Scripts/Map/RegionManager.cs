@@ -11,28 +11,19 @@ namespace Map
     {
         private static GameTimeController gameTimeController;
 
-        private static readonly Dictionary<Region.Id, Region> Regions = new();
+        public static Dictionary<Region.Id, Region> Regions = new();
+        public static Dictionary<Color32, Region.Id> RegionColorMapping = new();
 
         public static void Initialize(GameTimeController gameTimeControllerRef)
         {
             gameTimeController = gameTimeControllerRef;
-
-            if (Regions.Count == 0)
-            {
-                var textAsset = Resources.Load<TextAsset>("Map/Regions/RegionData");
-                var regionInfos = JsonConvert.DeserializeObject<Dictionary<Region.Id, RegionInfo>>(textAsset.text);
-                var neutralFaction = FactionManager.GetFaction(Faction.Id.NEUTRAL);
-                foreach ((var regionId, var regionInfo) in regionInfos)
-                {
-                    var region = new Region(regionId, regionInfo, neutralFaction);
-
-                    Regions.Add(regionId, region);
-                }
-            }
         }
 
         public static void Load(MapWorldState worldState)
         {
+            gameTimeController.CurrentTime.OnNewDay += OnNewDay;
+
+            return;
             if (worldState.HasNoRegions()) return;
 
             Regions.Clear();
@@ -46,8 +37,6 @@ namespace Map
 
                 Regions.Add(regionState.RegionId, region);
             }
-
-            gameTimeController.CurrentTime.OnNewDay += OnNewDay;
         }
 
         public static void Save(MapWorldState worldState)
@@ -74,19 +63,6 @@ namespace Map
             {
                 region.AggregateDailyResources();
             }
-        }
-
-        public static Dictionary<Color32, Region.Id> GetIdMap()
-        {
-            var idMap = new Dictionary<Color32, Region.Id>();
-
-            foreach ((var regionId, var region) in Regions)
-            {
-                var color = Hex.ToColor32(region.RegionInfo.IdMapColor);
-                idMap.Add(color, regionId);
-            }
-
-            return idMap;
         }
 
         public static Region GetRegion(Region.Id regionId)

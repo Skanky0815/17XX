@@ -1,17 +1,20 @@
 using Assets.Scripts.Map.Objects;
+using Map.Objects;
 using UnityEngine;
 
 namespace Map.Controller
 {
-    public class LocationController : MonoBehaviour
+    public class LocationController : MonoBehaviour, IInteractable
     {
-        public Region.Id RegionId;
+        public Region Region;
+        public string KnotId;
+        public Player.Player Player;
 
-        private Region _region;
+        public Location Location;
 
-        private void Start()
+        public void Interact(Vector2 position)
         {
-            _region = RegionManager.GetRegion(RegionId);
+            Player.MoveTo(KnotId);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -19,10 +22,9 @@ namespace Map.Controller
             var player = other.gameObject.GetComponentInParent<Player.Player>();
             if (!other.gameObject.GetComponentInParent<Player.Player>()) return;
 
-            Debug.Log($"Objekt {player.name} ist in {_region.RegionInfo.Name} eingetreten.");
+            Debug.Log($"Objekt {player.name} ist in {Location.Name} in der {Region.RegionInfo.Name} Region eingetroffen.");
 
-            _region.ChangeOwner(player.Faction);
+            Region.ChangeOwner(player.Faction);
         }
     }
-
 }
