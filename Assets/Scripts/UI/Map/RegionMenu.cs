@@ -2,14 +2,14 @@ using UnityEngine.UIElements;
 using UnityEngine;
 using Assets.Scripts.Map.Objects;
 using Map;
+using UI.Elements;
 
-namespace Ui.Map
+namespace UI.Map
 {
     public class RegionMenu : MonoBehaviour
     {
         private VisualElement _regionMenu;
-        private Label _nameLabel;
-        private Button _infoButton;
+        private PanelHeader _panelHeader;
         private RegionInfo _regionInfo;
         private Region.Id _currentRegionId;
 
@@ -18,24 +18,19 @@ namespace Ui.Map
         private Label _materialLabel;
         private Label _populationLabel;
 
-        private VisualElement _factionIcon;
-
         private void Start()
         {
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
 
             _regionInfo = gameObject.GetComponent<RegionInfo>();
             _regionMenu = root.Q<VisualElement>("RegionMenu");
-            _nameLabel = _regionMenu.Q<Label>("Name");
-            _infoButton = _regionMenu.Q<Button>("InfoButton");
+            _panelHeader = _regionMenu.Q<PanelHeader>("PanelHeader");
             _goldLabel = _regionMenu.Q<Label>("Gold");
             _foodLabel = _regionMenu.Q<Label>("Food");
             _materialLabel = _regionMenu.Q<Label>("Material");
             _populationLabel = _regionMenu.Q<Label>("Population");
 
-            _factionIcon = _regionMenu.Q<VisualElement>("FactionIcon");
-
-            _infoButton.clicked += ShowRegionInfo;
+            _panelHeader.RegisterButtonCallback(ShowRegionInfo);
 
             Hide();
         }
@@ -48,19 +43,12 @@ namespace Ui.Map
 
             var region = RegionManager.GetRegion(regionId);
 
-            _nameLabel.text = region.RegionInfo.Name;
+            _panelHeader.SetContent(region.RegionInfo.Name, "?", region.Owner?.Icon);
             _goldLabel.text = region.RegionInfo.Gold.ToString();
             _foodLabel.text = region.RegionInfo.Food.ToString();
             _materialLabel.text = region.RegionInfo.Material.ToString();
             _populationLabel.text = region.RegionInfo.Population.ToString();
 
-            if (region.Owner != null)
-            {
-                _factionIcon.style.backgroundImage = new StyleBackground(region.Owner.Icon);
-            } else
-            {
-                _factionIcon.style.backgroundImage = null;
-            }
             _regionMenu.style.visibility = Visibility.Visible;
         }
 

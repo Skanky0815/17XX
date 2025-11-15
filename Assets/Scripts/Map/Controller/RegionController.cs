@@ -1,4 +1,4 @@
-using Ui.Map;
+using UI.Map;
 using UnityEngine;
 
 namespace Map.Controller

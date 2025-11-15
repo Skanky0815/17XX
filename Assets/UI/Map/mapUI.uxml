@@ -1,5 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Template name="PanelHeader" src="project://database/Assets/Resources/UI/PanelHeader.uxml?fileID=9197481963319205126&amp;guid=bb2faa615266f1f40b49476526c06f8e&amp;type=3#PanelHeader" />
     <Style src="project://database/Assets/UI/Map/temp.uss?fileID=7433441132597879392&amp;guid=f9ae0370d07c0014fa1bd85a13e2ae45&amp;type=3#temp" />
     <ui:VisualElement name="Screen" focusable="false" picking-mode="Ignore" style="display: flex; flex-grow: 1; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; visibility: visible; display: flex; width: 100%; height: 100%; flex-direction: column; flex-wrap: nowrap; overflow: visible; opacity: 1; position: absolute; justify-content: space-between; align-items: stretch; top: -2px; left: 0;">
         <ui:VisualElement name="TopBar" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row; height: 120px; align-items: flex-start; align-content: center; align-self: stretch; justify-content: space-between;">
@@ -39,11 +38,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Main" picking-mode="Ignore" style="flex-grow: 1; justify-content: center; padding-right: 30px; padding-left: 30px;">
             <ui:VisualElement name="RegionInfo" class="panel" style="flex-grow: 0; align-self: flex-end; flex-shrink: 0; align-items: center; width: 500px; margin-right: 25px; margin-top: 25px; margin-left: 25px; margin-bottom: 25px; height: auto;">
-                <ui:VisualElement class="panelTitle">
-                    <ui:VisualElement name="FactionIcon" style="border-right-width: 2px;" />
-                    <ui:Label text="RegionName" name="Name" class="uiBorder" />
-                    <ui:Button text="X" name="CloseButton" tooltip="Close" />
-                </ui:VisualElement>
+                <UI.Elements.PanelHeader style="top: -25px;" />
                 <ui:VisualElement name="AmbientImage" style="flex-grow: 0; background-color: rgb(166, 166, 166); height: 329px; flex-shrink: 0; align-items: flex-start; width: 494px; background-image: url(&quot;project://database/Assets/ambientImage_test.png?fileID=2800000&amp;guid=6d99ee82442d56b42a65277ed2be4853&amp;type=3#ambientImage_test&quot;); -unity-background-scale-mode: scale-and-crop;" />
                 <ui:ScrollView style="align-self: flex-start;">
                     <ui:Label text="Label" name="Description" style="white-space: normal; align-self: flex-start; font-size: 20px;" />
@@ -55,9 +50,7 @@
                 <ui:VisualElement style="flex-grow: 0; flex-direction: row; top: -25px; align-self: center; width: 100%; justify-content: space-around;">
                     <ui:Label text="9" name="Gold" class="panelIcon" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=-566404052&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#gold_icon&quot;);" />
                     <ui:Label text="9" name="Material" class="panelIcon" />
-                    <ui:Instance template="PanelHeader" name="TemplateContainer">
-                        <AttributeOverrides element-name="RigthField" focusable="false" />
-                    </ui:Instance>
+                    <UI.Elements.PanelHeader />
                     <ui:Label text="9" name="Food" selectable="false" focusable="false" class="panelIcon" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=-1120199610&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#food_icon&quot;);" />
                     <ui:Label text="9" name="Population" selectable="true" focusable="true" class="panelIcon" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=282362211&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#persons_icon&quot;);" />
                 </ui:VisualElement>

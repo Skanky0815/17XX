@@ -3,17 +3,16 @@ using UnityEngine.UIElements;
 using System.Collections.Generic;
 using Assets.Scripts.Map.Objects;
 using Map;
+using UI.Elements;
 
-namespace Ui.Map
+namespace UI.Map
 {
     public class RegionInfo : MonoBehaviour
     {
         private VisualElement _regionInfo;
-        private Label _nameLabel;
+        private PanelHeader _panelHeader;
         private Label _descriptionLabel;
-        private Button _closeButton;
         private VisualElement _ambientImage;
-        private VisualElement _factionIcon;
 
         private Dictionary<string, Texture2D> _ambientImageChach = new();
 
@@ -22,13 +21,11 @@ namespace Ui.Map
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
 
             _regionInfo = root.Q<VisualElement>("RegionInfo");
-            _nameLabel = _regionInfo.Q<Label>("Name");
-            _closeButton = _regionInfo.Q<Button>("CloseButton");
+            _panelHeader = _regionInfo.Q<PanelHeader>("PanelHeader");
             _descriptionLabel = _regionInfo.Q<Label>("Description");
             _ambientImage = _regionInfo.Q<VisualElement>("AmbientImage");
-            _factionIcon = _regionInfo.Q<VisualElement>("FactionIcon");
 
-            _closeButton.clicked += Hide;
+            _panelHeader.RegisterButtonCallback(Hide);
 
             Hide();
         }
@@ -37,18 +34,9 @@ namespace Ui.Map
         {
             var region = RegionManager.GetRegion(regionId);
 
-            _nameLabel.text = region.RegionInfo.Name;
+            _panelHeader.SetContent(region.RegionInfo.Name, "X", region.Owner?.Icon);
             _descriptionLabel.text = region.RegionInfo.Description;
             _ambientImage.style.backgroundImage = new StyleBackground(GetAmbientImage($"Map/Regions/{region.RegionInfo.AmbientImage}"));
-
-            if (region.Owner != null)
-            {
-                _factionIcon.style.backgroundImage = new StyleBackground(region.Owner.Icon);
-            }
-            else
-            {
-                _factionIcon.style.backgroundImage = null;
-            }
 
             _regionInfo.style.visibility = Visibility.Visible;
         }

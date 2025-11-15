@@ -7,8 +7,9 @@
 
 .panelHeader {
     flex-shrink: 0;
+    flex-grow: 0;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     border-left-color: var(--border-color);
     border-right-color: var(--border-color);
     border-top-color: var(--border-color);
@@ -29,6 +30,7 @@
 .panelHeader > * {
     width: 25px;
     height: 36px;
+    flex-grow: 0;
     background-color: var(--button-color);
 }
 
