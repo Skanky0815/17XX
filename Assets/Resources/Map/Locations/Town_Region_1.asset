@@ -15,4 +15,4 @@ MonoBehaviour:
   Name: Stadt1
   LocationType: 0
   Prefab: {fileID: 6936839512203574568, guid: 3bb983f87fad80640b762f6bf35a4b61, type: 3}
-  AllowedRegions: 0d000000
+  AllowedRegions: 00000000

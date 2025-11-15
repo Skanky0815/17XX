@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.Core.States;
 using Assets.Scripts.Map.Objects;
-using Map.Controller;
 using Map.Objects;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -22,11 +21,18 @@ namespace Map.Loader
         public List<Location> Locations = new();
         public Renderer MapRenderer;
 
-        private Dictionary<Faction.Id, Faction> _factions = new();
-        private Dictionary<Region.Id, Region> _regions = new();
-        private Dictionary<Color32, Region.Id> _regionColorMapping = new();
-        private List<KnotCollection> _knots = new();
-        private KnotGraph _knotGrapth = new();
+        private readonly Dictionary<Faction.Id, Faction> _factions = new();
+        private readonly Dictionary<Region.Id, Region> _regions = new();
+        private readonly Dictionary<Color32, Region.Id> _regionColorMapping = new();
+        private readonly List<KnotCollection> _knots = new();
+        private readonly KnotGraph _knotGrapth = new();
+
+        private LocationSpwaner _locationSpwaner;
+
+        private void Awake()
+        {
+            _locationSpwaner = gameObject.AddComponent<LocationSpwaner>();
+        }
 
         private void Start()
         {
@@ -35,7 +41,8 @@ namespace Map.Loader
             InitializeKnots();
             InitializeKnotGraph();
             AssginKnotsToRegions();
-            SpwanLocations();
+            
+            _locationSpwaner.Spwan(Locations, _regions, Player);
         }
 
         private void LoadFactions()
@@ -151,46 +158,14 @@ namespace Map.Loader
                 var knot = knotCollection[0];
                 var localPos = MapRenderer.transform.InverseTransformPoint(knot.WorldPosition);
                 var bounds = MapRenderer.localBounds;
-                var u = Mathf.InverseLerp(bounds.min.x, bounds.max.x, localPos.x);
-                var v = Mathf.InverseLerp(bounds.min.z, bounds.max.z, localPos.z);
+                var u = 1f - Mathf.InverseLerp(bounds.min.x, bounds.max.x, localPos.x);
+                var v = 1f - Mathf.InverseLerp(bounds.min.z, bounds.max.z, localPos.z);
                 var uv = new Vector2(u, v);
 
                 var pixelColor = IdMap.GetPixelBilinear(uv.x, uv.y);
                 if (_regionColorMapping.TryGetValue(pixelColor, out var regionId))
                 {
                     _regions[regionId].Knots.AddRange(knotCollection);
-                }
-                else
-                {
-                    Debug.LogWarning($"No region found for knot at position {knot.WorldPosition} with color {pixelColor}");
-                }
-            }
-        }
-
-        private void SpwanLocations()
-        {
-            var layer = LayerMask.NameToLayer("Interactable");
-            foreach (var location in Locations)
-            {
-                foreach (var allowedRegion in location.AllowedRegions)
-                {
-                    var region = _regions[allowedRegion];
-                    try
-                    {
-                        var locationObject = Instantiate(location.Prefab, region.Knots[0].WorldPosition, Quaternion.identity, transform);
-                        locationObject.name = $"{location.Name} in {region.RegionInfo.Name}";
-                        var locationController = locationObject.GetComponent<LocationController>();
-                        locationController.Player = Player;
-                        locationController.Region = region;
-                        locationController.KnotId = region.Knots[0].Id;
-                        locationController.Location = location;
-
-                        locationObject.SetActive(true);
-                    }
-                    catch (System.Exception e)
-                    {
-                        Debug.LogError($"Error spawning location {location.Name} in region {region.RegionId}: {e.Message}");
-                    }
                 }
             }
         }
