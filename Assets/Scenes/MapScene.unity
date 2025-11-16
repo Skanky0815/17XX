@@ -20913,6 +20913,8 @@ MonoBehaviour:
   WorldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
   Locations:
   - {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
+  - {fileID: 11400000, guid: 2963fe3f28cabda42bd41d4f15baecfd, type: 2}
+  - {fileID: 11400000, guid: 6a357cc7f58a5a5499700016d5fd72a4, type: 2}
   MapRenderer: {fileID: 1695211676}
 --- !u!1001 &796858172
 PrefabInstance:
