@@ -2,7 +2,7 @@ using Core;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Ui.Map
+namespace UI.Map
 {
     public class Menu : MonoBehaviour
     {

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Ui.Map
+namespace UI.Map
 {
     public class RessouceCountTooltipElement : VisualElement
     {

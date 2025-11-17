@@ -28,7 +28,7 @@ namespace UI.Elements
 
         public void RegisterButtonCallback(System.Action callback)
         {
-            _rightButton.clicked += () => callback();
+            _rightButton.clicked += callback;
         }
 
         public void SetContent(string text, string buttonLabel, Texture2D icon)
@@ -39,6 +39,11 @@ namespace UI.Elements
                 _leftField.style.backgroundImage = new StyleBackground(icon);
             }
             _rightButton.text = buttonLabel;
+        }
+
+        public void SetContent(string text, string buttonLabel)
+        {
+            SetContent(text, buttonLabel, null);
         }
     }
 }

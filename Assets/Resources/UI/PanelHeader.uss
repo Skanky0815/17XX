@@ -6,6 +6,7 @@
 }
 
 .panelHeader {
+    top: -25px;
     flex-shrink: 0;
     flex-grow: 0;
     flex-direction: row;
@@ -22,7 +23,6 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    flex-grow: 0;
     justify-content: center;
     overflow: hidden;
 }
@@ -39,7 +39,6 @@
     width: auto;
     height: 36px;
     margin: 0;
-    padding: 0;
     background-color: var(--background-color);
     color: var(--border-color);
     -unity-font-style: normal;
@@ -72,4 +71,10 @@
     border-right-width: 0;
     border-bottom-width: 0;
     border-left-width: 0;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.panelHeader > Button:hover {
+    background-color: var(--color-darkblue)
 }

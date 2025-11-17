@@ -1,11 +1,13 @@
 {
-    "tooltip.resources.gold_description": "Du erhälst jeden Tag Gold aus deinen Regionen:",
+    "tooltip.resources.gold_description": "Du erhältst jeden Tag Gold aus deinen Regionen:",
     "tooltip.resources.gold_value": "Gold pro Tag:",
-    "tooltip.resources.material_description": "Du erhälst jeden Tag Material zum Bauen aus deinen Regionen:",
+    "tooltip.resources.material_description": "Du erhältst jeden Tag Material zum Bauen aus deinen Regionen:",
     "tooltip.resources.material_value": "Material pro Tag:",
-    "tooltip.resources.food_description": "Du erhälst jeden Tag Nahrung für deine Einwohner aus deinen Regionen:",
+    "tooltip.resources.food_description": "Du erhältst jeden Tag Nahrung für deine Einwohner aus deinen Regionen:",
     "tooltip.resources.food_value": "Nahrung pro Tag:",
-    "tooltip.resources.population_description": "Du erhälst jeden Tag Einwohner aus deinen Regionen:",
+    "tooltip.resources.population_description": "Du erhältst jeden Tag Einwohner aus deinen Regionen:",
     "tooltip.resources.population_Value": "Einwohner pro Tag:",
-    "clock.day": "{0}. Tag"
+    "clock.day": "{0}. Tag",
+    "location.enter": "Betreten",
+    "location.skip": "Ignorieren"
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
-namespace Ui.Map
+namespace UI.Map
 {
     public class Clock : MonoBehaviour
     {

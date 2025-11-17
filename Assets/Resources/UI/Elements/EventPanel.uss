@@ -1,0 +1,30 @@
+:root {
+    --border-color: rgb(123, 107, 59);
+    --background-color: rgb(237, 229, 207);
+    --text-color: rgb(34, 34, 34);
+    --button-color: rgb(59, 115, 143);   
+}
+
+.eventPanel {
+    flex-grow: 0;
+    align-items: center;
+    align-content: flex-start;
+    display: none;
+    height: auto;
+    width: 800px;
+}
+
+.eventPanel > #EventArea {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.eventPanel > Label {
+    align-self: flex-start;
+}
+
+.eventPanel > #EventArea > Button {
+    font-size: 16px;
+    -unity-font-style: bold;
+}

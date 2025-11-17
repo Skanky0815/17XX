@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UIElements;
 
-namespace Ui.Map
+namespace UI.Map
 {
     public class ResourcenInfo : MonoBehaviour
     {
