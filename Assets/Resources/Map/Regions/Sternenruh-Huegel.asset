@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Sternenruh-Huegel
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 4
+  idMapColor: '#0000ff'
+  regionName: "Sternenruh-H\xFCgel"
+  description: "Auf dem sanften R\xFCcken der Sternenruh-H\xFCgel steht ein halbverfallenes
+    Observatorium, dessen Kuppel einst die Sterne der Welt kartografierte. Heute
+    ist das Geb\xE4ude von Efeu umrankt, seine Instrumente verrostet, doch der Blick
+    von hier auf das n\xE4chtliche Firmament ist noch immer unvergleichlich.\\nDie
+    H\xFCgel selbst sind von wilden Kr\xE4utern und flatternden Gr\xE4sern bedeckt,
+    durchzogen von alten Pfaden, die einst von Gelehrten und Sternendeutern begangen
+    wurden.\\nManche sagen, dass bei Neumond ein schwaches Leuchten aus der Kuppel
+    dringt \u2013 als w\xFCrde jemand dort oben noch immer die Himmelszeichen lesen.
+    Andere berichten von Tr\xE4umen, die sie nach einem Besuch hier heimsuchten \u2013
+    Tr\xE4ume von anderen Welten, anderen Zeiten."
+  ambientImage: {fileID: 2800000, guid: f9e9ced68b7ec0a49b95ad46c83e6b83, type: 3}
+  gold: 0
+  food: 0
+  material: 0
+  population: 0
+  locations: []
+  owner: {fileID: 0}

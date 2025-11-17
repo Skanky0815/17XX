@@ -5,7 +5,7 @@ using UnityEngine.Splines;
 
 namespace Map
 {
-    public class PathManager
+    public static class PathManager
     {
         public static SplineContainer SplineContainer;
 

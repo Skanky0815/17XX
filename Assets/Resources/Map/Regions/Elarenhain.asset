@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Elarenhain
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 6
+  idMapColor: '#c894ce'
+  regionName: Elarenhain
+  description: "Im Herzen der Insel, wo die Berge ihre Schatten auf das Land werfen,
+    liegt der Elarenhain \u2013 ein uralter Wald, dessen B\xE4ume so hoch und dicht
+    sind, dass selbst der Wind sich darin verirrt. Moose bedecken den Boden wie Teppiche,
+    und zwischen den St\xE4mmen fl\xFCstert die Vergangenheit.\\nVersteckt zwischen
+    Farnen und Felsen liegt ein halb versunkener Steinkreis, dessen Runen im Mondlicht
+    schwach glimmen. Manche sagen, hier sei einst ein heiliger Ort der Waldelfen
+    gewesen, andere glauben, dass die Geister der Natur selbst hier wohnen.\\nIn
+    einer versteckten Senke liegt der Spiegelsee \u2013 so klar, dass er die Sterne
+    selbst zu reflektieren scheint. Wer dort in der D\xE4mmerung verweilt, h\xF6rt
+    manchmal Stimmen, die aus dem Wasser kommen \u2013 sanft, fremd und voller Sehnsucht."
+  ambientImage: {fileID: 2800000, guid: 071417e9a28ee6c4591da5837bed0584, type: 3}
+  gold: 0
+  food: 0
+  material: 0
+  population: 0
+  locations: []
+  owner: {fileID: 0}

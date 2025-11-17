@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Thargrimm-Kamm
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 0
+  idMapColor: '#4fff89'
+  regionName: Thargrimm-Kamm
+  description: "Hoch oben, wo die Wolken sich an die Zinnen der Berge klammern, liegt
+    der Thargrimm-Kamm \u2013 ein uraltes Gebirge, das selbst die \xC4ltesten der
+    Insel nur aus Legenden kennen. Die Pfade sind steil und gef\xE4hrlich, oft versch\xFCttet
+    durch Lawinen oder von Nebel verschluckt.\\nIn den tiefen H\xF6hlen unter dem
+    Granit sollen einst die Runenschmiede der Zwerge gewirkt haben, deren Feuer nie
+    ganz erloschen sind. Wanderer berichten von seltsamen Lichtreflexen in der Dunkelheit
+    und einem Summen, das durch das Gestein wandert \u2013 als w\xFCrde der Berg
+    selbst atmen.\\nNur wenige wagen sich hierher, und jene, die zur\xFCckkehren,
+    sprechen von einem Ort, der mehr verbirgt, als er preisgibt."
+  ambientImage: {fileID: 2800000, guid: 10939267896c293409968783a1357bb4, type: 3}
+  gold: 1
+  food: 0
+  material: 3
+  population: 0
+  locations:
+  - {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
+  owner: {fileID: 0}

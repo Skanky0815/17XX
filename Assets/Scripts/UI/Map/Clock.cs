@@ -1,6 +1,6 @@
 using System.Collections;
 using Core;
-using Map.Controller;
+using Map.Objects;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
@@ -9,7 +9,7 @@ namespace UI.Map
 {
     public class Clock : MonoBehaviour
     {
-        public GameTimeController gameTimeController;
+        public GameTime gameTime;
         public Sprite[] timeSprites;
         
         private Label _dayLabel;
@@ -49,14 +49,14 @@ namespace UI.Map
 
         private void Start()
         {
-            gameTimeController.CurrentTime.OnNewDay += OnNewDay;
-            gameTimeController.CurrentTime.OnNewHour += OnNewHour;
+            gameTime.OnNewDay += OnNewDay;
+            gameTime.OnNewHour += OnNewHour;
         }
 
         private void OnDestroy()
         {
-            gameTimeController.CurrentTime.OnNewDay -= OnNewDay;
-            gameTimeController.CurrentTime.OnNewHour -= OnNewHour;
+            gameTime.OnNewDay -= OnNewDay;
+            gameTime.OnNewHour -= OnNewHour;
         }
 
         private void OnNewDay(int day)

@@ -8,19 +8,23 @@ namespace Core.States
     public class MapWorldState : ScriptableObject
     {
         public Vector3 cameraPosition;
-        public List<FactionState> factions;
-        public Faction.Id playerFactionId;
-        public List<RegionState> regions;
-        public TimeState timeState;
+        public List<Faction> factions;
+        public Faction playerFaction;
+        public List<Region> regions;
+        public GameTime gameTime;
 
-        public bool HasNoFactions()
+        private readonly Dictionary<Color32, Region> _regionColorMapping = new();
+        
+        public Dictionary<Color32, Region> RegionColorMapping()
         {
-            return factions.Count == 0;
-        }
-
-        public bool HasNoRegions()
-        {
-            return regions.Count == 0;
+            if (_regionColorMapping.Count != 0) return _regionColorMapping;
+            
+            foreach (var region in regions)
+            { 
+                _regionColorMapping[Hex.ToColor32(region.idMapColor)] = region;
+            }
+            
+            return _regionColorMapping;
         }
     }
 }

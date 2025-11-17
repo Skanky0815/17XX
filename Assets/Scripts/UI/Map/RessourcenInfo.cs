@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Core;
+using Core.States;
 using Map;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,6 +10,8 @@ namespace UI.Map
 {
     public class ResourcesInfo : MonoBehaviour
     {
+        public MapWorldState mapWorldState;
+        
         private Label _goldLabel;
         private Label _foodLabel;
         private Label _materialLabel;
@@ -39,10 +42,10 @@ namespace UI.Map
             {
                 var totalValue = 0;
                 List<(string, int)> infoList = new();
-                foreach (var region in FactionManager.PlayerFaction.Regions.Values)
+                foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.RegionInfo.name, region.RegionInfo.gold));
-                    totalValue += region.RegionInfo.gold;
+                    infoList.Add((region.name, region.gold));
+                    totalValue += region.gold;
                 }
 
                 _tooltipElement.Show(
@@ -62,10 +65,10 @@ namespace UI.Map
                 if (evt == null) throw new ArgumentNullException(nameof(evt));
                 var totalValue = 0;
                 List<(string, int)> infoList = new();
-                foreach (var region in FactionManager.PlayerFaction.Regions.Values)
+                foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.RegionInfo.name, region.RegionInfo.material));
-                    totalValue += region.RegionInfo.material;
+                    infoList.Add((region.name, region.material));
+                    totalValue += region.material;
                 }
 
                 _tooltipElement.Show(
@@ -84,10 +87,10 @@ namespace UI.Map
             {
                 var totalValue = 0;
                 List<(string, int)> infoList = new();
-                foreach (var region in FactionManager.PlayerFaction.Regions.Values)
+                foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.RegionInfo.name, region.RegionInfo.food));
-                    totalValue += region.RegionInfo.food;
+                    infoList.Add((region.name, region.food));
+                    totalValue += region.food;
                 }
 
                 _tooltipElement.Show(
@@ -106,10 +109,10 @@ namespace UI.Map
             {
                 var totalValue = 0;
                 List<(string, int)> infoList = new();
-                foreach (var region in FactionManager.PlayerFaction.Regions.Values)
+                foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.RegionInfo.name, region.RegionInfo.population));
-                    totalValue += region.RegionInfo.population;
+                    infoList.Add((region.name, region.population));
+                    totalValue += region.population;
                 }
 
                 _tooltipElement.Show(
@@ -128,12 +131,12 @@ namespace UI.Map
 
         private void Update()
         {
-            if (FactionManager.PlayerFaction == null) return;
+            if (mapWorldState.playerFaction == null) return;
 
-            UpdateResourceCounter(_goldLabel, FactionManager.PlayerFaction.Gold);
-            UpdateResourceCounter(_foodLabel, FactionManager.PlayerFaction.Food);
-            UpdateResourceCounter(_materialLabel, FactionManager.PlayerFaction.Material);
-            UpdateResourceCounter(_populationLabel, FactionManager.PlayerFaction.Population);
+            UpdateResourceCounter(_goldLabel, mapWorldState.playerFaction.gold);
+            UpdateResourceCounter(_foodLabel, mapWorldState.playerFaction.food);
+            UpdateResourceCounter(_materialLabel, mapWorldState.playerFaction.material);
+            UpdateResourceCounter(_populationLabel, mapWorldState.playerFaction.population);
         }
 
         private static void UpdateResourceCounter(Label label, int value)

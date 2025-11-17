@@ -9164,7 +9164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16491027cc18612459540a151e6994d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightController
-  gameTimeManager: {fileID: 1764142424}
+  gameTime: {fileID: 11400000, guid: f644d92eb177bd64c8376b858cccf8da, type: 2}
 --- !u!4 &410902287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8807925768702028201, guid: 0270f71dc45d8f646823fa11d21fa193, type: 3}
@@ -20902,19 +20902,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a38c98ebb4def48b2ace6e2f72a535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Map.Loader.MapLoader
-  regionData: {fileID: 4900000, guid: d9a34bc0f36b5834980641288022df8b, type: 3}
-  factionData: {fileID: 4900000, guid: 4e96177985abe1b4083f5a4d906e4592, type: 3}
-  factionIcons:
-  - {fileID: 860171912, guid: 8bb3ad0435efecc45a1ad76b4198c615, type: 3}
-  - {fileID: 2006092787, guid: 8bb3ad0435efecc45a1ad76b4198c615, type: 3}
   pathSplines: {fileID: 575704685}
   idMap: {fileID: 2800000, guid: 2615e7ce2c589b04b9bb50cd412a66dc, type: 3}
   player: {fileID: 1113627959}
   worldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
-  locations:
-  - {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
-  - {fileID: 11400000, guid: 6a357cc7f58a5a5499700016d5fd72a4, type: 2}
-  - {fileID: 11400000, guid: 2963fe3f28cabda42bd41d4f15baecfd, type: 2}
   mapRenderer: {fileID: 1695211676}
 --- !u!1001 &796858172
 PrefabInstance:
@@ -28567,6 +28558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   playerMovement: {fileID: 1113627958}
   isSelected: 0
+  worldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
 --- !u!114 &1113627960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35974,7 +35966,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0324f09d151cf4b818c2a3a779b8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Clock
-  gameTimeController: {fileID: 1764142424}
+  gameTime: {fileID: 11400000, guid: f644d92eb177bd64c8376b858cccf8da, type: 2}
   timeSprites:
   - {fileID: 588127372, guid: b965e2c32b2cce145ba005f3f39845bc, type: 3}
   - {fileID: 904696252, guid: b965e2c32b2cce145ba005f3f39845bc, type: 3}
@@ -36004,6 +35996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3461b32ea003b0d498d04f27338af553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Ui.Map.ResourcenInfo
+  mapWorldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
 --- !u!114 &1457079205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41715,10 +41708,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec9c1986ddb61642a4ee492a7694769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegionHighlighter
+  worldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
+  gameTime: {fileID: 11400000, guid: f644d92eb177bd64c8376b858cccf8da, type: 2}
   regionIdMap: {fileID: 2800000, guid: 2615e7ce2c589b04b9bb50cd412a66dc, type: 3}
   mapRenderer: {fileID: 1695211676}
   regionMenu: {fileID: 1457079201}
-  gameTimeController: {fileID: 1764142424}
 --- !u!4 &1697585279 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8807925768702028201, guid: 873f2259d88f64b448fd0837e7e865a5, type: 3}
@@ -43155,6 +43149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d0763a61e0e4c4e9e49d7713d33fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimeManager
+  worldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
   isPause: 0
 --- !u!4 &1767331307 stripped
 Transform:

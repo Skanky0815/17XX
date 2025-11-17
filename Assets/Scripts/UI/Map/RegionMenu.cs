@@ -11,7 +11,7 @@ namespace UI.Map
         private VisualElement _regionMenu;
         private PanelHeader _panelHeader;
         private RegionInfo _regionInfo;
-        private Region.Id _currentRegionId;
+        private Region _currentRegion;
 
         private Label _goldLabel;
         private Label _foodLabel;
@@ -35,26 +35,24 @@ namespace UI.Map
             Hide();
         }
 
-        public void Show(Region.Id regionId)
+        public void Show(Region region)
         {
             _regionInfo.Hide();
             
-            _currentRegionId = regionId;
+            _currentRegion = region;
 
-            var region = RegionManager.GetRegion(regionId);
-
-            _panelHeader.SetContent(region.RegionInfo.name, "?", region.Owner?.Icon);
-            _goldLabel.text = region.RegionInfo.gold.ToString();
-            _foodLabel.text = region.RegionInfo.food.ToString();
-            _materialLabel.text = region.RegionInfo.material.ToString();
-            _populationLabel.text = region.RegionInfo.population.ToString();
+            _panelHeader.SetContent(region.name, "?", region.owner?.icon);
+            _goldLabel.text = region.gold.ToString();
+            _foodLabel.text = region.food.ToString();
+            _materialLabel.text = region.material.ToString();
+            _populationLabel.text = region.population.ToString();
 
             _regionMenu.style.visibility = Visibility.Visible;
         }
 
         private void ShowRegionInfo()
         {
-            _regionInfo.Show(_currentRegionId);
+            _regionInfo.Show(_currentRegion);
         }
 
         public void Hide()

@@ -1,10 +1,11 @@
+using Map.Objects;
 using UnityEngine;
 
 namespace Map.Controller
 {
     public class DayNightController : MonoBehaviour
     {
-        public GameTimeController gameTimeManager;
+        public GameTime gameTime;
 
         private Light _light;
 
@@ -12,7 +13,12 @@ namespace Map.Controller
         {
             _light = gameObject.GetComponent<Light>();
             
-            gameTimeManager.CurrentTime.OnNewMinute += OnNewMinute;
+            gameTime.OnNewMinute += OnNewMinute;
+        }
+
+        private void OnDestroy()
+        {
+            gameTime.OnNewMinute -= OnNewMinute;
         }
 
         private void OnNewMinute(int hour, int minute)

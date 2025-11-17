@@ -13,10 +13,23 @@ MonoBehaviour:
   m_Name: MapWorldState
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Core.States.MapWorldState
   cameraPosition: {x: 0, y: 0, z: 0}
-  factions: []
-  playerFactionId: 0
-  regions: []
-  timeState:
-    Day: 1
-    Houre: 12
-    Minute: 0
+  factions:
+  - {fileID: 11400000, guid: 2bf28d4a0f8118e4f8592405de904b0a, type: 2}
+  - {fileID: 11400000, guid: 1ef96c6bb9bc6634d8f56de91a58df71, type: 2}
+  playerFaction: {fileID: 11400000, guid: 2bf28d4a0f8118e4f8592405de904b0a, type: 2}
+  regions:
+  - {fileID: 11400000, guid: ab9b721acb17d7a4795e562eee6e70df, type: 2}
+  - {fileID: 11400000, guid: 06bb483d6e039f340b2d75654b6fca9f, type: 2}
+  - {fileID: 11400000, guid: a601eb85e9f76ef40b2a3e64bd03c23c, type: 2}
+  - {fileID: 11400000, guid: fe25aef05966acd49b710e8c862d9e2c, type: 2}
+  - {fileID: 11400000, guid: 7cc20a25fe973404bbbe1e3b3361da74, type: 2}
+  - {fileID: 11400000, guid: 4247d6ed10c544a4a9d6e00729bbe9b5, type: 2}
+  - {fileID: 11400000, guid: 5e7e16ab84efbbe4295604c95d187a0e, type: 2}
+  - {fileID: 11400000, guid: 0fa9989c6fcb86d49b70c6a9cd74bbc7, type: 2}
+  - {fileID: 11400000, guid: ddb5f59051e5a4043bbf8850efbefad0, type: 2}
+  - {fileID: 11400000, guid: dd9320914d7ff8942b78e7a362e49fd9, type: 2}
+  - {fileID: 11400000, guid: b1568a64c17fc044fb5d48373cb2aafb, type: 2}
+  - {fileID: 11400000, guid: 3adf04b6b3a2e5c4693015a9fb34df93, type: 2}
+  - {fileID: 11400000, guid: 8a7d89b9dc58f2f4d9fd9de6678fed1b, type: 2}
+  - {fileID: 11400000, guid: f0c5c0a6e5e1d7a4da6667e7e2574406, type: 2}
+  gameTime: {fileID: 11400000, guid: f644d92eb177bd64c8376b858cccf8da, type: 2}

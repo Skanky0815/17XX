@@ -16,8 +16,7 @@ namespace UI.Map
 
         private void Start()
         {
-            var factionId = GameManager.Instance.mapWorldState.playerFactionId;
-            var factionFlag = Resources.Load<Texture2D>($"{factionId.ToString().ToLowerInvariant()}_flag");
+            var factionFlag = GameManager.Instance.mapWorldState.playerFaction.flag;
             _factionPanel.SetFaction(factionFlag);
         }
     }

@@ -1,11 +1,12 @@
-using Map.Objects;
+using Core.States;
+
 using UnityEngine;
 
 namespace Map.Controller
 {
     public class GameTimeController : MonoBehaviour
     {
-        public GameTime CurrentTime = new();
+        public MapWorldState worldState;
 
         public bool isPause = false;
 
@@ -13,7 +14,7 @@ namespace Map.Controller
         {
             if (isPause) return;
 
-            CurrentTime.Advance(Time.deltaTime);
+            worldState.gameTime.Advance(Time.deltaTime);
         }
     }
 }

@@ -1,24 +1,19 @@
 using System;
+using UnityEngine;
 
 namespace Map.Objects
 {
-    public class GameTime
+    [CreateAssetMenu(menuName = "Game/GameTime")]
+    public class GameTime : ScriptableObject
     {
-        public int Day;
-        public int Hour;
-        public int Minute;
+        public int day = 1;
+        public int hour = 12;
+        public int minute = 1;
 
         private const float RealSecondsPerIngameDay = 60f;
         private static float TimeScale => 1440f / RealSecondsPerIngameDay;
 
         private float _minuteBuffer;
-
-        public GameTime(int day = 1, int hour = 12, int minute = 1)
-        {
-            Day = day;
-            Hour = hour;
-            Minute = minute;
-        }
 
         public void Advance(float deltaTime)
         {
@@ -27,19 +22,19 @@ namespace Map.Objects
             while (_minuteBuffer >= 1f)
             {
                 _minuteBuffer -= 1f;
-                Minute++;
+                minute++;
 
-                OnNewMinute?.Invoke(Hour, Minute);
+                OnNewMinute?.Invoke(hour, minute);
 
-                if (Minute < 60) continue;
-                Minute = 0;
-                Hour++;
-                OnNewHour?.Invoke(Hour);
+                if (minute < 60) continue;
+                minute = 0;
+                hour++;
+                OnNewHour?.Invoke(hour);
 
-                if (Hour < 24) continue;
-                Hour = 0;
-                Day++;
-                OnNewDay?.Invoke(Day);
+                if (hour < 24) continue;
+                hour = 0;
+                day++;
+                OnNewDay?.Invoke(day);
             }
         }
 

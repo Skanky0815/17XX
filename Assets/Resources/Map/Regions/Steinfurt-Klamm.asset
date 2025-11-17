@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Steinfurt-Klamm
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 2
+  idMapColor: '#6132c0'
+  regionName: Steinfurt-Klamm
+  description: "Zwischen dem moosbewachsenen Myrrwald und den donnernden Str\xF6men
+    des Praygar-Flusses erhebt sich der Nebelschlund-Grat wie der Buckel eines schlafenden
+    Drachen. Dichte Nebelschwaden verweilen \xFCber den silbergrauen Felsgipfeln,
+    Zeugen der unguten Aura, die diese Berge durchl\xFCftet.\\nReisende raunen einander
+    Schauergeschichten \xFCber einen finsteren, verlassenen Waldtempel am h\xF6chsten
+    Gipfel des Passes zu, gespickt mit widerw\xE4rtigen Details, die das Blut in
+    den Adern zum Gefrieren bringen. Wenngleich mit dem Nebel die Gefahr einen lebt,
+    haben es einige wenige Seher und Druiden in diese Berge wagen k\xF6nnen, wohingegen
+    einige eitle b\xFCrgerliche M\xF6chtegern-Mystiker in ihren Spuk ihr Leben verloren.\\nScharlatane
+    aus allen Herren L\xE4nder bieten renommtrunkene Dabeigewesene tagt\xE4glich
+    elixierte Tinktura an, hergestellt aus Eis, das angeblich aus der heiligen Glaskugel
+    eines der totgeglaubten Seher gewonnen wurde\u2026"
+  ambientImage: {fileID: 2800000, guid: 0f9d45ffbc07eef4ea24b719ead61a01, type: 3}
+  gold: 1
+  food: 2
+  material: 3
+  population: 0
+  locations: []
+  owner: {fileID: 0}

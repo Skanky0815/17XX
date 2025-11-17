@@ -1,5 +1,5 @@
 using Core.States;
-using Map;
+using Map.Objects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,8 +9,6 @@ namespace Core
     {
         public static GameManager Instance;
         public MapWorldState mapWorldState;
-
-        public GameConfig gameConfig;
 
         public void Awake()
         {
@@ -47,16 +45,11 @@ namespace Core
 
         private void SaveGame()
         {
-            GameTimeManager.Save(mapWorldState);
-            FactionManager.Save(mapWorldState);
-            RegionManager.Save(mapWorldState);
+            
         }
 
         public void LoadGame()
         {
-            // GameTimeManager.Load(mapWorldState);
-            // FactionManager.Load(mapWorldState);
-            // RegionManager.Load(mapWorldState);
         }
     }
 }

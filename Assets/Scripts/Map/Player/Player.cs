@@ -1,4 +1,5 @@
-using Map.Objects;
+using Core.States;
+
 using UnityEngine;
 
 namespace Map.Player
@@ -6,10 +7,8 @@ namespace Map.Player
     public class Player : MonoBehaviour
     {
         public PlayerMovement playerMovement;
-
         public bool isSelected;
-
-        public Faction Faction { get; internal set; }
+        public MapWorldState worldState;
 
         public void MoveTo(string knotId)
         {

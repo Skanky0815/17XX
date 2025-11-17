@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Myrrwald-Tiefe
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 1
+  idMapColor: '#c8d955'
+  regionName: Myrrwald-Tiefe
+  description: "Dort, wo die Schatten der Berge auf das dichte Gr\xFCn fallen, beginnt
+    die Myrrwald-Tiefe \u2013 ein uralter Forst, dessen B\xE4ume so hoch und dicht
+    stehen, dass kaum ein Sonnenstrahl den Boden erreicht. Die Luft ist feucht und
+    voller Sporen, das Zwitschern der V\xF6gel klingt fremd, fast wie Fl\xFCstern.\\nInmitten
+    des Waldes liegen die \xDCberreste eines vergessenen Tempels, dessen Steine von
+    Moos \xFCberwuchert und von Zeit gezeichnet sind. Manche sagen, hier sei einst
+    ein Zirkel von Waldmagiern ans\xE4ssig gewesen, deren Zauber noch immer in den
+    Wurzeln der B\xE4ume leben.\\nReisende berichten von Irrlichtern, die zwischen
+    den St\xE4mmen tanzen, und Stimmen, die sie in die Tiefe locken. Doch wer den
+    Wald mit Respekt betritt, dem offenbart er manchmal seine Wunder \u2013 Heilpflanzen,
+    uralte Runensteine oder gar ein Blick in die Vergangenheit"
+  ambientImage: {fileID: 2800000, guid: e8a94ded790f61448bbbd962c702e6b1, type: 3}
+  gold: 1
+  food: 0
+  material: 3
+  population: 0
+  locations: []
+  owner: {fileID: 0}

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Branweiden-Tal
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 5
+  idMapColor: '#4f122f'
+  regionName: Branweiden-Tal
+  description: "Eingebettet zwischen sanften H\xFCgeln und alten W\xE4ldern liegt
+    das Branweiden-Tal \u2013 eine Region, die vom Rhythmus der Jahreszeiten lebt.
+    Die Felder sind goldgelb im Sommer, nebelverhangen im Herbst und von Frost \xFCberzogen
+    im Winter.\\nDas Dorf Branweiden selbst besteht aus Fachwerkh\xE4usern mit schiefen
+    D\xE4chern, einem kleinen Marktplatz und einer uralten Linde, unter der die \xC4ltesten
+    Geschichten erz\xE4hlen. Windm\xFChlen drehen sich tr\xE4ge im Wind, und der
+    Duft von frischem Brot und Kr\xE4utern liegt oft in der Luft.\\nDie Bewohner
+    sind stolz auf ihre Traditionen \u2013 jedes Jahr feiern sie das Erntelicht-Fest,
+    bei dem Laternen aus K\xFCrbissen und R\xFCben die H\xFCgel erleuchten und alte
+    Lieder gesungen werden, die von der Zeit erz\xE4hlen, als die G\xF6tter noch
+    unter den Menschen wandelten."
+  ambientImage: {fileID: 2800000, guid: 29b3703d62f2ae0439a447d552f11f6b, type: 3}
+  gold: 0
+  food: 0
+  material: 0
+  population: 0
+  locations:
+  - {fileID: 11400000, guid: 6a357cc7f58a5a5499700016d5fd72a4, type: 2}
+  owner: {fileID: 0}

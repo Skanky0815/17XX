@@ -1,38 +1,41 @@
 using System.Collections.Generic;
-using Map.Serializable;
+using UnityEngine;
 
 namespace Map.Objects
 {
-    public class Region
+    [CreateAssetMenu(menuName = "Game/World/Region")]
+    public class Region : ScriptableObject
     {
-        public readonly Id RegionId;
+        public Id id;
+        public string idMapColor;
+        public List<Location> locations = new();
+        public Faction owner;
+        [Header("Lore")]
+        public string regionName;
+        [TextArea(5, 10)]
+        public string description;
+        public Texture2D ambientImage;
+        
+        [Header("Resources")]
+        public int gold;
+        public int food;
+        public int material;
+        public int population;
 
-        public readonly RegionInfo RegionInfo;
-
-        public Faction Owner { get; private set; }
 
         public readonly List<KnotCollection.Knot> Knots = new();
 
-        public Region(Id regionId, RegionInfo regionInfo, Faction owner)
-        {
-            RegionId = regionId;
-            RegionInfo = regionInfo;
-            Owner = owner;
-            
-            owner.Regions.Add(RegionId, this);
-        }
-
         public void ChangeOwner(Faction faction)
         {
-            Owner?.Regions.Remove(RegionId);
+            owner?.regions.Remove(this);
 
-            faction.Regions.Add(RegionId, this);
-            Owner = faction;
+            faction.regions.Add(this);
+            owner = faction;
         }
 
         public void AggregateDailyResources()
         {
-            Owner?.AddResources(RegionInfo.gold, RegionInfo.food, RegionInfo.material, RegionInfo.population);
+            owner?.AddResources(gold, food, material, population);
         }
 
         public enum Id

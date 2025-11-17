@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Core;
 using Core.States;
 using Map.Objects;
@@ -15,20 +16,20 @@ namespace MainMenu
         private void Awake()
         {
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
-
+            
             _dwarfButton = root.Q<VisualElement>("Dwarf");
             _orcButton = root.Q<VisualElement>("Orc");
         }
 
         private void Start()
         {
-            _dwarfButton.RegisterCallback<MouseDownEvent>(evt => StartGame(Faction.Id.DWARF));
-            _orcButton.RegisterCallback<MouseDownEvent>(evt => StartGame(Faction.Id.ORC));
+            _dwarfButton.RegisterCallback<MouseDownEvent>(evt => StartGame(worldState.factions[0]));
+            _orcButton.RegisterCallback<MouseDownEvent>(evt => StartGame(worldState.factions[1]));
         }
 
-        private void StartGame(Faction.Id factionId)
+        private void StartGame(Faction faction)
         {
-            worldState.playerFactionId = factionId;
+            worldState.playerFaction = faction;
             GameManager.Instance.SwitchToScene("MapScene");
         }
     }

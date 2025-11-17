@@ -9,7 +9,7 @@ namespace Map.Controller
 {
     public class LocationController : MonoBehaviour, IInteractable
     {
-        public Region Region;
+        public Region region;
         public string knotId;
         public Player.Player player;
         public Location location;
@@ -38,7 +38,7 @@ namespace Map.Controller
             var skipButton = new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") };
             _eventPanel.Show(
                 location.locationName,
-                $"Willkommen in {location.locationName}!\n\n {location.locationName} ist die Hauptsiedlung in {Region.RegionInfo.name}.",
+                $"Willkommen in {location.locationName}!\n\n {location.locationName} ist die Hauptsiedlung in {region.name}.",
                 null,
                 new List<Button>
                     {
@@ -50,8 +50,9 @@ namespace Map.Controller
 
         private void EnterLocation(Player.Player factionUnit)
         {
-            Region.ChangeOwner(factionUnit.Faction);
-            GameManager.Instance.SwitchToScene("Region01_Location_Town");
+            region.ChangeOwner(factionUnit.worldState.playerFaction);
+            _eventPanel.Hide();
+            //GameManager.Instance.SwitchToScene("Region01_Location_Town");
         }
         
         private void SkipLocation()

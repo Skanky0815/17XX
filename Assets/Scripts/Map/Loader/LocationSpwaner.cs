@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using Core.States;
 using Map.Controller;
 using Map.Objects;
 using UnityEngine;
@@ -8,11 +8,11 @@ namespace Map.Loader
 {
     public class LocationSpawner : MonoBehaviour
     {
-        public void Spawn(List<Location> locations, Dictionary<Region.Id, Region> regions, Player.Player player)
+        public void Spawn(MapWorldState worldState, Player.Player player)
         {
-            foreach (var location in locations)
+            foreach (var region in worldState.regions)
             {
-                foreach (var region in location.allowedRegions.Select(allowedRegion => regions[allowedRegion]))
+                foreach (var location in region.locations)
                 {
                     try
                     {
@@ -20,7 +20,7 @@ namespace Map.Loader
                     }
                     catch (System.Exception e)
                     {
-                        Debug.LogError($"Error spawning location {location.locationName} in region {region.RegionId}: {e.Message}");
+                        Debug.LogError($"Error spawning location {location.locationName} in region {region.regionName}: {e.Message}");
                     }
                 }
             }
@@ -29,11 +29,11 @@ namespace Map.Loader
         private void InstantiateLocation(Region region, Location location, Player.Player player)
         {
             var locationObject = Instantiate(location.prefab, region.Knots[0].WorldPosition, Quaternion.identity, transform);
-            locationObject.name = $"{location.locationName} in {region.RegionInfo.name}";
+            locationObject.name = $"{location.locationName} in {region.regionName}";
 
             var locationController = locationObject.GetComponent<LocationController>();
             locationController.player = player;
-            locationController.Region = region;
+            locationController.region = region;
             locationController.knotId = region.Knots[0].Id;
             locationController.location = location;
 

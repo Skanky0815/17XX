@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
+  m_Name: Karkspitz
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
+  id: 7
+  idMapColor: '#60d974'
+  regionName: Karkspitz
+  description: "Kargspitz mag klein sein, doch seine Bedeutung ist gro\xDF. Die sanften
+    H\xFCgel und offenen Wiesen dieser Region bilden das letzte gr\xFCne Band vor
+    den Mauern der Stadt Vallbr\xFCck, einem Zentrum f\xFCr Handel, Handwerk und
+    Geschichten.\\nEin alter Grenzstein aus dunklem Granit steht am Wegesrand \u2013
+    einst Symbol der Trennung, heute ein Treffpunkt f\xFCr H\xE4ndler, Pilger und
+    Geschichtenerz\xE4hler. Die Wege sind gut gepflegt, ges\xE4umt von Wildblumen
+    und kleinen B\xFCschen, und f\xFChren direkt zu den Toren der Stadt, deren T\xFCrme
+    und D\xE4cher schon von weitem sichtbar sind.\\nIn Kargspitz sp\xFCrt man den
+    Puls der Zivilisation: das Klappern der Wagenr\xE4der, das Rufen der Marktschreier
+    in der Ferne und den Duft von frischem Brot, der mit dem Wind \xFCber die Wiesen
+    zieht. Es ist ein Ort, an dem Vergangenheit und Gegenwart sich die Hand reichen
+    \u2013 schlicht, aber voller Leben."
+  ambientImage: {fileID: 2800000, guid: d80495a4d40aef14a9b807f0439e0500, type: 3}
+  gold: 0
+  food: 0
+  material: 0
+  population: 0
+  locations: []
+  owner: {fileID: 0}

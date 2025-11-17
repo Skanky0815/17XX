@@ -1,11 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Core;
 using Core.States;
 using Map.Objects;
-using Map.Serializable;
-using Map.Serializables;
-using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Splines;
 
@@ -13,19 +9,12 @@ namespace Map.Loader
 {
     public class MapLoader : MonoBehaviour
     {
-        public TextAsset regionData;
-        public TextAsset factionData;
-        public Sprite[] factionIcons;
         public SplineContainer pathSplines;
         public Texture2D idMap;
         public Player.Player player;
         public MapWorldState worldState;
-        public List<Location> locations = new();
         public Renderer mapRenderer;
-
-        private readonly Dictionary<Faction.Id, Faction> _factions = new();
-        private readonly Dictionary<Region.Id, Region> _regions = new();
-        private readonly Dictionary<Color32, Region.Id> _regionColorMapping = new();
+        
         private readonly List<KnotCollection> _knots = new();
         private readonly KnotGraph _knotGraph = new();
 
@@ -38,50 +27,11 @@ namespace Map.Loader
 
         private void Start()
         {
-            LoadFactions();
-            LoadRegions();
             InitializeKnots();
             InitializeKnotGraph();
             AssignKnotsToRegions();
             
-            _locationSpawner.Spawn(locations, _regions, player);
-        }
-
-        private void LoadFactions()
-        {
-            var factionInfos = JsonConvert.DeserializeObject<Dictionary<Faction.Id, FactionInfo>>(factionData.text);
-
-            foreach (var (factionId, factionInfo) in factionInfos)
-            {
-                Texture2D texture = null;
-                if (factionId != Faction.Id.NEUTRAL)
-                {
-                    var icon = factionIcons.FirstOrDefault(s => s.name == factionInfo.icon);
-                    texture = SpriteConverter.ToTexture(icon);
-                }
-
-                _factions[factionId] = new Faction(factionId, factionInfo, texture);
-            }
-
-            player.Faction = _factions[worldState.playerFactionId];
-            FactionManager.PlayerFaction = _factions[worldState.playerFactionId];
-            FactionManager.Factions = _factions;
-        }
-
-        private void LoadRegions()
-        {
-            var regionInfos = JsonConvert.DeserializeObject<Dictionary<Region.Id, RegionInfo>>(regionData.text);
-            var neutralFaction = _factions[Faction.Id.NEUTRAL];
-            foreach (var (regionId, regionInfo) in regionInfos)
-            {
-                var region = new Region(regionId, regionInfo, neutralFaction);
-
-                _regions.Add(regionId, region);
-                _regionColorMapping[Hex.ToColor32(regionInfo.idMapColor)] = regionId;
-            }
-
-            RegionManager.RegionColorMapping = _regionColorMapping;
-            RegionManager.Regions = _regions;
+            _locationSpawner.Spawn(worldState, player);
         }
 
         private void InitializeKnots()
@@ -164,9 +114,9 @@ namespace Map.Loader
                 var uv = new Vector2(u, v);
 
                 var pixelColor = idMap.GetPixelBilinear(uv.x, uv.y);
-                if (_regionColorMapping.TryGetValue(pixelColor, out var regionId))
+                if (worldState.RegionColorMapping().TryGetValue(pixelColor, out var region))
                 {
-                    _regions[regionId].Knots.AddRange(knotCollection);
+                    region.Knots.AddRange(knotCollection);
                 }
             }
         }
