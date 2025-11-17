@@ -40,7 +40,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Main" picking-mode="Ignore" style="flex-grow: 1; justify-content: center; padding-right: 30px; padding-left: 30px; align-items: center; flex-direction: row; align-self: center; align-content: center;">
             <UI.Elements.EventPanel name="EventPanel" />
-            <ui:VisualElement name="RegionInfo" class="panel" style="flex-grow: 0; flex-shrink: 0; width: 500px; margin-right: 25px; margin-top: 25px; margin-left: 25px; margin-bottom: 25px; height: auto;">
+            <ui:VisualElement name="RegionInfo" class="panel" style="flex-grow: 0; flex-shrink: 0; width: 500px; margin-right: 25px; margin-top: 25px; margin-left: 25px; margin-bottom: 25px; height: auto; align-items: center;">
                 <UI.Elements.PanelHeader style="top: -25px;" />
                 <ui:VisualElement name="AmbientImage" style="flex-grow: 0; background-color: rgb(166, 166, 166); height: 329px; flex-shrink: 0; align-items: flex-start; width: 494px; background-image: url(&quot;project://database/Assets/ambientImage_test.png?fileID=2800000&amp;guid=6d99ee82442d56b42a65277ed2be4853&amp;type=3#ambientImage_test&quot;); -unity-background-scale-mode: scale-and-crop;" />
                 <ui:ScrollView style="align-self: flex-start;">
