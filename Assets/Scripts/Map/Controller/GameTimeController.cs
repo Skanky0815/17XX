@@ -1,3 +1,4 @@
+using Map.Objects;
 using UnityEngine;
 
 namespace Map.Controller
@@ -6,11 +7,11 @@ namespace Map.Controller
     {
         public GameTime CurrentTime = new();
 
-        public bool IsPause = false;
+        public bool isPause = false;
 
         private void Update()
         {
-            if (IsPause) return;
+            if (isPause) return;
 
             CurrentTime.Advance(Time.deltaTime);
         }

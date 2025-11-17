@@ -13,7 +13,7 @@ namespace UI.Elements
 
         public PanelHeader()
         {
-            styleSheets.Add(Resources.Load<StyleSheet>("UI/PanelHeader"));
+            styleSheets.Add(Resources.Load<StyleSheet>("UI/Elements/PanelHeader"));
             AddToClassList("panelHeader");
             name = "PanelHeader";
 
@@ -31,19 +31,11 @@ namespace UI.Elements
             _rightButton.clicked += callback;
         }
 
-        public void SetContent(string text, string buttonLabel, Texture2D icon)
+        public void SetContent(string text, string buttonLabel, Texture2D icon = null)
         {
             _textLabel.text = text;
-            if (icon != null)
-            {
-                _leftField.style.backgroundImage = new StyleBackground(icon);
-            }
+            _leftField.style.backgroundImage = icon != null ? new StyleBackground(icon) : new StyleBackground();
             _rightButton.text = buttonLabel;
-        }
-
-        public void SetContent(string text, string buttonLabel)
-        {
-            SetContent(text, buttonLabel, null);
         }
     }
 }

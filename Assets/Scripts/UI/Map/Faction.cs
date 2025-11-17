@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Core;
 using UnityEngine;
 using UnityEngine.UIElements;

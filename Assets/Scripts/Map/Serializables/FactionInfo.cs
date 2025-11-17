@@ -1,6 +1,9 @@
-[System.Serializable]
-public class FactionInfo
+namespace Map.Serializables
 {
-        public string Name;
-        public string Icon;
+        [System.Serializable]
+        public class FactionInfo
+        {
+                public string name;
+                public string icon;
+        }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9295a5b8381dc0046853ce5241d22580, type: 3}
   m_Name: Town_Region_1
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Location
-  Name: Grimmhall
-  LocationType: 0
-  Prefab: {fileID: 6936839512203574568, guid: 3bb983f87fad80640b762f6bf35a4b61, type: 3}
-  AllowedRegions: 00000000
+  locationName: Berlin
+  locationType: 0
+  prefab: {fileID: 6936839512203574568, guid: 3bb983f87fad80640b762f6bf35a4b61, type: 3}
+  allowedRegions: 00000000

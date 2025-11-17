@@ -1,14 +1,14 @@
-using Assets.Scripts.Map.Objects;
+using Map.Objects;
 
-namespace Assets.Scripts.Core.States
+namespace Core.States
 {
     [System.Serializable]
     public class FactionState
     {
-        public Faction.Id FactionId;
-        public int Gold;
-        public int Food;
-        public int Material;
-        public int Population;
+        public Faction.Id factionId;
+        public int gold;
+        public int food;
+        public int material;
+        public int population;
     }
 }

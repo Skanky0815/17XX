@@ -9,15 +9,13 @@ namespace UI.Map
 {
     public class Clock : MonoBehaviour
     {
-        public GameTimeController GameTimeController;
-
-        public Sprite[] TimeSprites;
-
+        public GameTimeController gameTimeController;
+        public Sprite[] timeSprites;
+        
         private Label _dayLabel;
-
         private VisualElement _clockFront;
         private VisualElement _clockBack;
-        private VisualElement _clochHandElement;
+        private VisualElement _clockHandElement;
 
         private int _currentDay;
         private Texture2D[] _clockTextures;
@@ -33,17 +31,17 @@ namespace UI.Map
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
 
 
-            _clockTextures = new Texture2D[TimeSprites.Length];
-            for (var i = 0; i < TimeSprites.Length; i++)
+            _clockTextures = new Texture2D[timeSprites.Length];
+            for (var i = 0; i < timeSprites.Length; i++)
             {
-                _clockTextures[i] = SpriteConverter.ToTexture(TimeSprites[i]);
+                _clockTextures[i] = SpriteConverter.ToTexture(timeSprites[i]);
             }
 
             var clockPanel = root.Q<VisualElement>("ClockPanel");
 
             _clockFront = clockPanel.Q<VisualElement>("ClockFront");
             _clockBack = clockPanel.Q<VisualElement>("ClockBack");
-            _clochHandElement = clockPanel.Q<VisualElement>("ClockHand");
+            _clockHandElement = clockPanel.Q<VisualElement>("ClockHand");
             _dayLabel = clockPanel.Q<Label>("Day");
 
             _clockBack.style.backgroundImage = new StyleBackground(_clockTextures[1]);
@@ -51,14 +49,14 @@ namespace UI.Map
 
         private void Start()
         {
-            GameTimeController.CurrentTime.OnNewDay += OnNewDay;
-            GameTimeController.CurrentTime.OnNewHoure += OnNewHoure;
+            gameTimeController.CurrentTime.OnNewDay += OnNewDay;
+            gameTimeController.CurrentTime.OnNewHour += OnNewHour;
         }
 
         private void OnDestroy()
         {
-            GameTimeController.CurrentTime.OnNewDay -= OnNewDay;
-            GameTimeController.CurrentTime.OnNewHoure -= OnNewHoure;
+            gameTimeController.CurrentTime.OnNewDay -= OnNewDay;
+            gameTimeController.CurrentTime.OnNewHour -= OnNewHour;
         }
 
         private void OnNewDay(int day)
@@ -66,17 +64,19 @@ namespace UI.Map
             _currentDay = day;
         }
 
-        private void OnNewHoure(int houre)
+        private void OnNewHour(int hour)
         {
             _dayLabel.text = string.Format(_text, _currentDay);
 
-            Texture2D clock;
-            if (3 <= houre && houre < 6) clock = _clockTextures[0];
-            else if (6 <= houre && houre < 18) clock = _clockTextures[1];
-            else if (18 <= houre && houre < 21) clock = _clockTextures[2];
-            else clock = _clockTextures[3];
+            var clock = hour switch
+            {
+                >= 3 and < 6 => _clockTextures[0],
+                >= 6 and < 18 => _clockTextures[1],
+                >= 18 and < 21 => _clockTextures[2],
+                _ => _clockTextures[3]
+            };
 
-            _clochHandElement.experimental.animation.Rotation(Quaternion.Euler(0, 0, houre * 30f), 500);
+            _clockHandElement.experimental.animation.Rotation(Quaternion.Euler(0, 0, hour * 30f), 500);
 
             if (_currentClockImage == clock) return;
             SetClockBackground(clock);

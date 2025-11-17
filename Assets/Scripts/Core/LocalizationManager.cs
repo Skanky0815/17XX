@@ -8,7 +8,6 @@ namespace Core
     {
         public static LocalizationManager Instance { get; private set; }
         private Dictionary<string, string> _localizedTexts;
-        private string _currentLanguage;
 
         private void Awake()
         {
@@ -26,7 +25,6 @@ namespace Core
 
         public void LoadLocalization(string languageCode)
         {
-            _currentLanguage = languageCode;
             var localizationFile = Resources.Load<TextAsset>($"Localization/{languageCode}_map");
             if (localizationFile != null)
             {

@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Core.States;
-using Assets.Scripts.Map.Objects;
+using Core;
+using Core.States;
+using Map.Objects;
+using Map.Serializables;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -9,7 +11,7 @@ namespace Map
 {
     public static class FactionManager
     {
-        private static Player.Player player;
+        private static Player.Player _player;
 
         public static Faction PlayerFaction;
 
@@ -22,7 +24,7 @@ namespace Map
 
         public static void Initialize(Player.Player playerRef, MapWorldState worldState)
         {
-            player = playerRef;
+            _player = playerRef;
             return;
             if (Factions.Count == 0)
             {
@@ -32,7 +34,7 @@ namespace Map
                     Texture2D texture = null;
                     if (factionId != Faction.Id.NEUTRAL)
                     {
-                        var icon = factionIcons.FirstOrDefault(s => s.name == factionInfo.Icon);
+                        var icon = factionIcons.FirstOrDefault(s => s.name == factionInfo.icon);
                         texture = SpriteConverter.ToTexture(icon);
                     }
 
@@ -42,7 +44,7 @@ namespace Map
                 }
             }
 
-            player.Faction = Factions[worldState.playerFactionId];
+            _player.Faction = Factions[worldState.playerFactionId];
             PlayerFaction = Factions[worldState.playerFactionId];
         }
 
@@ -65,16 +67,16 @@ namespace Map
             var (factionInfos, factionIcons) = LoadAssets();
             foreach (var factionState in worldState.factions)
             {
-                var factionInfo = factionInfos[factionState.FactionId];
+                var factionInfo = factionInfos[factionState.factionId];
                 Texture2D texture = null;
-                if (factionState.FactionId != Faction.Id.NEUTRAL)
+                if (factionState.factionId != Faction.Id.NEUTRAL)
                 {
-                    var icon = factionIcons.FirstOrDefault(s => s.name == factionInfo.Icon);
+                    var icon = factionIcons.FirstOrDefault(s => s.name == factionInfo.icon);
                     texture = SpriteConverter.ToTexture(icon);
                 }
 
-                var faction = new Faction(factionState.FactionId, factionInfo, texture);
-                faction.AddResources(factionState.Gold, factionState.Food, factionState.Material, factionState.Population);
+                var faction = new Faction(factionState.factionId, factionInfo, texture);
+                faction.AddResources(factionState.gold, factionState.food, factionState.material, factionState.population);
 
                 Factions[faction.FactionId] = faction;
             }
@@ -82,7 +84,7 @@ namespace Map
             if (Factions.TryGetValue(worldState.playerFactionId, out var playerFaction))
             {
                 PlayerFaction = playerFaction;
-                player.Faction = playerFaction;
+                _player.Faction = playerFaction;
             }
         }
 

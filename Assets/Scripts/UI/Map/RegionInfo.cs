@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using Assets.Scripts.Map.Objects;
 using Map;
+using Map.Objects;
 using UI.Elements;
 
 namespace UI.Map
@@ -14,7 +14,7 @@ namespace UI.Map
         private Label _descriptionLabel;
         private VisualElement _ambientImage;
 
-        private Dictionary<string, Texture2D> _ambientImageChach = new();
+        private readonly Dictionary<string, Texture2D> _ambientImageChach = new();
 
         private void Start()
         {
@@ -34,23 +34,23 @@ namespace UI.Map
         {
             var region = RegionManager.GetRegion(regionId);
 
-            _panelHeader.SetContent(region.RegionInfo.Name, "X", region.Owner?.Icon);
-            _descriptionLabel.text = region.RegionInfo.Description;
-            _ambientImage.style.backgroundImage = new StyleBackground(GetAmbientImage($"Map/Regions/{region.RegionInfo.AmbientImage}"));
+            _panelHeader.SetContent(region.RegionInfo.name, "X", region.Owner?.Icon);
+            _descriptionLabel.text = region.RegionInfo.description;
+            _ambientImage.style.backgroundImage = new StyleBackground(GetAmbientImage($"Map/Regions/{region.RegionInfo.ambientImage}"));
 
-            _regionInfo.style.visibility = Visibility.Visible;
+            _regionInfo.style.display = DisplayStyle.Flex;
         }
 
         public void Hide()
         {
             if (_regionInfo == null) return;
 
-            _regionInfo.style.visibility = Visibility.Hidden;
+            _regionInfo.style.display = DisplayStyle.None;
         }
 
         private Texture2D GetAmbientImage(string imageName)
         {
-            if (_ambientImageChach.TryGetValue(imageName, out var chahedImage)) return chahedImage;
+            if (_ambientImageChach.TryGetValue(imageName, out var cachedImage)) return cachedImage;
 
             var ambientImage = Resources.Load<Texture2D>(imageName);
             _ambientImageChach[imageName] = ambientImage;

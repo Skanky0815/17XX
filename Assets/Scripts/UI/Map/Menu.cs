@@ -6,7 +6,6 @@ namespace UI.Map
 {
     public class Menu : MonoBehaviour
     {
-
         private Button _menuButton;
 
         private void Awake()

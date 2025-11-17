@@ -4,17 +4,17 @@ namespace Map.Controller
 {
     class PlayerController : MonoBehaviour, ISelectable
     {
-        public Player.Player Player;
+        public Player.Player player;
 
         public void Select(Vector2 position)
         {
             Debug.Log("Controller hier vom PLayer");
-            Player.IsSelected = true;
+            player.isSelected = true;
         }
         
         public void Deselect()
         {
-            Player.IsSelected = false;
+            player.isSelected = false;
         }
     }
 }

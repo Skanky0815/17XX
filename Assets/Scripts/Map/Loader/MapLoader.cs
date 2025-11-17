@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.Core.States;
-using Assets.Scripts.Map.Objects;
+using Core;
+using Core.States;
 using Map.Objects;
+using Map.Serializable;
+using Map.Serializables;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Splines;
@@ -11,27 +13,27 @@ namespace Map.Loader
 {
     public class MapLoader : MonoBehaviour
     {
-        public TextAsset RegionData;
-        public TextAsset FactionData;
-        public Sprite[] FactionIcons;
-        public SplineContainer PathSplines;
-        public Texture2D IdMap;
-        public Player.Player Player;
-        public MapWorldState WorldState;
-        public List<Location> Locations = new();
-        public Renderer MapRenderer;
+        public TextAsset regionData;
+        public TextAsset factionData;
+        public Sprite[] factionIcons;
+        public SplineContainer pathSplines;
+        public Texture2D idMap;
+        public Player.Player player;
+        public MapWorldState worldState;
+        public List<Location> locations = new();
+        public Renderer mapRenderer;
 
         private readonly Dictionary<Faction.Id, Faction> _factions = new();
         private readonly Dictionary<Region.Id, Region> _regions = new();
         private readonly Dictionary<Color32, Region.Id> _regionColorMapping = new();
         private readonly List<KnotCollection> _knots = new();
-        private readonly KnotGraph _knotGrapth = new();
+        private readonly KnotGraph _knotGraph = new();
 
-        private LocationSpwaner _locationSpwaner;
+        private LocationSpawner _locationSpawner;
 
         private void Awake()
         {
-            _locationSpwaner = gameObject.AddComponent<LocationSpwaner>();
+            _locationSpawner = gameObject.AddComponent<LocationSpawner>();
         }
 
         private void Start()
@@ -40,42 +42,42 @@ namespace Map.Loader
             LoadRegions();
             InitializeKnots();
             InitializeKnotGraph();
-            AssginKnotsToRegions();
+            AssignKnotsToRegions();
             
-            _locationSpwaner.Spwan(Locations, _regions, Player);
+            _locationSpawner.Spawn(locations, _regions, player);
         }
 
         private void LoadFactions()
         {
-            var factionInfos = JsonConvert.DeserializeObject<Dictionary<Faction.Id, FactionInfo>>(FactionData.text);
+            var factionInfos = JsonConvert.DeserializeObject<Dictionary<Faction.Id, FactionInfo>>(factionData.text);
 
-            foreach ((var factionId, var factionInfo) in factionInfos)
+            foreach (var (factionId, factionInfo) in factionInfos)
             {
                 Texture2D texture = null;
                 if (factionId != Faction.Id.NEUTRAL)
                 {
-                    var icon = FactionIcons.FirstOrDefault(s => s.name == factionInfo.Icon);
+                    var icon = factionIcons.FirstOrDefault(s => s.name == factionInfo.icon);
                     texture = SpriteConverter.ToTexture(icon);
                 }
 
                 _factions[factionId] = new Faction(factionId, factionInfo, texture);
             }
 
-            Player.Faction = _factions[WorldState.playerFactionId];
-            FactionManager.PlayerFaction = _factions[WorldState.playerFactionId];
+            player.Faction = _factions[worldState.playerFactionId];
+            FactionManager.PlayerFaction = _factions[worldState.playerFactionId];
             FactionManager.Factions = _factions;
         }
 
         private void LoadRegions()
         {
-            var regionInfos = JsonConvert.DeserializeObject<Dictionary<Region.Id, RegionInfo>>(RegionData.text);
+            var regionInfos = JsonConvert.DeserializeObject<Dictionary<Region.Id, RegionInfo>>(regionData.text);
             var neutralFaction = _factions[Faction.Id.NEUTRAL];
-            foreach ((var regionId, var regionInfo) in regionInfos)
+            foreach (var (regionId, regionInfo) in regionInfos)
             {
                 var region = new Region(regionId, regionInfo, neutralFaction);
 
                 _regions.Add(regionId, region);
-                _regionColorMapping[Hex.ToColor32(regionInfo.IdMapColor)] = regionId;
+                _regionColorMapping[Hex.ToColor32(regionInfo.idMapColor)] = regionId;
             }
 
             RegionManager.RegionColorMapping = _regionColorMapping;
@@ -84,13 +86,13 @@ namespace Map.Loader
 
         private void InitializeKnots()
         {
-            for (var splineIndex = 0; splineIndex < PathSplines.Splines.Count; splineIndex++)
+            for (var splineIndex = 0; splineIndex < pathSplines.Splines.Count; splineIndex++)
             {
-                var knots = PathSplines.Splines[splineIndex].Knots;
+                var knots = pathSplines.Splines[splineIndex].Knots;
                 for (var knotIndex = 0; knotIndex < knots.Count(); knotIndex++)
                 {
                     var knot = knots.ElementAt(knotIndex);
-                    var worldPosition = PathSplines.transform.TransformPoint(knot.Position);
+                    var worldPosition = pathSplines.transform.TransformPoint(knot.Position);
 
                     var isAdded = false;
                     foreach (var knotGroup in _knots)
@@ -121,48 +123,47 @@ namespace Map.Loader
                 knotGroup[0].ConnectedKnots = knots;
             }
 
-            PathManager.SplineContainer = PathSplines;
+            PathManager.SplineContainer = pathSplines;
         }
 
         private void InitializeKnotGraph()
         {
-            foreach (var spline in PathSplines.Splines.Select((spline, splineIndex) => (spline, splineIndex)))
+            foreach (var spline in pathSplines.Splines.Select((spline, splineIndex) => (spline, splineIndex)))
             {
-                for (int i = 0; i < spline.spline.Knots.Count() - 1; i++)
+                for (var i = 0; i < spline.spline.Knots.Count() - 1; i++)
                 {
                     var knotA = $"{spline.splineIndex}:{i}";
                     var knotB = $"{spline.splineIndex}:{i + 1}";
-                    _knotGrapth.AddEdge(knotA, knotB);
+                    _knotGraph.AddEdge(knotA, knotB);
                 }
             }
 
-            foreach (var knot in _knots)
+            foreach (var knots in _knots.Select(knot => knot[0].ConnectedKnots))
             {
-                var knots = knot[0].ConnectedKnots;
-                for (int i = 0; i < knots.Count; i++)
+                for (var i = 0; i < knots.Count; i++)
                 {
-                    for (int j = i + 1; j < knots.Count; j++)
+                    for (var j = i + 1; j < knots.Count; j++)
                     {
-                        _knotGrapth.AddEdge(knots[i].Id, knots[j].Id);
+                        _knotGraph.AddEdge(knots[i].Id, knots[j].Id);
                     }
                 }
             }
 
-            PathManager.KnotGrapth = _knotGrapth;
+            PathManager.KnotGraph = _knotGraph;
         }
 
-        private void AssginKnotsToRegions()
+        private void AssignKnotsToRegions()
         {
             foreach (var knotCollection in _knots)
             {
                 var knot = knotCollection[0];
-                var localPos = MapRenderer.transform.InverseTransformPoint(knot.WorldPosition);
-                var bounds = MapRenderer.localBounds;
+                var localPos = mapRenderer.transform.InverseTransformPoint(knot.WorldPosition);
+                var bounds = mapRenderer.localBounds;
                 var u = 1f - Mathf.InverseLerp(bounds.min.x, bounds.max.x, localPos.x);
                 var v = 1f - Mathf.InverseLerp(bounds.min.z, bounds.max.z, localPos.z);
                 var uv = new Vector2(u, v);
 
-                var pixelColor = IdMap.GetPixelBilinear(uv.x, uv.y);
+                var pixelColor = idMap.GetPixelBilinear(uv.x, uv.y);
                 if (_regionColorMapping.TryGetValue(pixelColor, out var regionId))
                 {
                     _regions[regionId].Knots.AddRange(knotCollection);

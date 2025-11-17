@@ -1,41 +1,42 @@
-using Assets.Scripts.Core.States;
+using Core.States;
 using Map.Controller;
+using Map.Objects;
 
 namespace Map
 {
     public static class GameTimeManager
     {
-        private static GameTimeController gameTimeController;
+        private static GameTimeController _gameTimeController;
 
         public static void Initialize(GameTimeController gameTimeControllerRef)
         {
-            gameTimeController = gameTimeControllerRef;
+            _gameTimeController = gameTimeControllerRef;
         }
 
         public static void Pause()
         {
-            if (gameTimeController == null) return;
+            if (_gameTimeController == null) return;
 
-            gameTimeController.IsPause = true;
+            _gameTimeController.isPause = true;
         }
 
         public static void Resume()
         {
-            if (gameTimeController == null) return;
+            if (_gameTimeController == null) return;
 
-            gameTimeController.IsPause = false;
+            _gameTimeController.isPause = false;
         }
 
         public static void Save(MapWorldState worldState)
         {
-            if (gameTimeController == null) return;
+            if (_gameTimeController == null) return;
 
-            var gameTime = gameTimeController.CurrentTime;
+            var gameTime = _gameTimeController.CurrentTime;
             worldState.timeState = new TimeState
             {
-                Day = gameTime.Day,
-                Houre = gameTime.Hour,
-                Minute = gameTime.Minute,
+                day = gameTime.Day,
+                hour = gameTime.Hour,
+                minute = gameTime.Minute,
             };
         }
 
@@ -43,10 +44,10 @@ namespace Map
         {
             if (worldState.timeState.IsNotSaved()) return;
 
-            gameTimeController.CurrentTime = new GameTime(
-                worldState.timeState.Day,
-                worldState.timeState.Houre,
-                worldState.timeState.Minute
+            _gameTimeController.CurrentTime = new GameTime(
+                worldState.timeState.day,
+                worldState.timeState.hour,
+                worldState.timeState.minute
             );
         }
     }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Assets.Scripts.Map.Objects;
 using UnityEngine;
 
 namespace Map.Objects
@@ -7,12 +6,12 @@ namespace Map.Objects
     [CreateAssetMenu(menuName = "Game/World/Location")]
     public class Location : ScriptableObject
     {
-        public string Name;
-        public LocationType LocationType;
-        public GameObject Prefab;
+        public string locationName;
+        public LocationType locationType;
+        public GameObject prefab;
 
-        public List<Region.Id> AllowedRegions = new();
+        public List<Region.Id> allowedRegions = new();
     }
 }
 
-public enum LocationType { Fixed, Random }
+public enum LocationType { FIXED, RANDOM }

@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public interface IInteractable
+namespace Core
 {
-    void Interact(Vector2 position);
+    public interface IInteractable
+    {
+        void Interact(Vector2 position);
+    }
 }

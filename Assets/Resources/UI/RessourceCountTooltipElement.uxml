@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Map/temp.uss?fileID=7433441132597879392&amp;guid=f9ae0370d07c0014fa1bd85a13e2ae45&amp;type=3#temp" />
-    <Style src="project://database/Assets/Resources/UI/RessouceCountTooltipElement.uss?fileID=7433441132597879392&amp;guid=f075b1b3410326940823c0f780470f06&amp;type=3#Tooltip" />
-    <ui:VisualElement name="RessouceCountTooltipElement" class="panel tooltip" style="visibility: visible;">
+    <Style src="project://database/Assets/Resources/UI/RessourceCountTooltipElement.uss?fileID=7433441132597879392&amp;guid=f075b1b3410326940823c0f780470f06&amp;type=3#Tooltip" />
+    <ui:VisualElement name="RessourceCountTooltipElement" class="panel tooltip" style="visibility: visible;">
         <ui:Label name="Description" text="Das ist ein Demo Text :D" class="description" />
         <ui:VisualElement name="InfoList" />
         <ui:VisualElement class="summery infoline">

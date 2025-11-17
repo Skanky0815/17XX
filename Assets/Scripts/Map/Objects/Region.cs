@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Map.Serializable;
 
-namespace Assets.Scripts.Map.Objects
+namespace Map.Objects
 {
     public class Region
     {
@@ -31,7 +32,7 @@ namespace Assets.Scripts.Map.Objects
 
         public void AggregateDailyResources()
         {
-            Owner?.AddResources(RegionInfo.Gold, RegionInfo.Food, RegionInfo.Population, RegionInfo.Population);
+            Owner?.AddResources(RegionInfo.gold, RegionInfo.food, RegionInfo.material, RegionInfo.population);
         }
 
         public enum Id

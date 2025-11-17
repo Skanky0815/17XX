@@ -1,32 +1,35 @@
-using Assets.Scripts.Core.States;
-using Assets.Scripts.Map.Objects;
 using Core;
+using Core.States;
+using Map.Objects;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MenuController : MonoBehaviour
+namespace MainMenu
 {
-    public MapWorldState WorldState;
-    private VisualElement _dwarfButton;
-    private VisualElement _orcButton;
-
-    private void Awake()
+    public class MenuController : MonoBehaviour
     {
-        var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
+        public MapWorldState worldState;
+        private VisualElement _dwarfButton;
+        private VisualElement _orcButton;
 
-        _dwarfButton = root.Q<VisualElement>("Dwarf");
-        _orcButton = root.Q<VisualElement>("Orc");
-    }
+        private void Awake()
+        {
+            var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
 
-    private void Start()
-    {
-        _dwarfButton.RegisterCallback<MouseDownEvent>(evt => StartGame(Faction.Id.DWARF));
-        _orcButton.RegisterCallback<MouseDownEvent>(evt => StartGame(Faction.Id.ORC));
-    }
+            _dwarfButton = root.Q<VisualElement>("Dwarf");
+            _orcButton = root.Q<VisualElement>("Orc");
+        }
 
-    private void StartGame(Faction.Id factionId)
-    {
-        WorldState.playerFactionId = factionId;
-        GameManager.Instance.SwitchToScene("MapScene");
+        private void Start()
+        {
+            _dwarfButton.RegisterCallback<MouseDownEvent>(evt => StartGame(Faction.Id.DWARF));
+            _orcButton.RegisterCallback<MouseDownEvent>(evt => StartGame(Faction.Id.ORC));
+        }
+
+        private void StartGame(Faction.Id factionId)
+        {
+            worldState.playerFactionId = factionId;
+            GameManager.Instance.SwitchToScene("MapScene");
+        }
     }
 }

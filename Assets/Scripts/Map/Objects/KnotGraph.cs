@@ -4,20 +4,20 @@ namespace Map.Objects
 {
     public class KnotGraph
     {
-        private readonly Dictionary<string, List<string>> adjacency = new();
+        private readonly Dictionary<string, List<string>> _adjacency = new();
 
         public void AddEdge(string idA, string idB)
         {
-            if (!adjacency.ContainsKey(idA)) adjacency[idA] = new();
-            if (!adjacency.ContainsKey(idB)) adjacency[idB] = new();
+            if (!_adjacency.ContainsKey(idA)) _adjacency[idA] = new List<string>();
+            if (!_adjacency.ContainsKey(idB)) _adjacency[idB] = new List<string>();
 
-            adjacency[idA].Add(idB);
-            adjacency[idB].Add(idA);
+            _adjacency[idA].Add(idB);
+            _adjacency[idB].Add(idA);
         }
 
         public List<string> GetNeighbors(string knotId)
         {
-            return adjacency.TryGetValue(knotId, out var neighbors) ? neighbors : new();
+            return _adjacency.TryGetValue(knotId, out var neighbors) ? neighbors : new List<string>();
         }
     }
 }

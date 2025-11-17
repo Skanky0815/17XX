@@ -1,15 +1,15 @@
-namespace Assets.Scripts.Core.States
+namespace Core.States
 {
     [System.Serializable]
     public class TimeState
     {
-        public int Day;
-        public int Houre;
-        public int Minute;
+        public int day;
+        public int hour;
+        public int minute;
 
         public bool IsNotSaved()
         {
-            return 0 == Day || 0 == Houre || 0 == Minute; 
+            return 0 == day || 0 == hour || 0 == minute; 
         }
     }
 }

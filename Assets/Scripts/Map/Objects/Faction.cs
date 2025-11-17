@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using Assets.Scripts.Core.States;
+using Core.States;
+using Map.Serializables;
 using UnityEngine;
 
-namespace Assets.Scripts.Map.Objects
+namespace Map.Objects
 {
     public class Faction
     {
@@ -38,11 +39,11 @@ namespace Assets.Scripts.Map.Objects
         {
             return new FactionState
             {
-                FactionId = FactionId,
-                Gold = Gold,
-                Food = Food,
-                Material = Material,
-                Population = Population
+                factionId = FactionId,
+                gold = Gold,
+                food = Food,
+                material = Material,
+                population = Population
             };
         }
 

@@ -6880,16 +6880,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdaeb0c93c4b4034194388581ed74713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  MoveSpeed: 20
-  DragSpeed: 0.5
-  EdgeSize: 20
-  ZoomSpeed: 80
-  MinZoom: 10
-  MaxZoom: 45
-  XZoomedIn: {x: -20, y: 20}
-  ZZoomedIn: {x: -38, y: -12}
-  XZoomedOut: {x: 0, y: 0}
-  ZZoomedOut: {x: -30, y: -30}
+  moveSpeed: 20
+  dragSpeed: 0.5
+  edgeSize: 20
+  zoomSpeed: 80
+  minZoom: 10
+  maxZoom: 45
+  xZoomedIn: {x: -20, y: 20}
+  zZoomedIn: {x: -38, y: -12}
+  xZoomedOut: {x: 0, y: 0}
+  zZoomedOut: {x: -30, y: -30}
 --- !u!4 &333956104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8807925768702028201, guid: 873f2259d88f64b448fd0837e7e865a5, type: 3}
@@ -9164,7 +9164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16491027cc18612459540a151e6994d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DayNightController
-  GameTimeManager: {fileID: 1764142424}
+  gameTimeManager: {fileID: 1764142424}
 --- !u!4 &410902287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8807925768702028201, guid: 0270f71dc45d8f646823fa11d21fa193, type: 3}
@@ -20902,20 +20902,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76a38c98ebb4def48b2ace6e2f72a535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Map.Loader.MapLoader
-  RegionData: {fileID: 4900000, guid: d9a34bc0f36b5834980641288022df8b, type: 3}
-  FactionData: {fileID: 4900000, guid: 4e96177985abe1b4083f5a4d906e4592, type: 3}
-  FactionIcons:
+  regionData: {fileID: 4900000, guid: d9a34bc0f36b5834980641288022df8b, type: 3}
+  factionData: {fileID: 4900000, guid: 4e96177985abe1b4083f5a4d906e4592, type: 3}
+  factionIcons:
   - {fileID: 860171912, guid: 8bb3ad0435efecc45a1ad76b4198c615, type: 3}
   - {fileID: 2006092787, guid: 8bb3ad0435efecc45a1ad76b4198c615, type: 3}
-  PathSplines: {fileID: 575704685}
-  IdMap: {fileID: 2800000, guid: 2615e7ce2c589b04b9bb50cd412a66dc, type: 3}
-  Player: {fileID: 1113627959}
-  WorldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
-  Locations:
+  pathSplines: {fileID: 575704685}
+  idMap: {fileID: 2800000, guid: 2615e7ce2c589b04b9bb50cd412a66dc, type: 3}
+  player: {fileID: 1113627959}
+  worldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
+  locations:
   - {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
-  - {fileID: 11400000, guid: 2963fe3f28cabda42bd41d4f15baecfd, type: 2}
   - {fileID: 11400000, guid: 6a357cc7f58a5a5499700016d5fd72a4, type: 2}
-  MapRenderer: {fileID: 1695211676}
+  - {fileID: 11400000, guid: 2963fe3f28cabda42bd41d4f15baecfd, type: 2}
+  mapRenderer: {fileID: 1695211676}
 --- !u!1001 &796858172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28551,8 +28551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acba755c6331bb49a9b6b127c742597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  MoveSpeed: 1
-  ArrivalThreshold: 0.05
+  moveSpeed: 1
+  arrivalThreshold: 0.05
 --- !u!114 &1113627959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28565,8 +28565,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7749149e95c614748aeb6a63a47e1512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  PlayerMovement: {fileID: 1113627958}
-  IsSelected: 0
+  playerMovement: {fileID: 1113627958}
+  isSelected: 0
 --- !u!114 &1113627960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28579,7 +28579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4885b0de2a9005f4a8e3cab5d00e31d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  Player: {fileID: 1113627959}
+  player: {fileID: 1113627959}
 --- !u!65 &1113627961
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29589,7 +29589,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342ae70ce7fa24e47b39cf4179c074d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputController
-  UIDocument: {fileID: 1457079199}
+  uiDocument: {fileID: 1457079199}
 --- !u!4 &1159368575
 Transform:
   m_ObjectHideFlags: 0
@@ -35974,8 +35974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0324f09d151cf4b818c2a3a779b8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Clock
-  GameTimeController: {fileID: 1764142424}
-  TimeSprites:
+  gameTimeController: {fileID: 1764142424}
+  timeSprites:
   - {fileID: 588127372, guid: b965e2c32b2cce145ba005f3f39845bc, type: 3}
   - {fileID: 904696252, guid: b965e2c32b2cce145ba005f3f39845bc, type: 3}
   - {fileID: 1480455599, guid: b965e2c32b2cce145ba005f3f39845bc, type: 3}
@@ -41715,9 +41715,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec9c1986ddb61642a4ee492a7694769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegionHighlighter
-  RegionIdMap: {fileID: 2800000, guid: 2615e7ce2c589b04b9bb50cd412a66dc, type: 3}
-  MapRenderer: {fileID: 1695211676}
-  RegionMenu: {fileID: 1457079201}
+  regionIdMap: {fileID: 2800000, guid: 2615e7ce2c589b04b9bb50cd412a66dc, type: 3}
+  mapRenderer: {fileID: 1695211676}
+  regionMenu: {fileID: 1457079201}
   gameTimeController: {fileID: 1764142424}
 --- !u!4 &1697585279 stripped
 Transform:
@@ -43155,7 +43155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61d0763a61e0e4c4e9e49d7713d33fc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameTimeManager
-  IsPause: 0
+  isPause: 0
 --- !u!4 &1767331307 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8807925768702028201, guid: 873f2259d88f64b448fd0837e7e865a5, type: 3}

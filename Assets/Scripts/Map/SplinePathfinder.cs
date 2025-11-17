@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Map.Objects;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace Map
         {
             var openSet = new SortedSet<(float fScore, string id)>(Comparer<(float, string)>.Create((a, b) =>
             {
-                int compare = a.Item1.CompareTo(b.Item1);
-                return compare == 0 ? a.Item2.CompareTo(b.Item2) : compare;
+                var compare = a.Item1.CompareTo(b.Item1);
+                return compare == 0 ? string.Compare(a.Item2, b.Item2, StringComparison.Ordinal) : compare;
             }));
 
             var cameFrom = new Dictionary<string, string>();
@@ -30,18 +31,17 @@ namespace Map
 
                 foreach (var neighbor in graph.GetNeighbors(current))
                 {
-                    float tentativeG = gScore[current] + 1f; // konstante Kosten, optional anpassbar
+                    var tentativeG = gScore[current] + 1f; // konstante Kosten, optional anpassbar
 
-                    if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])
-                    {
-                        cameFrom[neighbor] = current;
-                        gScore[neighbor] = tentativeG;
-                        fScore[neighbor] = tentativeG + Heuristic(neighbor, goalId);
+                    if (gScore.ContainsKey(neighbor) && !(tentativeG < gScore[neighbor])) continue;
+                    
+                    cameFrom[neighbor] = current;
+                    gScore[neighbor] = tentativeG;
+                    fScore[neighbor] = tentativeG + Heuristic(neighbor, goalId);
 
-                        // Duplikate vermeiden
-                        openSet.RemoveWhere(e => e.id == neighbor);
-                        openSet.Add((fScore[neighbor], neighbor));
-                    }
+                    // Duplikate vermeiden
+                    openSet.RemoveWhere(e => e.id == neighbor);
+                    openSet.Add((fScore[neighbor], neighbor));
                 }
             }
 
@@ -54,8 +54,8 @@ namespace Map
             var aParts = aId.Split(':').Select(int.Parse).ToArray();
             var bParts = bId.Split(':').Select(int.Parse).ToArray();
 
-            int splineDiff = System.Math.Abs(aParts[0] - bParts[0]);
-            int knotDiff = System.Math.Abs(aParts[1] - bParts[1]);
+            var splineDiff = Math.Abs(aParts[0] - bParts[0]);
+            var knotDiff = Math.Abs(aParts[1] - bParts[1]);
 
             return splineDiff + knotDiff;
         }

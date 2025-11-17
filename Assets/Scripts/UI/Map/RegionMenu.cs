@@ -1,7 +1,7 @@
 using UnityEngine.UIElements;
 using UnityEngine;
-using Assets.Scripts.Map.Objects;
 using Map;
+using Map.Objects;
 using UI.Elements;
 
 namespace UI.Map
@@ -43,16 +43,16 @@ namespace UI.Map
 
             var region = RegionManager.GetRegion(regionId);
 
-            _panelHeader.SetContent(region.RegionInfo.Name, "?", region.Owner?.Icon);
-            _goldLabel.text = region.RegionInfo.Gold.ToString();
-            _foodLabel.text = region.RegionInfo.Food.ToString();
-            _materialLabel.text = region.RegionInfo.Material.ToString();
-            _populationLabel.text = region.RegionInfo.Population.ToString();
+            _panelHeader.SetContent(region.RegionInfo.name, "?", region.Owner?.Icon);
+            _goldLabel.text = region.RegionInfo.gold.ToString();
+            _foodLabel.text = region.RegionInfo.food.ToString();
+            _materialLabel.text = region.RegionInfo.material.ToString();
+            _populationLabel.text = region.RegionInfo.population.ToString();
 
             _regionMenu.style.visibility = Visibility.Visible;
         }
 
-        public void ShowRegionInfo()
+        private void ShowRegionInfo()
         {
             _regionInfo.Show(_currentRegionId);
         }

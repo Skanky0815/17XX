@@ -9,11 +9,11 @@ namespace Map
     {
         public static SplineContainer SplineContainer;
 
-        public static KnotGraph KnotGrapth = new();
+        public static KnotGraph KnotGraph = new();
 
         public static float GetSpineLenght(string knotId)
         {
-            (var splineIndex, _) = ParseKnotId(knotId);
+            var (splineIndex, _) = ParseKnotId(knotId);
             var spline = SplineContainer.Splines[splineIndex];
             
             return spline.GetLength();
@@ -21,7 +21,7 @@ namespace Map
 
         public static Vector3 GetKnotWoldPosition(string knotId)
         {
-            (var splineIndex, var knotIndex) = ParseKnotId(knotId);
+            var (splineIndex, knotIndex) = ParseKnotId(knotId);
 
             var spline = SplineContainer.Splines[splineIndex];
             var localPos = spline.Knots.ElementAt(knotIndex).Position;
@@ -31,18 +31,18 @@ namespace Map
 
         public static Vector3 EvaluateSplinePosition(string knotId, float t)
         {
-            (var splineIndex, _) = ParseKnotId(knotId);
+            var (splineIndex, _) = ParseKnotId(knotId);
             var spline = SplineContainer.Splines[splineIndex];
 
-            return SplineUtility.EvaluatePosition(spline, t);
+            return spline.EvaluatePosition(t);
         }
 
         public static Vector3 EvaluateSplineTangent(string knotId, float t)
         {
-            (var splineIndex, _) = ParseKnotId(knotId);
+            var (splineIndex, _) = ParseKnotId(knotId);
             var spline = SplineContainer.Splines[splineIndex];
 
-            return SplineUtility.EvaluateTangent(spline, t);
+            return spline.EvaluateTangent(t);
         }
 
         private static (int splineIndex, int knotIndex) ParseKnotId(string knotId)

@@ -4,16 +4,16 @@ using UnityEngine.UIElements;
 
 namespace UI.Map
 {
-    public class RessouceCountTooltipElement : VisualElement
+    public class RessourceCountTooltipElement : VisualElement
     {
-        private Label _descriptionLabel;
-        private Label _summeryLabel;
-        private Label _summeryValueLabel;
-        private VisualElement _infoList;
+        private readonly Label _descriptionLabel;
+        private readonly Label _summeryLabel;
+        private readonly Label _summeryValueLabel;
+        private readonly VisualElement _infoList;
 
-        public RessouceCountTooltipElement()
+        public RessourceCountTooltipElement()
         {
-            var asset = Resources.Load<VisualTreeAsset>("UI/RessouceCountTooltipElement");
+            var asset = Resources.Load<VisualTreeAsset>("UI/RessourceCountTooltipElement");
             asset.CloneTree(this);
             style.display = DisplayStyle.None;
 
@@ -27,7 +27,7 @@ namespace UI.Map
         {
             _descriptionLabel.text = description;
 
-            foreach ((var regionName, var value) in infos)
+            foreach (var (regionName, value) in infos)
             {
                 var visualElement = new VisualElement();
                 visualElement.AddToClassList("infoline");

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Assets.Scripts.Map.Objects;
+using Map.Objects;
 using UnityEngine;
 
-namespace Assets.Scripts.Core.States
+namespace Core.States
 {
     [CreateAssetMenu(menuName = "Game/WorldState")]
     public class MapWorldState : ScriptableObject

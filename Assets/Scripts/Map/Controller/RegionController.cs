@@ -5,11 +5,14 @@ namespace Map.Controller
 {
     public class RegionController : MonoBehaviour, ISelectable
     {
-        public Texture2D RegionIdMap;
-        public Renderer MapRenderer;
-
-        public RegionMenu RegionMenu;
-
+        private static readonly int HoverColor = Shader.PropertyToID("_HoverColor");
+        private static readonly int GlowColor = Shader.PropertyToID("_GlowColor");
+        private static readonly int GlowStrength = Shader.PropertyToID("_GlowStrength");
+        private static readonly int Tolerance = Shader.PropertyToID("_Tolerance");
+        
+        public Texture2D regionIdMap;
+        public Renderer mapRenderer;
+        public RegionMenu regionMenu;
         public GameTimeController gameTimeController;
 
         private void Start()
@@ -26,31 +29,28 @@ namespace Map.Controller
         {
             var ray = Camera.main.ScreenPointToRay(position);
 
-            if (Physics.Raycast(ray, out var hit))
-            {
-                if (hit.collider.gameObject != MapRenderer.gameObject) return;
+            if (!Physics.Raycast(ray, out var hit)) return;
+            if (hit.collider.gameObject != mapRenderer.gameObject) return;
   
-                var uv = hit.textureCoord;
-                var color = RegionIdMap.GetPixelBilinear(uv.x, uv.y);
+            var uv = hit.textureCoord;
+            var color = regionIdMap.GetPixelBilinear(uv.x, uv.y);
 
-                if (RegionManager.RegionColorMapping.TryGetValue(color, out var regionId))
-                {
-                    MapRenderer.material.SetColor("_HoverColor", color);
-                    MapRenderer.material.SetColor("_GlowColor", Color.lawnGreen);
-                    MapRenderer.material.SetFloat("_GlowStrength", 1.8f);
-                    MapRenderer.material.SetFloat("_Tolerance", 0.01f);
+            if (!RegionManager.RegionColorMapping.TryGetValue(color, out var regionId)) return;
+            
+            mapRenderer.material.SetColor(HoverColor, color);
+            mapRenderer.material.SetColor(GlowColor, Color.lawnGreen);
+            mapRenderer.material.SetFloat(GlowStrength, 1.8f);
+            mapRenderer.material.SetFloat(Tolerance, 0.01f);
 
-                    RegionMenu.Show(regionId);
-                }
-            }
+            regionMenu.Show(regionId);
         }
 
         public void Deselect()
         {
-            MapRenderer.material.SetColor("_HoverColor", new Color32(0, 0, 0, 0));
-            MapRenderer.material.SetColor("_GlowColor", new Color32(0, 0, 0, 0));
+            mapRenderer.material.SetColor(HoverColor, new Color32(0, 0, 0, 0));
+            mapRenderer.material.SetColor(GlowColor, new Color32(0, 0, 0, 0));
 
-            RegionMenu.Hide();
+            regionMenu.Hide();
         }
     }
 }

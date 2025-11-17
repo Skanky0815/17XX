@@ -1,57 +1,52 @@
 using System;
 
-public class GameTime
+namespace Map.Objects
 {
-    public int Day = 1;
-    public int Hour = 12;
-    public int Minute;
-
-    public float RealSecondsPerIngameDay = 60f;
-    public float TimeScale => 1440f / RealSecondsPerIngameDay;
-
-    private float _minuteBuffer = 0f;
-
-    public GameTime(int day = 1, int houre = 12, int minute = 1)
+    public class GameTime
     {
-        Day = day;
-        Hour = houre;
-        Minute = minute;
+        public int Day;
+        public int Hour;
+        public int Minute;
 
-        OnNewMinute?.Invoke(Hour, Minute);
-        OnNewHoure?.Invoke(Hour);
-        OnNewDay?.Invoke(Day);
-    }
+        private const float RealSecondsPerIngameDay = 60f;
+        private static float TimeScale => 1440f / RealSecondsPerIngameDay;
 
-    public void Advance(float deltaTime)
-    {
-        _minuteBuffer += deltaTime * TimeScale;
+        private float _minuteBuffer;
 
-        while (_minuteBuffer >= 1f)
+        public GameTime(int day = 1, int hour = 12, int minute = 1)
         {
-            _minuteBuffer -= 1f;
-            Minute++;
+            Day = day;
+            Hour = hour;
+            Minute = minute;
+        }
 
-            OnNewMinute?.Invoke(Hour, Minute);
+        public void Advance(float deltaTime)
+        {
+            _minuteBuffer += deltaTime * TimeScale;
 
-            if (Minute >= 60)
+            while (_minuteBuffer >= 1f)
             {
+                _minuteBuffer -= 1f;
+                Minute++;
+
+                OnNewMinute?.Invoke(Hour, Minute);
+
+                if (Minute < 60) continue;
                 Minute = 0;
                 Hour++;
-                OnNewHoure?.Invoke(Hour);
+                OnNewHour?.Invoke(Hour);
 
-                if (Hour >= 24)
-                {
-                    Hour = 0;
-                    Day++;
-                    OnNewDay?.Invoke(Day);
-                }
+                if (Hour < 24) continue;
+                Hour = 0;
+                Day++;
+                OnNewDay?.Invoke(Day);
             }
         }
+
+        public event Action<int> OnNewDay;
+
+        public event Action<int> OnNewHour;
+
+        public event Action<int, int> OnNewMinute;
     }
-
-    public event Action<int> OnNewDay;
-
-    public event Action<int> OnNewHoure;
-
-    public event Action<int, int> OnNewMinute;
 }

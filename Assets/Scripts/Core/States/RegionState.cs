@@ -1,11 +1,11 @@
-using Assets.Scripts.Map.Objects;
+using Map.Objects;
 
-namespace Assets.Scripts.Core.States
+namespace Core.States
 {
     [System.Serializable]
     public class RegionState
     {
-        public Region.Id RegionId;
-        public Faction.Id FactionId;
+        public Region.Id regionId;
+        public Faction.Id factionId;
     }
 }

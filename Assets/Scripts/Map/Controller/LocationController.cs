@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Assets.Scripts.Map.Objects;
 using Core;
 using Map.Objects;
 using UI.Elements;
@@ -11,10 +10,9 @@ namespace Map.Controller
     public class LocationController : MonoBehaviour, IInteractable
     {
         public Region Region;
-        public string KnotId;
-        public Player.Player Player;
-
-        public Location Location;
+        public string knotId;
+        public Player.Player player;
+        public Location location;
 
         private EventPanel _eventPanel;
         private LocalizationManager _localizationManager;
@@ -28,19 +26,19 @@ namespace Map.Controller
 
         public void Interact(Vector2 position)
         {
-            Player.MoveTo(KnotId);
+            player.MoveTo(knotId);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            var player = other.gameObject.GetComponentInParent<Player.Player>();
+            var factionUnit = other.gameObject.GetComponentInParent<Player.Player>();
             if (!other.gameObject.GetComponentInParent<Player.Player>()) return;
 
-            var enterButton = new Button(EnterLocation) { text = _localizationManager.GetText("location.enter") };
+            var enterButton = new Button(() => EnterLocation(factionUnit)) { text = _localizationManager.GetText("location.enter") };
             var skipButton = new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") };
             _eventPanel.Show(
-                Location.Name,
-                $"Willkommen in {Location.Name}!\n\n {Location.Name} ist die Hauptsiedlung in {Region.RegionInfo.Name}.",
+                location.locationName,
+                $"Willkommen in {location.locationName}!\n\n {location.locationName} ist die Hauptsiedlung in {Region.RegionInfo.name}.",
                 null,
                 new List<Button>
                     {
@@ -48,12 +46,11 @@ namespace Map.Controller
                         skipButton,
                     }
             );
-
-            Region.ChangeOwner(player.Faction);
         }
 
-        private void EnterLocation()
+        private void EnterLocation(Player.Player factionUnit)
         {
+            Region.ChangeOwner(factionUnit.Faction);
             GameManager.Instance.SwitchToScene("Region01_Location_Town");
         }
         

@@ -1,21 +1,21 @@
-using Assets.Scripts.Map.Objects;
+using Map.Objects;
 using UnityEngine;
 
 namespace Map.Player
 {
     public class Player : MonoBehaviour
     {
-        public PlayerMovement PlayerMovement;
+        public PlayerMovement playerMovement;
 
-        public bool IsSelected;
+        public bool isSelected;
 
         public Faction Faction { get; internal set; }
 
         public void MoveTo(string knotId)
         {
-            if (!IsSelected) return;
+            if (!isSelected) return;
 
-            PlayerMovement.RequestPath(knotId);
+            playerMovement.RequestPath(knotId);
         }
     }
 }

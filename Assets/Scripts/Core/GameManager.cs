@@ -1,5 +1,4 @@
-using Assets.Scripts.Core;
-using Assets.Scripts.Core.States;
+using Core.States;
 using Map;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -40,14 +39,13 @@ namespace Core
             SceneController.InitializeSceneObjects(scene.name, mapWorldState);
         }
 
-        public void SwitchToScene(string name)
+        public void SwitchToScene(string sceneName)
         {
             SaveGame();
-            SceneManager.LoadScene(name);
+            SceneManager.LoadScene(sceneName);
         }
 
-
-        public void SaveGame()
+        private void SaveGame()
         {
             GameTimeManager.Save(mapWorldState);
             FactionManager.Save(mapWorldState);

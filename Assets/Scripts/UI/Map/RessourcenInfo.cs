@@ -1,20 +1,20 @@
+using System;
 using System.Collections.Generic;
 using Core;
 using Map;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.UIElements;
 
 namespace UI.Map
 {
-    public class ResourcenInfo : MonoBehaviour
+    public class ResourcesInfo : MonoBehaviour
     {
         private Label _goldLabel;
         private Label _foodLabel;
         private Label _materialLabel;
         private Label _populationLabel;
 
-        private RessouceCountTooltipElement _tooltipElement;
+        private RessourceCountTooltipElement _tooltipElement;
 
         private LocalizationManager _localizationManager;
 
@@ -29,7 +29,7 @@ namespace UI.Map
             _materialLabel = factionStatsPanel.Q<Label>("Material");
             _populationLabel = factionStatsPanel.Q<Label>("Population");
 
-            _tooltipElement = new RessouceCountTooltipElement();
+            _tooltipElement = new RessourceCountTooltipElement();
             root.Add(_tooltipElement);
         }
 
@@ -41,8 +41,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in FactionManager.PlayerFaction.Regions.Values)
                 {
-                    infoList.Add((region.RegionInfo.Name, region.RegionInfo.Gold));
-                    totalValue += region.RegionInfo.Gold;
+                    infoList.Add((region.RegionInfo.name, region.RegionInfo.gold));
+                    totalValue += region.RegionInfo.gold;
                 }
 
                 _tooltipElement.Show(
@@ -53,18 +53,19 @@ namespace UI.Map
                     infoList
                 );
             });
-            _goldLabel.parent.RegisterCallback<MouseLeaveEvent>(evt =>
+            _goldLabel.parent.RegisterCallback<MouseLeaveEvent>(_ =>
             {
                 _tooltipElement.Hide();
             });
             _materialLabel.parent.RegisterCallback<MouseEnterEvent>(evt =>
             {
+                if (evt == null) throw new ArgumentNullException(nameof(evt));
                 var totalValue = 0;
                 List<(string, int)> infoList = new();
                 foreach (var region in FactionManager.PlayerFaction.Regions.Values)
                 {
-                    infoList.Add((region.RegionInfo.Name, region.RegionInfo.Material));
-                    totalValue += region.RegionInfo.Material;
+                    infoList.Add((region.RegionInfo.name, region.RegionInfo.material));
+                    totalValue += region.RegionInfo.material;
                 }
 
                 _tooltipElement.Show(
@@ -75,7 +76,7 @@ namespace UI.Map
                     infoList
                 );
             });
-            _materialLabel.parent.RegisterCallback<MouseLeaveEvent>(evt =>
+            _materialLabel.parent.RegisterCallback<MouseLeaveEvent>(_ =>
             {
                 _tooltipElement.Hide();
             });
@@ -85,8 +86,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in FactionManager.PlayerFaction.Regions.Values)
                 {
-                    infoList.Add((region.RegionInfo.Name, region.RegionInfo.Food));
-                    totalValue += region.RegionInfo.Food;
+                    infoList.Add((region.RegionInfo.name, region.RegionInfo.food));
+                    totalValue += region.RegionInfo.food;
                 }
 
                 _tooltipElement.Show(
@@ -97,7 +98,7 @@ namespace UI.Map
                     infoList
                 );
             });
-            _foodLabel.parent.RegisterCallback<MouseLeaveEvent>(evt =>
+            _foodLabel.parent.RegisterCallback<MouseLeaveEvent>(_ =>
             {
                 _tooltipElement.Hide();
             });
@@ -107,8 +108,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in FactionManager.PlayerFaction.Regions.Values)
                 {
-                    infoList.Add((region.RegionInfo.Name, region.RegionInfo.Population));
-                    totalValue += region.RegionInfo.Population;
+                    infoList.Add((region.RegionInfo.name, region.RegionInfo.population));
+                    totalValue += region.RegionInfo.population;
                 }
 
                 _tooltipElement.Show(
@@ -119,7 +120,7 @@ namespace UI.Map
                     infoList
                 );
             });
-            _populationLabel.parent.RegisterCallback<MouseLeaveEvent>(evt =>
+            _populationLabel.parent.RegisterCallback<MouseLeaveEvent>(_ =>
             {
                 _tooltipElement.Hide();
             });
@@ -129,13 +130,13 @@ namespace UI.Map
         {
             if (FactionManager.PlayerFaction == null) return;
 
-            UpdateResouceCounter(_goldLabel, FactionManager.PlayerFaction.Gold);
-            UpdateResouceCounter(_foodLabel, FactionManager.PlayerFaction.Food);
-            UpdateResouceCounter(_materialLabel, FactionManager.PlayerFaction.Material);
-            UpdateResouceCounter(_populationLabel, FactionManager.PlayerFaction.Population);
+            UpdateResourceCounter(_goldLabel, FactionManager.PlayerFaction.Gold);
+            UpdateResourceCounter(_foodLabel, FactionManager.PlayerFaction.Food);
+            UpdateResourceCounter(_materialLabel, FactionManager.PlayerFaction.Material);
+            UpdateResourceCounter(_populationLabel, FactionManager.PlayerFaction.Population);
         }
 
-        private void UpdateResouceCounter(Label label, int value)
+        private static void UpdateResourceCounter(Label label, int value)
         {
             label.text = value.ToString();
             label.style.color = value > 0 ? Color.darkGreen : Color.darkRed;

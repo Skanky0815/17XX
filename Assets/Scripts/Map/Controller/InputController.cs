@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -7,12 +9,12 @@ namespace Map.Controller
 {
     class InputController : MonoBehaviour
     {
-        public UIDocument UIDocument;
+        public UIDocument uiDocument;
 
         private ClickControls.PointerActions _pointerActions;
         private int _interactableLayer;
 
-        private List<ISelectable> _selectedObjects = new();
+        private readonly List<ISelectable> _selectedObjects = new();
 
         private void Awake()
         {
@@ -45,13 +47,13 @@ namespace Map.Controller
         private bool IsUiElement(Vector2 mousePosition)
         {
             mousePosition.y = Screen.height - mousePosition.y;
-            var panelPostition = RuntimePanelUtils.ScreenToPanel(UIDocument.rootVisualElement.panel, mousePosition);
-            var hit = UIDocument.rootVisualElement.panel.Pick(panelPostition);
+            var panelPosition = RuntimePanelUtils.ScreenToPanel(uiDocument.rootVisualElement.panel, mousePosition);
+            var hit = uiDocument.rootVisualElement.panel.Pick(panelPosition);
 
             return hit != null;
         }
 
-        private void HandleInteractable(RaycastHit hit, Vector2 mousePosition)
+        private static void HandleInteractable(RaycastHit hit, Vector2 mousePosition)
         {
             var interactable = hit.collider.GetComponent<IInteractable>();
             interactable?.Interact(mousePosition);
@@ -59,18 +61,15 @@ namespace Map.Controller
 
         private void HandleSelectable(RaycastHit hit, Vector2 mousePosition)
         {
-            if (hit.collider.TryGetComponent<ISelectable>(out var selectable))
+            if (!hit.collider.TryGetComponent<ISelectable>(out var selectable)) return;
+
+            foreach (var selected in _selectedObjects.Where(selected => selected != selectable))
             {
-                foreach (var selected in _selectedObjects)
-                {
-                    if (selected == selectable) continue;
-
-                    selected.Deselect();
-                }
-
-                selectable.Select(mousePosition);
-                _selectedObjects.Add(selectable);
+                selected.Deselect();
             }
+
+            selectable.Select(mousePosition);
+            _selectedObjects.Add(selectable);
         }
     }
 }

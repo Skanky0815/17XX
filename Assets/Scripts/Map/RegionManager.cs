@@ -1,7 +1,8 @@
 using System.Collections.Generic;
-using Assets.Scripts.Core.States;
-using Assets.Scripts.Map.Objects;
+using Core.States;
 using Map.Controller;
+using Map.Objects;
+using Map.Serializable;
 using Newtonsoft.Json;
 using UnityEngine;
 
@@ -9,19 +10,19 @@ namespace Map
 {
     public static class RegionManager
     {
-        private static GameTimeController gameTimeController;
+        private static GameTimeController _gameTimeController;
 
         public static Dictionary<Region.Id, Region> Regions = new();
         public static Dictionary<Color32, Region.Id> RegionColorMapping = new();
 
         public static void Initialize(GameTimeController gameTimeControllerRef)
         {
-            gameTimeController = gameTimeControllerRef;
+            _gameTimeController = gameTimeControllerRef;
         }
 
         public static void Load(MapWorldState worldState)
         {
-            gameTimeController.CurrentTime.OnNewDay += OnNewDay;
+            _gameTimeController.CurrentTime.OnNewDay += OnNewDay;
 
             return;
             if (worldState.HasNoRegions()) return;
@@ -32,29 +33,29 @@ namespace Map
             var regionInfos = JsonConvert.DeserializeObject<Dictionary<Region.Id, RegionInfo>>(textAsset.text);
             foreach (var regionState in worldState.regions)
             {
-                var faction = FactionManager.GetFaction(regionState.FactionId);
-                var region = new Region(regionState.RegionId, regionInfos[regionState.RegionId], faction);
+                var faction = FactionManager.GetFaction(regionState.factionId);
+                var region = new Region(regionState.regionId, regionInfos[regionState.regionId], faction);
 
-                Regions.Add(regionState.RegionId, region);
+                Regions.Add(regionState.regionId, region);
             }
         }
 
         public static void Save(MapWorldState worldState)
         {
             worldState.regions.Clear();
-            foreach ((var regionId, var region) in Regions)
+            foreach (var (regionId, region) in Regions)
             {
                 var regionState = new RegionState
                 {
-                    RegionId = regionId,
-                    FactionId = region.Owner.FactionId,
+                    regionId = regionId,
+                    factionId = region.Owner.FactionId,
                 };
                 worldState.regions.Add(regionState);
             }
 
-            if (gameTimeController == null) return;
+            if (_gameTimeController == null) return;
 
-            gameTimeController.CurrentTime.OnNewDay -= OnNewDay;
+            _gameTimeController.CurrentTime.OnNewDay -= OnNewDay;
         }
 
         public static void OnNewDay(int day)
@@ -67,9 +68,7 @@ namespace Map
 
         public static Region GetRegion(Region.Id regionId)
         {
-            if (!Regions.TryGetValue(regionId, out var region)) throw new KeyNotFoundException($"Region with Id '{regionId}' not found.");
-
-            return region;
+            return !Regions.TryGetValue(regionId, out var region) ? throw new KeyNotFoundException($"Region with Id '{regionId}' not found.") : region;
         }
     }
 }
