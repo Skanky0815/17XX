@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core;
 using Map.Objects;
 using UI.Elements;
@@ -7,10 +7,9 @@ using UnityEngine.UIElements;
 
 namespace Map.Controller
 {
-    public class LocationController : MonoBehaviour, IInteractable
+    public class RandomLocationController : MonoBehaviour
     {
         public Region region;
-        public string knotId;
         public Player.Player player;
         public Location location;
 
@@ -26,14 +25,9 @@ namespace Map.Controller
             _localizationManager = LocalizationManager.Instance;
         }
 
-        public void Interact(Vector2 position)
-        {
-            player.MoveTo(knotId);
-        }
-
         private void OnTriggerExit(Collider other)
         {
-            _isTriggert = false;
+            gameObject.SetActive(false);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -41,7 +35,7 @@ namespace Map.Controller
             if (_isTriggert) return;
             
             var factionUnit = other.gameObject.GetComponentInParent<Player.Player>();
-            if (!factionUnit || factionUnit.playerMovement.targetKnotId != knotId) return;
+            if (!other.gameObject.GetComponentInParent<Player.Player>()) return;
 
             _isTriggert = true;
             player.playerMovement.StopMoving();
@@ -50,7 +44,7 @@ namespace Map.Controller
             var skipButton = new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") };
             _eventPanel.Show(
                 location.locationName,
-                location.welcomeText,
+                string.Format(location.welcomeText, location.locationName, location.locationName, region.name),
                 null,
                 new List<Button>
                     {
@@ -62,7 +56,6 @@ namespace Map.Controller
 
         private void EnterLocation(Player.Player factionUnit)
         {
-            region.ChangeOwner(factionUnit.worldState.playerFaction);
             _eventPanel.Hide();
             //GameManager.Instance.SwitchToScene("Region01_Location_Town");
         }

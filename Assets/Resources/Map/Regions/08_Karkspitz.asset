@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
-  m_Name: Karkspitz
+  m_Name: 08_Karkspitz
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
   id: 7
   idMapColor: '#60d974'

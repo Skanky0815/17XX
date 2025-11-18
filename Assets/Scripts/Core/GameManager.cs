@@ -1,5 +1,4 @@
 using Core.States;
-using Map.Objects;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,7 +23,6 @@ namespace Core
             {
                 Destroy(gameObject);
             }
-
         }
 
         private void OnSceneUnloaded(Scene scene)

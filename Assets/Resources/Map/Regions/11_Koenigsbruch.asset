@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
-  m_Name: Silbermark
+  m_Name: 11_Koenigsbruch
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
-  id: 12
-  idMapColor: '#bb00a0'
-  regionName: Silbermark
+  id: 10
+  idMapColor: '#bb7c41'
+  town: {fileID: 11400000, guid: 2963fe3f28cabda42bd41d4f15baecfd, type: 2}
+  locations: []
+  owner: {fileID: 0}
+  regionName: "K\xF6nigsbruch"
   description: 
   ambientImage: {fileID: 0}
   gold: 0
   food: 0
   material: 0
   population: 0
-  locations: []
-  owner: {fileID: 0}

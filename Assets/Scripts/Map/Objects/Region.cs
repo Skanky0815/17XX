@@ -8,6 +8,7 @@ namespace Map.Objects
     {
         public Id id;
         public string idMapColor;
+        public Location town;
         public List<Location> locations = new();
         public Faction owner;
         [Header("Lore")]

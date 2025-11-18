@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
-  m_Name: Graustrom-Tal
+  m_Name: 09_Daemmerforst
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
-  id: 9
-  idMapColor: '#60dbdb'
-  regionName: Graustrom-Tal
+  id: 8
+  idMapColor: '#607a19'
+  regionName: "D\xE4mmerforst"
   description: 
   ambientImage: {fileID: 0}
   gold: 0

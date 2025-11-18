@@ -1,6 +1,6 @@
 # 17XX Der Streit um Regalistra
 
-<img src="./Assets/Resources/Textures/map.jpeg" alt="Karte von Regalistra" />
+<img src="./Assets/Resources/Textures/menu_background.png" alt="Karte von Regalistra" />
 
 Die Insel **Regalistra** – einst ein abgelegener Außenposten, heute das Zentrum eines schwelenden Konflikts. Ihre fruchtbaren Täler, seltenen Erze und magischen Quellen haben die Aufmerksamkeit zweier Mächte geweckt:
 

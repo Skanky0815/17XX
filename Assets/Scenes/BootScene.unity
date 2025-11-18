@@ -149,7 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Assets.Scripts.Core.GameManager
   mapWorldState: {fileID: 11400000, guid: 7956595bce6e2dd4190e9a54691ca466, type: 2}
-  gameConfig: {fileID: 11400000, guid: 7fa6ec43306ce204f898ed9cf4553def, type: 2}
 --- !u!4 &960425685
 Transform:
   m_ObjectHideFlags: 0

@@ -54,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8653946, y: 0.82095635, z: 1.4803772}
-  m_Center: {x: 0.099702835, y: -0.089521825, z: 0.2401886}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4214576524500684923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68,9 +68,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65ca2aae381fbb4b9478d00fdb47bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  KnotId: 
-  Player: {fileID: 0}
-  Location: {fileID: 0}
+  region: {fileID: 0}
+  knotId: 
+  player: {fileID: 0}
+  location: {fileID: 0}
 --- !u!65 &-8561883324508223612
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90,8 +91,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8823547, y: 1, z: 1.4488392}
-  m_Center: {x: 0.102752686, y: 0, z: 0.2244196}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1604052001116246579
 PrefabInstance:
   m_ObjectHideFlags: 0

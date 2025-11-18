@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
-  m_Name: Thargrimm-Kamm
+  m_Name: 01_Thargrimm-Kamm
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
   id: 0
   idMapColor: '#4fff89'
+  town: {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
+  locations:
+  - {fileID: 11400000, guid: 61ce4d2c0a0b2b044a432f410e6938f7, type: 2}
+  owner: {fileID: 0}
   regionName: Thargrimm-Kamm
   description: "Hoch oben, wo die Wolken sich an die Zinnen der Berge klammern, liegt
     der Thargrimm-Kamm \u2013 ein uraltes Gebirge, das selbst die \xC4ltesten der
@@ -29,6 +33,3 @@ MonoBehaviour:
   food: 0
   material: 3
   population: 0
-  locations:
-  - {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
-  owner: {fileID: 0}

@@ -29,8 +29,7 @@ namespace UI.Map
         {
             _text = LocalizationManager.Instance.GetText("clock.day");
             var root = gameObject.GetComponent<UIDocument>().rootVisualElement;
-
-
+            
             _clockTextures = new Texture2D[timeSprites.Length];
             for (var i = 0; i < timeSprites.Length; i++)
             {

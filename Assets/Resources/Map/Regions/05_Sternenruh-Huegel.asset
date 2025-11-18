@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 242094588323a604aa3477d08a7c8968, type: 3}
-  m_Name: Sternenruh-Huegel
+  m_Name: 05_Sternenruh-Huegel
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
   id: 4
   idMapColor: '#0000ff'
+  town: {fileID: 0}
+  locations:
+  - {fileID: 11400000, guid: 61ce4d2c0a0b2b044a432f410e6938f7, type: 2}
+  owner: {fileID: 0}
   regionName: "Sternenruh-H\xFCgel"
   description: "Auf dem sanften R\xFCcken der Sternenruh-H\xFCgel steht ein halbverfallenes
     Observatorium, dessen Kuppel einst die Sterne der Welt kartografierte. Heute
@@ -30,5 +34,3 @@ MonoBehaviour:
   food: 0
   material: 0
   population: 0
-  locations: []
-  owner: {fileID: 0}

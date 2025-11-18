@@ -11,6 +11,7 @@ namespace Map.Player
         
         private string _currentKnotId;
 
+        public string targetKnotId;
         private string _targetKnotId;
 
         private Queue<string> _pathQueue;
@@ -52,9 +53,14 @@ namespace Map.Player
 #endif
         }
 
-        public void RequestPath(string targetKnotId)
+        public void StopMoving()
         {
-            if (targetKnotId == null)
+            CancelPath();
+        }
+        
+        public void RequestPath(string newTargetKnotId)
+        {
+            if (newTargetKnotId == null)
             {
                 Debug.LogWarning("RequestPath: targetKnots ist null.");
                 return;
@@ -63,16 +69,17 @@ namespace Map.Player
             EnsureCurrentKnotInitialized();
 
 #if UNITY_EDITOR
-            Debug.Log($"RequestPath: selected goal {targetKnotId} from current {_currentKnotId ?? "null"}");
+            Debug.Log($"RequestPath: selected goal {newTargetKnotId} from current {_currentKnotId ?? "null"}");
 #endif
 
-            var pathIds = SplinePathfinder.FindPath(_currentKnotId, targetKnotId, PathManager.KnotGraph);
+            var pathIds = SplinePathfinder.FindPath(_currentKnotId, newTargetKnotId, PathManager.KnotGraph);
             if (pathIds == null || pathIds.Count == 0)
             {
-                Debug.LogWarning($"RequestPath: kein Pfad gefunden von {_currentKnotId} nach {targetKnotId}");
+                Debug.LogWarning($"RequestPath: kein Pfad gefunden von {_currentKnotId} nach {newTargetKnotId}");
                 return;
             }
 
+            targetKnotId = newTargetKnotId;
             StartFollowingPath(pathIds);
         }
 

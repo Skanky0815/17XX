@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 using System.Collections.Generic;
-using Map;
 using Map.Objects;
 using UI.Elements;
 
@@ -32,7 +31,7 @@ namespace UI.Map
 
         public void Show(Region region)
         {
-            _panelHeader.SetContent(region.name, "X", region.owner?.icon);
+            _panelHeader.SetContent(region.regionName, "X", region.owner?.icon);
             _descriptionLabel.text = region.description;
             _ambientImage.style.backgroundImage = new StyleBackground(region.ambientImage);
 

@@ -1,5 +1,4 @@
 using Core.States;
-
 using UnityEngine;
 
 namespace Map.Player

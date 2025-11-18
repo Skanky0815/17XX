@@ -52,8 +52,6 @@ namespace Map.Controller
 
             Color targetColor;
             float intensity;
-
-
             float t;
             switch (timeInHours)
             {

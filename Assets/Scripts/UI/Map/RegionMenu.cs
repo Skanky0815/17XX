@@ -1,6 +1,5 @@
 using UnityEngine.UIElements;
 using UnityEngine;
-using Map;
 using Map.Objects;
 using UI.Elements;
 
@@ -41,7 +40,7 @@ namespace UI.Map
             
             _currentRegion = region;
 
-            _panelHeader.SetContent(region.name, "?", region.owner?.icon);
+            _panelHeader.SetContent(region.regionName, "?", region.owner?.icon);
             _goldLabel.text = region.gold.ToString();
             _foodLabel.text = region.food.ToString();
             _materialLabel.text = region.material.ToString();
