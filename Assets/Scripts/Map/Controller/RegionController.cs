@@ -28,7 +28,7 @@ namespace Map.Controller
             gameTime.OnNewDay -= OnNewDay;
         }
         
-        public void OnNewDay(int day)
+        private void OnNewDay(int day)
         {
             foreach (var region in worldState.regions)
             {
