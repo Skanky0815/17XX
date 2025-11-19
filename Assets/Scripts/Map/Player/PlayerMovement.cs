@@ -55,7 +55,7 @@ namespace Map.Player
 
         public void StopMoving()
         {
-            CancelPath();
+            _pathQueue = null;
         }
         
         public void RequestPath(string newTargetKnotId)
