@@ -9,7 +9,7 @@ namespace Map.Objects
         public Id id;
         public string idMapColor;
         public Location town;
-        public List<Location> locations = new();
+        public List<RandomEvent> randomEvents = new();
         public Faction owner;
         [Header("Lore")]
         public string regionName;

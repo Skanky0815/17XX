@@ -15,23 +15,23 @@ namespace Map.Loader
             {
                 SpawnTown(region, player);
                 
-                if (region.locations.Count == 0) continue;
+                if (region.randomEvents.Count == 0) continue;
                 
-                var randomLocation = region.locations[_random.Next(0, region.locations.Count - 1)];
-                SpawnRandom(region, randomLocation, player);
+                var regionRandomEvent = region.randomEvents[_random.Next(0, region.randomEvents.Count - 1)];
+                SpawnRandom(region, regionRandomEvent, player);
             }
         }
 
-        private void SpawnRandom(Region region, Location location, Player.Player player)
+        private void SpawnRandom(Region region, RandomEvent randomEvent, Player.Player player)
         {
             var knot = region.Knots[_random.Next(1, region.Knots.Count - 1)];
-            var locationObject = Instantiate(location.prefab, knot.WorldPosition, Quaternion.identity, transform);
-            locationObject.name = $"Random: {location.locationName} in {region.regionName}";
+            var locationObject = Instantiate(randomEvent.prefab, knot.WorldPosition, Quaternion.identity, transform);
+            locationObject.name = $"Random: {randomEvent.name} in {region.name}";
 
-            var locationController = locationObject.GetComponent<RandomLocationController>();
-            locationController.player = player;
-            locationController.region = region;
-            locationController.location = location;
+            var randomLocationController = locationObject.GetComponent<RandomLocationController>();
+            randomLocationController.player = player;
+            randomLocationController.region = region;
+            randomLocationController.randomEvent = randomEvent;
 
             locationObject.SetActive(true);   
         }

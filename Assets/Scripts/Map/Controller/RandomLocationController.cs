@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using Core;
 using Map.Objects;
 using UI.Elements;
@@ -11,12 +11,13 @@ namespace Map.Controller
     {
         public Region region;
         public Player.Player player;
-        public Location location;
+        public RandomEvent randomEvent;
 
         private EventPanel _eventPanel;
         private LocalizationManager _localizationManager;
 
         private bool _isTriggert;
+        private bool _isHandled;
 
         private void Start()
         {
@@ -27,7 +28,10 @@ namespace Map.Controller
 
         private void OnTriggerExit(Collider other)
         {
+            if (!_isHandled) return;
+            
             gameObject.SetActive(false);
+            _isHandled = false;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -40,24 +44,26 @@ namespace Map.Controller
             _isTriggert = true;
             player.playerMovement.StopMoving();
 
-            var enterButton = new Button(() => EnterLocation(factionUnit)) { text = _localizationManager.GetText("location.enter") };
-            var skipButton = new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") };
+            // TODO: Check if Faction can pay the costs if not buttons should be disabled
+            var buttons = randomEvent.options.Select(option => new Button(() => HandleOption(factionUnit, option)) { text = option.optionName, }).ToList();
+
+            buttons.Add(new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") });
             _eventPanel.Show(
-                location.locationName,
-                string.Format(location.welcomeText, location.locationName, location.locationName, region.name),
-                null,
-                new List<Button>
-                    {
-                        enterButton,
-                        skipButton,
-                    }
+                randomEvent.eventName,
+                randomEvent.description,
+                randomEvent.ambientImage,
+                buttons
             );
         }
 
-        private void EnterLocation(Player.Player factionUnit)
+        private void HandleOption(Player.Player factionUnit,  RandomEventOption option)
         {
+            factionUnit.worldState.playerFaction.AddResources(option.gold, option.food,option.material, option.population);
+            factionUnit.worldState.gameTime.hour += option.hour;
+            
+            _isHandled = true;
+            
             _eventPanel.Hide();
-            //GameManager.Instance.SwitchToScene("Region01_Location_Town");
         }
         
         private void SkipLocation()

@@ -15,17 +15,17 @@ MonoBehaviour:
   id: 5
   idMapColor: '#4f122f'
   town: {fileID: 11400000, guid: 6a357cc7f58a5a5499700016d5fd72a4, type: 2}
-  locations: []
+  randomEvents: []
   owner: {fileID: 0}
   regionName: Branweiden-Tal
   description: "Eingebettet zwischen sanften H\xFCgeln und alten W\xE4ldern liegt
     das Branweiden-Tal \u2013 eine Region, die vom Rhythmus der Jahreszeiten lebt.
     Die Felder sind goldgelb im Sommer, nebelverhangen im Herbst und von Frost \xFCberzogen
-    im Winter.\\nDas Dorf Branweiden selbst besteht aus Fachwerkh\xE4usern mit schiefen
+    im Winter.\nDas Dorf Branweiden selbst besteht aus Fachwerkh\xE4usern mit schiefen
     D\xE4chern, einem kleinen Marktplatz und einer uralten Linde, unter der die \xC4ltesten
     Geschichten erz\xE4hlen. Windm\xFChlen drehen sich tr\xE4ge im Wind, und der
-    Duft von frischem Brot und Kr\xE4utern liegt oft in der Luft.\\nDie Bewohner
-    sind stolz auf ihre Traditionen \u2013 jedes Jahr feiern sie das Erntelicht-Fest,
+    Duft von frischem Brot und Kr\xE4utern liegt oft in der Luft.\nDie Bewohner sind
+    stolz auf ihre Traditionen \u2013 jedes Jahr feiern sie das Erntelicht-Fest,
     bei dem Laternen aus K\xFCrbissen und R\xFCben die H\xFCgel erleuchten und alte
     Lieder gesungen werden, die von der Zeit erz\xE4hlen, als die G\xF6tter noch
     unter den Menschen wandelten."

@@ -15,17 +15,16 @@ MonoBehaviour:
   id: 4
   idMapColor: '#0000ff'
   town: {fileID: 0}
-  locations:
-  - {fileID: 11400000, guid: 61ce4d2c0a0b2b044a432f410e6938f7, type: 2}
+  randomEvents: []
   owner: {fileID: 0}
   regionName: "Sternenruh-H\xFCgel"
   description: "Auf dem sanften R\xFCcken der Sternenruh-H\xFCgel steht ein halbverfallenes
     Observatorium, dessen Kuppel einst die Sterne der Welt kartografierte. Heute
     ist das Geb\xE4ude von Efeu umrankt, seine Instrumente verrostet, doch der Blick
-    von hier auf das n\xE4chtliche Firmament ist noch immer unvergleichlich.\\nDie
+    von hier auf das n\xE4chtliche Firmament ist noch immer unvergleichlich.\nDie
     H\xFCgel selbst sind von wilden Kr\xE4utern und flatternden Gr\xE4sern bedeckt,
     durchzogen von alten Pfaden, die einst von Gelehrten und Sternendeutern begangen
-    wurden.\\nManche sagen, dass bei Neumond ein schwaches Leuchten aus der Kuppel
+    wurden.\nManche sagen, dass bei Neumond ein schwaches Leuchten aus der Kuppel
     dringt \u2013 als w\xFCrde jemand dort oben noch immer die Himmelszeichen lesen.
     Andere berichten von Tr\xE4umen, die sie nach einem Besuch hier heimsuchten \u2013
     Tr\xE4ume von anderen Welten, anderen Zeiten."

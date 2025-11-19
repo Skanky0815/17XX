@@ -11,7 +11,7 @@
     align-content: flex-start;
     display: none;
     height: auto;
-    width: 800px;
+    width: 500px;
 }
 
 .eventPanel > #EventArea {
@@ -22,6 +22,7 @@
 
 .eventPanel > Label {
     align-self: flex-start;
+    white-space: normal;
 }
 
 .eventPanel > #EventArea > Button {

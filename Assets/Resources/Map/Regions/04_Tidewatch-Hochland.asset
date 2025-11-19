@@ -14,14 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
   id: 3
   idMapColor: '#00ffff'
+  town: {fileID: 0}
+  randomEvents: []
+  owner: {fileID: 0}
   regionName: Tidewatch-Hochland
   description: "Im \xE4u\xDFersten Nordosten der Insel erhebt sich das Tidewatch-Hochland
     \u2013 ein windumtostes Plateau, das sich wie ein steinerner Schild gegen die
     tobende See stemmt. Die Wellen brechen donnernd an den Klippen, w\xE4hrend M\xF6wen
-    kreischend \xFCber die Gr\xE4ser jagen.\\nAuf dem h\xF6chsten Punkt thront ein
+    kreischend \xFCber die Gr\xE4ser jagen.\nAuf dem h\xF6chsten Punkt thront ein
     alter Leuchtturm, dessen Licht seit Jahrhunderten den Weg weist \u2013 nicht
     nur f\xFCr Schiffe, sondern auch f\xFCr jene, die sich in den Nebeln der Zeit
-    verirrt haben.\\n\xDCber das Hochland verstreut liegen uralte Steinkreise, deren
+    verirrt haben.\n\xDCber das Hochland verstreut liegen uralte Steinkreise, deren
     Ursprung niemand kennt. Einige glauben, sie seien Sternentore, andere sagen,
     sie markieren die Gr\xE4ber gefallener W\xE4chter. Die Einheimischen \u2013 wettergegerbt
     und schweigsam \u2013 erz\xE4hlen von Geistern, die bei Sturm zwischen den Steinen
@@ -31,5 +34,3 @@ MonoBehaviour:
   food: 2
   material: 2
   population: 1
-  locations: []
-  owner: {fileID: 0}

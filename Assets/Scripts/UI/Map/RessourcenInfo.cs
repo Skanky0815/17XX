@@ -44,7 +44,7 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.name, region.gold));
+                    infoList.Add((region.regionName, region.gold));
                     totalValue += region.gold;
                 }
 
@@ -67,7 +67,7 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.name, region.material));
+                    infoList.Add((region.regionName, region.material));
                     totalValue += region.material;
                 }
 
@@ -89,7 +89,7 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.name, region.food));
+                    infoList.Add((region.regionName, region.food));
                     totalValue += region.food;
                 }
 
@@ -111,7 +111,7 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.name, region.population));
+                    infoList.Add((region.regionName, region.population));
                     totalValue += region.population;
                 }
 

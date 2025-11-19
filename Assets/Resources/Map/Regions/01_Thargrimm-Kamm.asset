@@ -15,18 +15,18 @@ MonoBehaviour:
   id: 0
   idMapColor: '#4fff89'
   town: {fileID: 11400000, guid: 3f1471b4032340c4f8236d61ed219450, type: 2}
-  locations:
-  - {fileID: 11400000, guid: 61ce4d2c0a0b2b044a432f410e6938f7, type: 2}
+  randomEvents:
+  - {fileID: 11400000, guid: 1000eaaee2a2a63449717d5a301185d9, type: 2}
   owner: {fileID: 0}
   regionName: Thargrimm-Kamm
   description: "Hoch oben, wo die Wolken sich an die Zinnen der Berge klammern, liegt
     der Thargrimm-Kamm \u2013 ein uraltes Gebirge, das selbst die \xC4ltesten der
     Insel nur aus Legenden kennen. Die Pfade sind steil und gef\xE4hrlich, oft versch\xFCttet
-    durch Lawinen oder von Nebel verschluckt.\\nIn den tiefen H\xF6hlen unter dem
+    durch Lawinen oder von Nebel verschluckt.\nIn den tiefen H\xF6hlen unter dem
     Granit sollen einst die Runenschmiede der Zwerge gewirkt haben, deren Feuer nie
     ganz erloschen sind. Wanderer berichten von seltsamen Lichtreflexen in der Dunkelheit
     und einem Summen, das durch das Gestein wandert \u2013 als w\xFCrde der Berg
-    selbst atmen.\\nNur wenige wagen sich hierher, und jene, die zur\xFCckkehren,
+    selbst atmen.\nNur wenige wagen sich hierher, und jene, die zur\xFCckkehren,
     sprechen von einem Ort, der mehr verbirgt, als er preisgibt."
   ambientImage: {fileID: 2800000, guid: 10939267896c293409968783a1357bb4, type: 3}
   gold: 1

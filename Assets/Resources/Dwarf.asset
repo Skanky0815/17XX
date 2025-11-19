@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Dwarf
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Faction
   id: 0
-  gold: 0
+  gold: 10
   food: 0
-  material: 0
+  material: 14
   population: 0
   regions: []
   factionName: "K\xF6nigreich Freidorien der Zwerge"

@@ -5,7 +5,6 @@ namespace Map.Objects
     [CreateAssetMenu(menuName = "Game/World/Location")]
     public class Location : ScriptableObject
     {
-        public LocationType locationType;
         public GameObject prefab;
         [Header("Lore")]
         public string locationName;
@@ -13,5 +12,3 @@ namespace Map.Objects
         public string welcomeText;
     }
 }
-
-public enum LocationType { FIXED, RANDOM }

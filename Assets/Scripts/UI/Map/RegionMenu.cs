@@ -46,6 +46,15 @@ namespace UI.Map
             _materialLabel.text = region.material.ToString();
             _populationLabel.text = region.population.ToString();
 
+            if (region.owner == null)
+            {
+                _regionMenu.style.bottom = -150;
+            }
+            else
+            {
+                _regionMenu.style.bottom = 0;
+            }
+            
             _regionMenu.style.visibility = Visibility.Visible;
         }
 
