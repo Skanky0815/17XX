@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Core;
 using Map.Objects;
+using Map.Objects.Events;
 using UI.Elements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,15 +10,23 @@ namespace Map.Controller
 {
     public class RandomLocationController : MonoBehaviour
     {
-        public Region region;
-        public Player.Player player;
-        public RandomEvent randomEvent;
+        private Region _region;
+        private Player.Player _player;
+        private RandomEvent _randomEvent;
 
         private EventPanel _eventPanel;
         private LocalizationManager _localizationManager;
 
         private bool _isTriggert;
         private bool _isHandled;
+
+        public void SetData(Region region, Player.Player player, RandomEvent randomEvent)
+        {
+            _region = region;
+            region.currentEvent = randomEvent;
+            _player = player;
+            _randomEvent = randomEvent;
+        }
 
         private void Start()
         {
@@ -31,6 +40,7 @@ namespace Map.Controller
             if (!_isHandled) return;
             
             gameObject.SetActive(false);
+            _region.currentEvent = null;
             _isHandled = false;
         }
 
@@ -42,28 +52,53 @@ namespace Map.Controller
             if (!other.gameObject.GetComponentInParent<Player.Player>()) return;
 
             _isTriggert = true;
-            player.playerMovement.StopMoving();
+            _player.playerMovement.StopMoving();
 
-            // TODO: Check if Faction can pay the costs if not buttons should be disabled
-            var buttons = randomEvent.options.Select(option => new Button(() => HandleOption(factionUnit, option)) { text = option.optionName, }).ToList();
+            var buttons = _randomEvent.options.Select(option => CreateButton(option, factionUnit)).ToList();
+            if (_randomEvent.isSkipable)
+            {
+                buttons.Add(new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") });
+            }
 
-            buttons.Add(new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") });
             _eventPanel.Show(
-                randomEvent.eventName,
-                randomEvent.description,
-                randomEvent.ambientImage,
-                buttons
+                _randomEvent.eventName,
+                _randomEvent.description,
+                _randomEvent.ambientImage,
+                buttons,
+                !_randomEvent.isSkipable
             );
         }
 
         private void HandleOption(Player.Player factionUnit,  RandomEventOption option)
         {
-            factionUnit.worldState.playerFaction.AddResources(option.gold, option.food,option.material, option.population);
-            factionUnit.worldState.gameTime.hour += option.hour;
+            switch (option)
+            {
+                case ResourceOption resourceOption:
+                    factionUnit.worldState.playerFaction.AddResources(resourceOption.gold, resourceOption.food,resourceOption.material, resourceOption.population);
+                    factionUnit.worldState.gameTime.hour += resourceOption.hour;
+                    break;
+                case LevelOption levelOption:
+                    GameManager.Instance.SwitchToScene(levelOption.scene);
+                    break;
+            }
             
             _isHandled = true;
             
             _eventPanel.Hide();
+        }
+
+        private Button CreateButton(RandomEventOption option, Player.Player factionUnit)
+        {
+            var button = new Button(() => HandleOption(factionUnit, option)) { text = option.optionName, };
+
+            if (option is not ResourceOption resourceOption) return button;
+            
+            if (!factionUnit.worldState.playerFaction.CanPay(resourceOption.ToCosts()))
+            {
+                button.SetEnabled(false);
+            }
+
+            return  button;
         }
         
         private void SkipLocation()

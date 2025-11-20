@@ -24,7 +24,7 @@ namespace UI.Elements
             _panelHeader = new PanelHeader();
             _image = new Image { name = "EventImage" };
             _textLabel = new Label("Event Text") { name = "EventText" };
-            _actionArea = new VisualElement() { name = "EventArea" };
+            _actionArea = new VisualElement { name = "EventArea" };
             
             Add(_panelHeader);
             Add(_image);
@@ -32,7 +32,7 @@ namespace UI.Elements
             Add(_actionArea);
         }
 
-        public void Show(string title, string text, Texture2D image, List<Button> buttons)
+        public void Show(string title, string text, Texture2D image, List<Button> buttons, bool disableCloseButton = false)
         {
             _textLabel.text = text;
             if (image != null)
@@ -45,15 +45,22 @@ namespace UI.Elements
                 _image.style.display = DisplayStyle.None;
             }
 
-            _panelHeader.SetContent(title, "X");
-            _panelHeader.RegisterButtonCallback(Hide);
+            if (disableCloseButton)
+            {
+                _panelHeader.SetContent(title, "");
+            }
+            else
+            {
+                _panelHeader.SetContent(title, "X");
+                _panelHeader.RegisterButtonCallback(Hide);
+            }
 
             _actionArea.Clear();
             foreach (var button in buttons)
             {
                 _actionArea.Add(button);
             }
-            
+
             style.display = DisplayStyle.Flex;
         }
 

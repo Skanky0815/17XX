@@ -22,10 +22,10 @@ namespace Map.Objects
         public int food;
         public int material;
         public int population;
-
-
+        
         public readonly List<KnotCollection.Knot> Knots = new();
-
+        public RandomEvent currentEvent;
+        
         public void ChangeOwner(Faction faction)
         {
             owner?.regions.Remove(this);
@@ -38,7 +38,7 @@ namespace Map.Objects
         {
             owner?.AddResources(gold, food, material, population);
         }
-
+        
         public enum Id
         {
             REGION_01,

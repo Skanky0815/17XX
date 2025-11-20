@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f42ec73bac3f40e9af923515935572f3, type: 3}
+  m_Name: blocked_road
+  m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.RandomEvent
+  prefab: {fileID: 1655286345542802387, guid: 80d8c344b9d1af549bb7e4cee8f72b02, type: 3}
+  options:
+  - {fileID: 11400000, guid: 06d8a84d0ea2c54439819b4aeb448cf2, type: 2}
+  isSkipable: 0
+  daysToRespawn: 0
+  eventName: Versperrter Weg
+  ambientImage: {fileID: 2800000, guid: f44d45792255e8d419ef772b6e5661e5, type: 3}
+  description: "Der Weg endet j\xE4h an einem Abgrund \u2013 die Br\xFCcke, einst
+    aus festem Stein und Holz, liegt zerborsten im Flussbett. Planken treiben im
+    Wasser, Seile h\xE4ngen lose im Wind. Wer weiter will, muss reparieren\u2026
+    oder einen anderen Pfad finden.\r\n"

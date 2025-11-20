@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
   id: 8
   idMapColor: '#607a19'
+  town: {fileID: 0}
+  randomEvents:
+  - {fileID: 11400000, guid: bd9b699df56181d4197cae4a20da9c33, type: 2}
+  owner: {fileID: 0}
   regionName: "D\xE4mmerforst"
   description: 
   ambientImage: {fileID: 0}
@@ -21,5 +25,3 @@ MonoBehaviour:
   food: 0
   material: 0
   population: 0
-  locations: []
-  owner: {fileID: 0}

@@ -65,8 +65,7 @@ namespace Map.Controller
             var scrollDelta = _input.Camera.Scroll.ReadValue<Vector2>().y;
             _zoomVelocity += scrollDelta * zoomSpeed;
             _zoomVelocity = Mathf.Lerp(_zoomVelocity, 0f, Time.deltaTime * 5f);
-
-
+            
             _cam.fieldOfView -= _zoomVelocity * Time.deltaTime;
             _cam.fieldOfView = Mathf.Clamp(_cam.fieldOfView, minZoom, maxZoom);
 

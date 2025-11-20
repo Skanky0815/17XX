@@ -27,14 +27,6 @@ namespace Map.Controller
         { 
             gameTime.OnNewDay -= OnNewDay;
         }
-        
-        private void OnNewDay(int day)
-        {
-            foreach (var region in worldState.regions)
-            {
-                region.AggregateDailyResources();
-            }
-        }
 
         public void Select(Vector2 position)
         {
@@ -54,6 +46,14 @@ namespace Map.Controller
             mapRenderer.material.SetFloat(Tolerance, 0.01f);
 
             regionMenu.Show(region);
+        }
+
+        private void OnNewDay(int day)
+        {
+            foreach (var region in worldState.regions)
+            {
+                region.AggregateDailyResources();
+            }
         }
 
         public void Deselect()

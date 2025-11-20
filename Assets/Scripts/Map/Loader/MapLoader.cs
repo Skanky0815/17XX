@@ -32,8 +32,19 @@ namespace Map.Loader
             AssignKnotsToRegions();
             
             _locationSpawner.Spawn(worldState, player);
+            worldState.gameTime.OnNewDay += OnNewDay;
         }
 
+        private void OnDestroy()
+        {
+            worldState.gameTime.OnNewDay -= OnNewDay;
+        }
+
+        private void OnNewDay(int day)
+        {
+            _locationSpawner.SpawnRandom(worldState, player);
+        }
+        
         private void InitializeKnots()
         {
             for (var splineIndex = 0; splineIndex < pathSplines.Splines.Count; splineIndex++)

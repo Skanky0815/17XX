@@ -28,6 +28,35 @@ namespace Map.Objects
         {
             DWARF,
             ORC
-        } 
+        }
+
+        public bool CanPay(Costs costs)
+        {
+            var canPayGold = true;
+            var canPayFood = true;
+            var canPayMaterial = true;
+            var canPayPopulation = true;
+            if (costs.gold < 0)
+            {
+                canPayGold = gold + costs.gold >= 0;
+            }
+
+            if (costs.food < 0)
+            {
+                canPayFood = food + costs.food >= 0;
+            }
+
+            if (costs.material < 0)
+            {
+                canPayMaterial = material + costs.material >= 0;
+            }
+
+            if (costs.population < 0)
+            {
+                canPayPopulation = population + costs.population >= 0;
+            }
+            
+            return canPayGold && canPayFood && canPayMaterial && canPayPopulation;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Core.States;
 using Map.Controller;
 using Map.Objects;
@@ -7,6 +8,7 @@ namespace Map.Loader
 {
     public class LocationSpawner : MonoBehaviour
     {
+        private Dictionary<string, GameObject> _randomEventPool = new();
         private readonly System.Random _random = new(); 
         
         public void Spawn(MapWorldState worldState, Player.Player player)
@@ -22,6 +24,33 @@ namespace Map.Loader
             }
         }
 
+        public void SpawnRandom(MapWorldState worldState, Player.Player player)
+        {
+            foreach (var region in worldState.regions)
+            {
+                if (region.randomEvents.Count == 0) continue;
+                if (region.currentEvent) continue;
+                
+                var randomEvent = region.randomEvents[_random.Next(0, region.randomEvents.Count - 1)];
+                if (_randomEventPool.TryGetValue($"{region.name}+{randomEvent.name}", out var randomEventGameObjekt))
+                {
+                    ReactivateRandomEvent(region, randomEventGameObjekt, randomEvent);
+                }
+                else
+                {
+                    SpawnRandom(region, randomEvent, player);    
+                }
+            }
+        }
+
+        private void ReactivateRandomEvent(Region region, GameObject randomEventGameObjekt, RandomEvent randomEvent)
+        {
+            var knot = region.Knots[_random.Next(1, region.Knots.Count - 1)];
+            randomEventGameObjekt.transform.position = knot.WorldPosition;
+            randomEventGameObjekt.SetActive(true);
+            region.currentEvent = randomEvent;
+        }
+
         private void SpawnRandom(Region region, RandomEvent randomEvent, Player.Player player)
         {
             var knot = region.Knots[_random.Next(1, region.Knots.Count - 1)];
@@ -29,11 +58,10 @@ namespace Map.Loader
             locationObject.name = $"Random: {randomEvent.name} in {region.name}";
 
             var randomLocationController = locationObject.GetComponent<RandomLocationController>();
-            randomLocationController.player = player;
-            randomLocationController.region = region;
-            randomLocationController.randomEvent = randomEvent;
+            randomLocationController.SetData(region, player, randomEvent);
 
             locationObject.SetActive(true);   
+            _randomEventPool.Add($"{region.name}+{randomEvent.name}", locationObject);
         }
         
         private void SpawnTown(Region region, Player.Player player)
