@@ -35,6 +35,7 @@
 }
 
 .panelHeader > Label {
+    -unity-font-definition: url("project://database/Assets/UI/Fonts/OLDENGL.TTF");
     border-left-color: var(--border-color);
     width: auto;
     height: 36px;

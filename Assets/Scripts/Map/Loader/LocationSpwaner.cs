@@ -26,10 +26,10 @@ namespace Map.Loader
 
         public void SpawnRandom(MapWorldState worldState, Player.Player player)
         {
-            foreach (var region in worldState.regions)
+            for (var i = 0; i < worldState.regions.Count; i++)
             {
-                if (region.randomEvents.Count == 0) continue;
-                if (region.currentEvent) continue;
+                var region  = worldState.regions[i];
+                if (region.randomEvents.Count == 0 && region.currentEvent) continue;
                 
                 var randomEvent = region.randomEvents[_random.Next(0, region.randomEvents.Count - 1)];
                 if (_randomEventPool.TryGetValue($"{region.name}+{randomEvent.name}", out var randomEventGameObjekt))

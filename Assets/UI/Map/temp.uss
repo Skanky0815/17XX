@@ -209,8 +209,9 @@ Button {
     border-bottom-left-radius: 10px;
     background-color: var(--color-blue);
     color: var(--color-main);
+    -unity-font-definition: url("project://database/Assets/UI/Fonts/LCALLIG.TTF?fileID=12800000&guid=139007c44157817498f63bab346c21aa&type=3#LCALLIG");
 }
 
 Button:hover {
-    background-color: var(--color-darkblue)
+    background-color: var(--color-darkblue);
 }

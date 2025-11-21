@@ -58,13 +58,12 @@ namespace Map.Loader
                     var isAdded = false;
                     foreach (var knotGroup in _knots)
                     {
-                        if (Vector3.Distance(knotGroup[0].WorldPosition, worldPosition) < .05f)
-                        {
-                            var newKnot = new KnotCollection.Knot(splineIndex, knotIndex, worldPosition);
-                            knotGroup.Add(newKnot);
-                            isAdded = true;
-                            break;
-                        }
+                        if (!(Vector3.Distance(knotGroup[0].WorldPosition, worldPosition) < .05f)) continue;
+                        
+                        var newKnot = new KnotCollection.Knot(splineIndex, knotIndex, worldPosition);
+                        knotGroup.Add(newKnot);
+                        isAdded = true;
+                        break;
                     }
 
                     if (isAdded) continue;

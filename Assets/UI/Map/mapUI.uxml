@@ -6,16 +6,16 @@
             <ui:VisualElement style="flex-grow: 1; flex-direction: row; left: auto; justify-content: center;">
                 <ui:VisualElement name="FactionStats" class="panel" style="flex-grow: 0; height: 64px; width: 300px; border-top-width: 0; border-top-right-radius: 0; border-right-width: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 10px; flex-direction: row; align-items: center;">
                     <ui:VisualElement class="resourcenCount">
-                        <ui:Label text="999" name="Gold" class="resourcenCountText" />
+                        <ui:Label text="999" name="Gold" class="resourcenCountText" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/LCALLIG.TTF?fileID=12800000&amp;guid=139007c44157817498f63bab346c21aa&amp;type=3#LCALLIG&quot;);" />
                     </ui:VisualElement>
                     <ui:VisualElement class="resourcenCount" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=696045857&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#material_icon&quot;);">
-                        <ui:Label text="999" name="Material" class="resourcenCountText" />
+                        <ui:Label text="999" name="Material" class="resourcenCountText" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/LCALLIG.TTF?fileID=12800000&amp;guid=139007c44157817498f63bab346c21aa&amp;type=3#LCALLIG&quot;);" />
                     </ui:VisualElement>
                     <ui:VisualElement class="resourcenCount" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=-1120199610&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#food_icon&quot;);">
-                        <ui:Label text="999" name="Food" selectable="true" focusable="true" class="resourcenCountText" />
+                        <ui:Label text="999" name="Food" selectable="true" focusable="true" class="resourcenCountText" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/LCALLIG.TTF?fileID=12800000&amp;guid=139007c44157817498f63bab346c21aa&amp;type=3#LCALLIG&quot;);" />
                     </ui:VisualElement>
                     <ui:VisualElement class="resourcenCount" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=282362211&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#persons_icon&quot;); border-right-width: 0;">
-                        <ui:Label text="999&#10;" name="Population" class="resourcenCountText" />
+                        <ui:Label text="999&#10;" name="Population" class="resourcenCountText" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/LCALLIG.TTF?fileID=12800000&amp;guid=139007c44157817498f63bab346c21aa&amp;type=3#LCALLIG&quot;);" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="ClockPanel" class="panel" style="flex-grow: 0; height: 158px; align-items: center; border-top-left-radius: 0; border-top-right-radius: 0; border-top-width: 0; border-bottom-left-radius: 230px; border-bottom-right-radius: 521px; width: auto; padding-bottom: 0; padding-top: 2px;">
@@ -26,14 +26,14 @@
                         </ui:VisualElement>
                         <ui:VisualElement name="ClockHand" class="clockLayer" style="background-image: url(&quot;project://database/Assets/Resources/Textures/clock_hand.png?fileID=2800000&amp;guid=84f0c6b12374c3e40964c3cb0863bd7e&amp;type=3#clock_hand&quot;);" />
                     </ui:VisualElement>
-                    <ui:VisualElement class="panelTitle" style="top: -4px;">
-                        <ui:VisualElement name="VisualElement" />
-                        <ui:Label text="#. Tag" name="Day" />
+                    <ui:VisualElement class="panelTitle" style="top: -4px; height: 28px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px;">
+                        <ui:VisualElement name="VisualElement" style="height: 100%;" />
+                        <ui:Label text="#. Tag" name="Day" style="font-size: 18px; height: auto; -unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/OLDENGL.TTF?fileID=12800000&amp;guid=c01cdd88bf33ae14f91afafdfa2390a1&amp;type=3#OLDENGL&quot;);" />
                         <ui:VisualElement name="VisualElement" />
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement class="panel" style="flex-grow: 0; height: 64px; width: 300px; border-top-left-radius: 0; border-top-width: 0; border-left-width: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 10px; flex-direction: row; align-items: center; justify-content: space-around;">
-                    <ui:Button text="Menü" name="MenuButton" />
+                    <ui:Button text="Menü" name="MenuButton" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/LCALLIG.TTF?fileID=12800000&amp;guid=139007c44157817498f63bab346c21aa&amp;type=3#LCALLIG&quot;);" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="VisualElement" style="flex-grow: 0; width: 200px;" />
