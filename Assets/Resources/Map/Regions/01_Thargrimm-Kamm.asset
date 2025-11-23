@@ -29,7 +29,9 @@ MonoBehaviour:
     selbst atmen.\nNur wenige wagen sich hierher, und jene, die zur\xFCckkehren,
     sprechen von einem Ort, der mehr verbirgt, als er preisgibt."
   ambientImage: {fileID: 2800000, guid: 10939267896c293409968783a1357bb4, type: 3}
-  gold: 1
-  food: 0
-  material: 3
-  population: 0
+  income:
+    gold: 5
+    material: 5
+    food: 0
+    population: 0
+  currentEvent: {fileID: 0}

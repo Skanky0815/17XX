@@ -16,12 +16,8 @@ namespace Map.Objects
         [TextArea(5, 10)]
         public string description;
         public Texture2D ambientImage;
-        
-        [Header("Resources")]
-        public int gold;
-        public int food;
-        public int material;
-        public int population;
+
+        [Header("Resources")] public Resources income;
         
         public readonly List<KnotCollection.Knot> Knots = new();
         public RandomEvent currentEvent;
@@ -36,7 +32,7 @@ namespace Map.Objects
 
         public void AggregateDailyResources()
         {
-            owner?.AddResources(gold, food, material, population);
+            owner?.AddResources(income);
         }
         
         public enum Id

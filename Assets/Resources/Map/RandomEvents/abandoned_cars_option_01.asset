@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: abandoned_cars_option_01
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Events.ResourceOption
   optionName: "Pl\xFCndern"
-  tooltipText: "Das Pl\xFCnder dauert 2 Stunden."
-  gold: 0
-  food: 5
-  material: 5
-  population: 0
+  tooltipText: "Das Pl\xFCnder dauert 2 Stunden aber du erh\xE4lst 5 Nahrung und
+    5 Materialien."
+  costs:
+    gold: 0
+    material: 5
+    food: 5
+    population: 0
   hour: 2

@@ -6,22 +6,8 @@ namespace Map.Objects.Events
     public class ResourceOption : RandomEventOption
     {
         [Header("Rewads/Costs")]
-        public int gold;
-        public int food;
-        public int material;
-        public int population;
+        public Resources costs;
 
         public int hour;
-
-        public Costs ToCosts()
-        {
-            return new Costs()
-            {
-                gold = gold,
-                material = material,
-                food = food,
-                population = population,
-            };
-        }
     }
 }

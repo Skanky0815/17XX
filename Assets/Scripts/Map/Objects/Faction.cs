@@ -7,21 +7,15 @@ namespace Map.Objects
     public class Faction : ScriptableObject
     {
         public Id id;
-        public int gold;
-        public int food;
-        public int material;
-        public int population;
+        public Resources resources;
         public List<Region> regions = new();
         public string factionName;
         public Texture2D icon;
         public Texture2D flag;
 
-        public void AddResources(int gold, int food, int material, int population)
+        public void AddResources(Resources income)
         {
-            this.gold += gold;
-            this.food += food;
-            this.material += material;
-            this.population += population;
+            resources += income;
         }
 
         public enum Id
@@ -30,30 +24,30 @@ namespace Map.Objects
             ORC
         }
 
-        public bool CanPay(Costs costs)
+        public bool CanPay(Resources costs)
         {
             var canPayGold = true;
             var canPayFood = true;
             var canPayMaterial = true;
             var canPayPopulation = true;
-            if (costs.gold < 0)
+            if (resources.gold < 0)
             {
-                canPayGold = gold + costs.gold >= 0;
+                canPayGold = resources.gold + resources.gold >= 0;
             }
 
-            if (costs.food < 0)
+            if (resources.food < 0)
             {
-                canPayFood = food + costs.food >= 0;
+                canPayFood = resources.food + resources.food >= 0;
             }
 
-            if (costs.material < 0)
+            if (resources.material < 0)
             {
-                canPayMaterial = material + costs.material >= 0;
+                canPayMaterial = resources.material + resources.material >= 0;
             }
 
-            if (costs.population < 0)
+            if (resources.population < 0)
             {
-                canPayPopulation = population + costs.population >= 0;
+                canPayPopulation = resources.population + resources.population >= 0;
             }
             
             return canPayGold && canPayFood && canPayMaterial && canPayPopulation;

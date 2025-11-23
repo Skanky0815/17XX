@@ -30,7 +30,9 @@ MonoBehaviour:
     Lieder gesungen werden, die von der Zeit erz\xE4hlen, als die G\xF6tter noch
     unter den Menschen wandelten."
   ambientImage: {fileID: 2800000, guid: 29b3703d62f2ae0439a447d552f11f6b, type: 3}
-  gold: 0
-  food: 0
-  material: 0
-  population: 0
+  income:
+    gold: 0
+    material: 0
+    food: 5
+    population: 5
+  currentEvent: {fileID: 0}

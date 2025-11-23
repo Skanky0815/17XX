@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Events.ResourceOption
   optionName: Verwundete Helfen
   tooltipText: "Das Helfen kostet dich 2 Nahung aber du erh\xE4lst 4 Einwohner."
-  gold: 0
-  food: -2
-  material: 0
-  population: 4
+  costs:
+    gold: 0
+    material: 0
+    food: -2
+    population: 4
   hour: 0

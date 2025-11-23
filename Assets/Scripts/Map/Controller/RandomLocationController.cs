@@ -69,7 +69,7 @@ namespace Map.Controller
             switch (option)
             {
                 case ResourceOption resourceOption:
-                    factionUnit.worldState.playerFaction.AddResources(resourceOption.gold, resourceOption.food,resourceOption.material, resourceOption.population);
+                    factionUnit.worldState.playerFaction.AddResources(resourceOption.costs);
                     factionUnit.worldState.gameTime.hour += resourceOption.hour;
                     break;
                 case LevelOption levelOption:
@@ -91,7 +91,7 @@ namespace Map.Controller
 
             if (option is not ResourceOption resourceOption) return button;
             
-            if (!factionUnit.worldState.playerFaction.CanPay(resourceOption.ToCosts()))
+            if (!factionUnit.worldState.playerFaction.CanPay(resourceOption.costs))
             {
                 button.SetEnabled(false);
             }

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Core;
 using Core.States;
-using Map;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -44,8 +43,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.regionName, region.gold));
-                    totalValue += region.gold;
+                    infoList.Add((region.regionName, region.income.gold));
+                    totalValue += region.income.gold;
                 }
 
                 _tooltipElement.Show(
@@ -67,8 +66,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.regionName, region.material));
-                    totalValue += region.material;
+                    infoList.Add((region.regionName, region.income.material));
+                    totalValue += region.income.material;
                 }
 
                 _tooltipElement.Show(
@@ -89,8 +88,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.regionName, region.food));
-                    totalValue += region.food;
+                    infoList.Add((region.regionName, region.income.food));
+                    totalValue += region.income.food;
                 }
 
                 _tooltipElement.Show(
@@ -111,8 +110,8 @@ namespace UI.Map
                 List<(string, int)> infoList = new();
                 foreach (var region in mapWorldState.playerFaction.regions)
                 {
-                    infoList.Add((region.regionName, region.population));
-                    totalValue += region.population;
+                    infoList.Add((region.regionName, region.income.population));
+                    totalValue += region.income.population;
                 }
 
                 _tooltipElement.Show(
@@ -133,10 +132,10 @@ namespace UI.Map
         {
             if (mapWorldState.playerFaction == null) return;
 
-            UpdateResourceCounter(_goldLabel, mapWorldState.playerFaction.gold);
-            UpdateResourceCounter(_foodLabel, mapWorldState.playerFaction.food);
-            UpdateResourceCounter(_materialLabel, mapWorldState.playerFaction.material);
-            UpdateResourceCounter(_populationLabel, mapWorldState.playerFaction.population);
+            UpdateResourceCounter(_goldLabel, mapWorldState.playerFaction.resources.gold);
+            UpdateResourceCounter(_foodLabel, mapWorldState.playerFaction.resources.food);
+            UpdateResourceCounter(_materialLabel, mapWorldState.playerFaction.resources.material);
+            UpdateResourceCounter(_populationLabel, mapWorldState.playerFaction.resources.population);
         }
 
         private static void UpdateResourceCounter(Label label, int value)

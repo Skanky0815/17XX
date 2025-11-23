@@ -41,10 +41,10 @@ namespace UI.Map
             _currentRegion = region;
 
             _panelHeader.SetContent(region.regionName, "?", region.owner?.icon);
-            _goldLabel.text = region.gold.ToString();
-            _foodLabel.text = region.food.ToString();
-            _materialLabel.text = region.material.ToString();
-            _populationLabel.text = region.population.ToString();
+            _goldLabel.text = region.income.gold.ToString();
+            _foodLabel.text = region.income.food.ToString();
+            _materialLabel.text = region.income.material.ToString();
+            _populationLabel.text = region.income.population.ToString();
 
             if (region.owner == null)
             {

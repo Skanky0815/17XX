@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Events.ResourceOption
   optionName: Reparieren
   tooltipText: "Zahle 5 Material um die Br\xFCcke zu Reparieren."
-  gold: 0
-  food: 0
-  material: -5
-  population: 0
+  costs:
+    gold: 0
+    material: -5
+    food: 0
+    population: 0
   hour: 2
