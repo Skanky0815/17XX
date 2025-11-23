@@ -60,12 +60,7 @@ namespace Map.Controller
                 buttons.Add(new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") });
             }
 
-            _eventPanel.Show(
-                _randomEvent.eventName,
-                _randomEvent.description,
-                _randomEvent.ambientImage,
-                buttons,
-                !_randomEvent.isSkipable
+            _eventPanel.Show(_randomEvent, buttons
             );
         }
 
@@ -83,13 +78,16 @@ namespace Map.Controller
             }
             
             _isHandled = true;
-            
             _eventPanel.Hide();
         }
 
         private Button CreateButton(RandomEventOption option, Player.Player factionUnit)
         {
-            var button = new Button(() => HandleOption(factionUnit, option)) { text = option.optionName, };
+            var button = new Button(() => HandleOption(factionUnit, option))
+            {
+                text = option.optionName,
+                tooltip = option.tooltipText
+            };
 
             if (option is not ResourceOption resourceOption) return button;
             

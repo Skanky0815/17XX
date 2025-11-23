@@ -49,9 +49,7 @@ namespace Map.Controller
             var enterButton = new Button(() => EnterLocation(factionUnit)) { text = _localizationManager.GetText("location.enter") };
             var skipButton = new Button(SkipLocation) { text = _localizationManager.GetText("location.skip") };
             _eventPanel.Show(
-                location.locationName,
-                location.welcomeText,
-                null,
+                location,
                 new List<Button>
                     {
                         enterButton,

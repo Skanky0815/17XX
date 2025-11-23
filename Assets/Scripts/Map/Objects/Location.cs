@@ -10,5 +10,7 @@ namespace Map.Objects
         public string locationName;
         [TextArea(5, 10)]
         public string welcomeText;
+
+        public Texture2D ambientImage;
     }
 }

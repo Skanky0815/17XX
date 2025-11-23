@@ -58,7 +58,7 @@ namespace Map.Loader
                     var isAdded = false;
                     foreach (var knotGroup in _knots)
                     {
-                        if (!(Vector3.Distance(knotGroup[0].WorldPosition, worldPosition) < .05f)) continue;
+                        if (!(Vector3.Distance(knotGroup[0].worldPosition, worldPosition) < .05f)) continue;
                         
                         var newKnot = new KnotCollection.Knot(splineIndex, knotIndex, worldPosition);
                         knotGroup.Add(newKnot);
@@ -80,7 +80,7 @@ namespace Map.Loader
                     knots.Add(knot);
                 }
 
-                knotGroup[0].ConnectedKnots = knots;
+                knotGroup[0].connectedKnots = knots;
             }
 
             PathManager.SplineContainer = pathSplines;
@@ -98,7 +98,7 @@ namespace Map.Loader
                 }
             }
 
-            foreach (var knots in _knots.Select(knot => knot[0].ConnectedKnots))
+            foreach (var knots in _knots.Select(knot => knot[0].connectedKnots))
             {
                 for (var i = 0; i < knots.Count; i++)
                 {
@@ -117,7 +117,7 @@ namespace Map.Loader
             foreach (var knotCollection in _knots)
             {
                 var knot = knotCollection[0];
-                var localPos = mapRenderer.transform.InverseTransformPoint(knot.WorldPosition);
+                var localPos = mapRenderer.transform.InverseTransformPoint(knot.worldPosition);
                 var bounds = mapRenderer.localBounds;
                 var u = 1f - Mathf.InverseLerp(bounds.min.x, bounds.max.x, localPos.x);
                 var v = 1f - Mathf.InverseLerp(bounds.min.z, bounds.max.z, localPos.z);

@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Map.Objects.Region
   id: 13
   idMapColor: '#4b00a0'
+  town: {fileID: 11400000, guid: f9c1d7ec2d400424cb9aa8d38e0b66fb, type: 2}
+  randomEvents: []
+  owner: {fileID: 11400000, guid: 2bf28d4a0f8118e4f8592405de904b0a, type: 2}
   regionName: Aschenmeer
   description: 
   ambientImage: {fileID: 0}
@@ -21,5 +24,4 @@ MonoBehaviour:
   food: 0
   material: 0
   population: 0
-  locations: []
-  owner: {fileID: 0}
+  currentEvent: {fileID: 0}

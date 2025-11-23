@@ -35,7 +35,16 @@ namespace UI.Elements
         {
             _textLabel.text = text;
             _leftField.style.backgroundImage = icon != null ? new StyleBackground(icon) : new StyleBackground();
-            _rightButton.text = buttonLabel;
+
+            if (buttonLabel == null)
+            {
+                _rightButton.SetEnabled(false);
+            }
+            else
+            {
+                _rightButton.text = buttonLabel;
+                _rightButton.SetEnabled(true);
+            }
         }
     }
 }

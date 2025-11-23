@@ -29,7 +29,7 @@ namespace Map.Loader
             for (var i = 0; i < worldState.regions.Count; i++)
             {
                 var region  = worldState.regions[i];
-                if (region.randomEvents.Count == 0 && region.currentEvent) continue;
+                if (region.randomEvents.Count == 0 || region.currentEvent) continue;
                 
                 var randomEvent = region.randomEvents[_random.Next(0, region.randomEvents.Count - 1)];
                 if (_randomEventPool.TryGetValue($"{region.name}+{randomEvent.name}", out var randomEventGameObjekt))
@@ -46,7 +46,7 @@ namespace Map.Loader
         private void ReactivateRandomEvent(Region region, GameObject randomEventGameObjekt, RandomEvent randomEvent)
         {
             var knot = region.Knots[_random.Next(1, region.Knots.Count - 1)];
-            randomEventGameObjekt.transform.position = knot.WorldPosition;
+            randomEventGameObjekt.transform.position = knot.worldPosition;
             randomEventGameObjekt.SetActive(true);
             region.currentEvent = randomEvent;
         }
@@ -54,7 +54,7 @@ namespace Map.Loader
         private void SpawnRandom(Region region, RandomEvent randomEvent, Player.Player player)
         {
             var knot = region.Knots[_random.Next(1, region.Knots.Count - 1)];
-            var locationObject = Instantiate(randomEvent.prefab, knot.WorldPosition, Quaternion.identity, transform);
+            var locationObject = Instantiate(randomEvent.prefab, knot.worldPosition, Quaternion.identity, transform);
             locationObject.name = $"Random: {randomEvent.name} in {region.name}";
 
             var randomLocationController = locationObject.GetComponent<RandomLocationController>();
@@ -70,7 +70,7 @@ namespace Map.Loader
             
             if (town == null) return;
             
-            var locationObject = Instantiate(town.prefab, region.Knots[1].WorldPosition, Quaternion.identity, transform);
+            var locationObject = Instantiate(town.prefab, region.Knots[1].worldPosition, Quaternion.identity, transform);
             locationObject.name = $"{town.locationName} in {region.regionName}";
 
             var locationController = locationObject.GetComponent<LocationController>();

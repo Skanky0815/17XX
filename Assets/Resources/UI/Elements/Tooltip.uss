@@ -1,0 +1,12 @@
+﻿.tooltip {
+    position: absolute;
+    height: auto;
+    width: 320px;
+    display: none;
+}
+
+.tooltip > Label {
+    align-self: flex-start;
+    white-space: normal;
+    -unity-font-style: italic;
+}

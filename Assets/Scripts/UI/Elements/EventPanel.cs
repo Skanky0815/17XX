@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
+using Map.Objects;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,6 +14,7 @@ namespace UI.Elements
         private readonly Image _image;
         private readonly Label _textLabel;
         private readonly VisualElement _actionArea;
+        private readonly Tooltip _tooltip;
 
         public EventPanel()
         {
@@ -25,6 +28,7 @@ namespace UI.Elements
             _image = new Image { name = "EventImage" };
             _textLabel = new Label("Event Text") { name = "EventText" };
             _actionArea = new VisualElement { name = "EventArea" };
+            _tooltip = new Tooltip();
             
             Add(_panelHeader);
             Add(_image);
@@ -32,41 +36,74 @@ namespace UI.Elements
             Add(_actionArea);
         }
 
-        public void Show(string title, string text, Texture2D image, List<Button> buttons, bool disableCloseButton = false)
+        public void Show(Location location, List<Button> buttons)
         {
-            _textLabel.text = text;
-            if (image != null)
-            {
-                _image.image = image;
-                _image.style.display = DisplayStyle.Flex;
-            }
-            else
-            {
-                _image.style.display = DisplayStyle.None;
-            }
+            _textLabel.text = location.welcomeText;
+            SetAbientImage(location.ambientImage);
+            
+            _panelHeader.SetContent(location.locationName, "X");
+            _panelHeader.RegisterButtonCallback(Hide);
 
-            if (disableCloseButton)
+            _actionArea.Clear();
+            for (var i = 0; i < buttons.Count; i++)
             {
-                _panelHeader.SetContent(title, "");
+                _actionArea.Add(buttons[i]);
+            }
+            Add(_tooltip);
+
+            style.display = DisplayStyle.Flex;
+        }
+
+        public void Show(RandomEvent randomEvent, List<Button> buttons)
+        {
+            _textLabel.text = randomEvent.description;
+            SetAbientImage(randomEvent.ambientImage);
+
+            if (randomEvent.isSkipable)
+            {
+                _panelHeader.SetContent(randomEvent.eventName, "X");
+                _panelHeader.RegisterButtonCallback(Hide);
             }
             else
             {
-                _panelHeader.SetContent(title, "X");
-                _panelHeader.RegisterButtonCallback(Hide);
+                _panelHeader.SetContent(randomEvent.eventName, "");
             }
 
             _actionArea.Clear();
-            foreach (var button in buttons)
+            for (var i = 0; i < buttons.Count; i++)
             {
+                var button = buttons[i];
+                if (button.tooltip != "")
+                {
+                    button.RegisterCallback<MouseEnterEvent>(evt =>
+                    {
+                        _tooltip.Show(button.tooltip, evt.mousePosition);
+                    });
+                    button.RegisterCallback<MouseLeaveEvent>(_ => _tooltip.Hide());
+                }
                 _actionArea.Add(button);
             }
-
+            Add(_tooltip);
+            
             style.display = DisplayStyle.Flex;
         }
 
         public void Hide()
         {
            style.display = DisplayStyle.None;
+        }
+
+        private void SetAbientImage(Texture2D ambientImage)
+        {
+            if (ambientImage != null)
+            {
+                _image.image = ambientImage;
+                _image.style.display = DisplayStyle.Flex;
+            }
+            else
+            {
+                _image.style.display = DisplayStyle.None;
+            }
         }
     }
 }
