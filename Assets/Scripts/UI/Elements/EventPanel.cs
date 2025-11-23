@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using Map.Objects;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -34,6 +33,7 @@ namespace UI.Elements
             Add(_image);
             Add(_textLabel);
             Add(_actionArea);
+            Add(_tooltip);
         }
 
         public void Show(Location location, List<Button> buttons)
@@ -49,7 +49,6 @@ namespace UI.Elements
             {
                 _actionArea.Add(buttons[i]);
             }
-            Add(_tooltip);
 
             style.display = DisplayStyle.Flex;
         }
@@ -77,14 +76,14 @@ namespace UI.Elements
                 {
                     button.RegisterCallback<MouseEnterEvent>(evt =>
                     {
-                        _tooltip.Show(button.tooltip, evt.mousePosition);
+                        var position = this.WorldToLocal(evt.mousePosition);
+                        _tooltip.Show(button.tooltip, position);
                     });
                     button.RegisterCallback<MouseLeaveEvent>(_ => _tooltip.Hide());
                 }
                 _actionArea.Add(button);
             }
-            Add(_tooltip);
-            
+
             style.display = DisplayStyle.Flex;
         }
 

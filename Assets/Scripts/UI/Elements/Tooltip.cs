@@ -23,6 +23,8 @@ namespace UI.Elements
 
         public void Show(string text, Vector2 position)
         {
+            style.top = position.y;
+            style.left = position.x;
             _text.text = text;
             style.display = DisplayStyle.Flex;
         }
