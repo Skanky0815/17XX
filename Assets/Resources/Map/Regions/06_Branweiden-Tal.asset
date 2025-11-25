@@ -16,7 +16,12 @@ MonoBehaviour:
   idMapColor: '#4f122f'
   town: {fileID: 11400000, guid: 6a357cc7f58a5a5499700016d5fd72a4, type: 2}
   randomEvents: []
-  owner: {fileID: 0}
+  buildings:
+  - {fileID: 11400000, guid: 44edf75d8285d2e4380d3f106c87cd7f, type: 2}
+  - {fileID: 11400000, guid: efbb50c9fe09c9f44a234311f007a17c, type: 2}
+  - {fileID: 11400000, guid: ac6bd3592955ca84a973667583a30857, type: 2}
+  buildingSlots: 5
+  owner: {fileID: 11400000, guid: 2bf28d4a0f8118e4f8592405de904b0a, type: 2}
   regionName: Branweiden-Tal
   description: "Eingebettet zwischen sanften H\xFCgeln und alten W\xE4ldern liegt
     das Branweiden-Tal \u2013 eine Region, die vom Rhythmus der Jahreszeiten lebt.

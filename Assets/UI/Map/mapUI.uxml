@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Map/temp.uss?fileID=7433441132597879392&amp;guid=f9ae0370d07c0014fa1bd85a13e2ae45&amp;type=3#temp" />
     <ui:VisualElement name="Screen" focusable="false" picking-mode="Ignore" style="display: flex; flex-grow: 1; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; visibility: visible; display: flex; width: 100%; height: 100%; flex-direction: column; flex-wrap: nowrap; overflow: visible; opacity: 1; position: absolute; justify-content: space-between; align-items: stretch; top: -2px; left: 0;">
-        <ui:VisualElement name="TopBar" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row; height: 120px; width: 100%; justify-content: space-between;">
-            <UI.Map.FactionPanel />
+        <ui:VisualElement name="TopBar" style="flex-grow: 0; flex-direction: row; height: 120px; width: 100%; justify-content: space-between;">
+            <UI.Map.FactionPanel name="FactionPanel" />
             <ui:VisualElement style="flex-grow: 1; flex-direction: row; left: auto; justify-content: center;">
                 <ui:VisualElement name="FactionStats" class="panel" style="flex-grow: 0; height: 64px; width: 300px; border-top-width: 0; border-top-right-radius: 0; border-right-width: 0; border-bottom-right-radius: 0; border-top-left-radius: 0; border-bottom-left-radius: 10px; flex-direction: row; align-items: center;">
                     <ui:VisualElement class="resourcenCount">
@@ -49,7 +49,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="BottomBar" picking-mode="Ignore" style="flex-grow: 0; height: 250px; align-self: center; align-items: center; align-content: flex-end; justify-content: flex-end;">
-            <ui:VisualElement name="RegionMenu" enabled="true" class="panel" style="height: 200px; align-content: flex-end; width: auto; background-color: rgb(237, 229, 207); border-left-color: rgb(123, 107, 59); border-right-color: rgb(123, 107, 59); border-top-color: rgb(123, 107, 59); border-bottom-color: rgb(123, 107, 59); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 0; border-left-width: 2px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 25px; border-top-right-radius: 25px; min-width: 800px; flex-grow: 0;">
+            <ui:VisualElement name="RegionMenu" enabled="true" class="panel regionMenu" style="height: 200px; align-content: flex-end; width: auto; background-color: rgb(237, 229, 207); border-left-color: rgb(123, 107, 59); border-right-color: rgb(123, 107, 59); border-top-color: rgb(123, 107, 59); border-bottom-color: rgb(123, 107, 59); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 0; border-left-width: 2px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-top-left-radius: 25px; border-top-right-radius: 25px; min-width: 800px; flex-grow: 0;">
                 <ui:VisualElement style="flex-grow: 0; flex-direction: row; top: -25px; align-self: center; width: 100%; justify-content: space-around;">
                     <ui:Label text="9" name="Gold" class="panelIcon" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=-566404052&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#gold_icon&quot;);" />
                     <ui:Label text="9" name="Material" class="panelIcon" />
@@ -57,6 +57,9 @@
                     <ui:Label text="9" name="Food" selectable="false" focusable="false" class="panelIcon" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=-1120199610&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#food_icon&quot;);" />
                     <ui:Label text="9" name="Population" selectable="true" focusable="true" class="panelIcon" style="background-image: url(&quot;project://database/Assets/Resources/Textures/Regions/resourccen_icons.png?fileID=282362211&amp;guid=4a8ad95974163fa4c9d27a403ed5f76b&amp;type=3#persons_icon&quot;);" />
                 </ui:VisualElement>
+                <ui:ScrollView name="ScrollView" vertical-scroller-visibility="Hidden" horizontal-scroller-visibility="Auto" style="flex-direction: row;">
+                    <ui:VisualElement name="BuildSlots" style="flex-grow: 1; flex-direction: row; justify-content: space-around;" />
+                </ui:ScrollView>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

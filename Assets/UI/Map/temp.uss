@@ -215,3 +215,24 @@ Button {
 Button:hover {
     background-color: var(--color-darkblue);
 }
+
+.regionMenu #BuildSlots Button {
+    background-color: rgba(0, 0, 0, 0);
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+    background-image: resource('Map/Buildings/slot_icon');
+}
+.regionMenu #BuildSlots BuildMenuButton {
+    background-color: rgba(0, 0, 0, 0);
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+}
+.regionMenu #BuildSlots BuildMenuButton:hover {
+    background-color: var(--color-blue)
+}
+
+.regionMenu #BuildSlots Button:hover {
+    background-color: var(--color-blue);
+}

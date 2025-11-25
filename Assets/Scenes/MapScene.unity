@@ -35955,6 +35955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7e621625b413545acd5319bb5cbdc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RegionPanel
+  slotIcon: {fileID: 2800000, guid: 46f3d0366e6afad4f830aaf6b3b36d75, type: 3}
 --- !u!114 &1457079202
 MonoBehaviour:
   m_ObjectHideFlags: 0

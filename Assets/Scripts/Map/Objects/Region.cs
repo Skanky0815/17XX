@@ -10,6 +10,8 @@ namespace Map.Objects
         public string idMapColor;
         public Location town;
         public List<RandomEvent> randomEvents = new();
+        public List<Building> buildings = new();
+        public int buildingSlots;
         public Faction owner;
         [Header("Lore")]
         public string regionName;
@@ -19,7 +21,7 @@ namespace Map.Objects
 
         [Header("Resources")] public Resources income;
         
-        public readonly List<KnotCollection.Knot> Knots = new();
+        public readonly List<KnotCollection.Knot> knots = new();
         public RandomEvent currentEvent;
         
         public void ChangeOwner(Faction faction)

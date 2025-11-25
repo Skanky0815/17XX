@@ -126,7 +126,7 @@ namespace Map.Loader
                 var pixelColor = idMap.GetPixelBilinear(uv.x, uv.y);
                 if (worldState.RegionColorMapping().TryGetValue(pixelColor, out var region))
                 {
-                    region.Knots.AddRange(knotCollection);
+                    region.knots.AddRange(knotCollection);
                 }
             }
         }
